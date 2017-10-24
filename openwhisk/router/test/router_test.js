@@ -8,7 +8,7 @@ var params = {
     semester: 5,
     courseOfStudies: 'INFB',
     context: { // If this test is not successful, try to get a new context! (Log and paste it here!)
-        conversation_id: '69cf475b-b891-4889-923b-f3605060e1c2',
+        conversation_id: 'fadaeace-4849-46c5-937b-5c9c487b1e57',
         system: {
             dialog_stack:[{dialog_node: 'root'}],
             dialog_turn_counter: 1,
