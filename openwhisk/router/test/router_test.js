@@ -7,25 +7,15 @@ var params = {
     use_unauthenticated: true,
     semester: 5,
     courseOfStudies: 'INFB',
-    context: { // If this test is not successful, try to get a new context! (Log and paste it here!)
-        conversation_id: 'fadaeace-4849-46c5-937b-5c9c487b1e57',
-        system: {
-            dialog_stack:[{dialog_node: 'root'}],
-            dialog_turn_counter: 1,
-            dialog_request_counter: 1,
-            _node_output_map:{
-                "Willkommen":[0]
-            }
-        }
-    }
+    context: { "conversation_id": "652d4d40-1597-46d3-ad61-8f6f1564663f", "system": { "dialog_stack": [], "dialog_turn_counter": 2, "dialog_request_counter": 2, "_node_output_map": { "Willkommen": [0], "node_1_1504124913816": [0] } }, "timezone": "CET" }
 };
 
 module.exports = {
-    'Router Action Test (timetables)' : function (test) {
+    'Router Action Test (timetables)': function (test) {
         test.expect(2);
         params.payload = 'timetable friday';
         request.post({
-            headers: {'content-type': 'text/plain'},
+            headers: { 'content-type': 'text/plain' },
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
@@ -38,11 +28,11 @@ module.exports = {
             test.done();
         });
     },
-    'Router Action Test (meal)' : function (test) {
+    'Router Action Test (meal)': function (test) {
         test.expect(2);
         params.payload = 'Food 1';
         request.post({
-            headers: {'content-type': 'text/plain'},
+            headers: { 'content-type': 'text/plain' },
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
@@ -55,11 +45,11 @@ module.exports = {
             test.done();
         });
     },
-    'Router Action Test (joke)' : function (test) {
+    'Router Action Test (joke)': function (test) {
         test.expect(1);
         params.payload = 'joke';
         request.post({
-            headers: {'content-type': 'text/plain'},
+            headers: { 'content-type': 'text/plain' },
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
