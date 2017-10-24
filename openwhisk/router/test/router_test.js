@@ -12,8 +12,8 @@ var params = {
 
 module.exports = {
     'Router Action Test (timetables)': function (test) {
-        console.log("TESTING ROUTER: ACTION TIMETABLE");
-        console.log('actionUrl: ' + actionUrl);
+        console.log("TESTING ROUTER: ACTION TIMETABLE \n");
+        console.log('actionUrl: ' + actionUrl + "\n");
         test.expect(2);
         params.payload = 'timetable friday';
         request.post({
