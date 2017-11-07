@@ -3,7 +3,7 @@ var ConversationV1 = require('watson-developer-cloud/conversation/v1');
 var conversation = new ConversationV1({
     username: $CONVERSATION_USERNAME,
     password: $CONVERSATION_PASSWORD,
-    path: {workspace_id: '652d4d40-1597-46d3-ad61-8f6f1564663f'},
+    path: {workspace_id: 'b66d2495-e86c-41fe-9223-6061fc11e946'},
     version_date: "2017-24-10"
     //2017-13-06
     // 6/13/20171
