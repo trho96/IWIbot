@@ -7,7 +7,15 @@ var params = {
     use_unauthenticated: true,
     semester: 5,
     courseOfStudies: 'INFB',
-    context: { conversation_id: "652d4d40-1597-46d3-ad61-8f6f1564663f", system: { dialog_stack: [], dialog_turn_counter: 2, dialog_request_counter: 2, _node_output_map: { Willkommen: [0], node_1_1504124913816: [0] } }, timezone: "CET" }
+    context: { conversation_id: "652d4d40-1597-46d3-ad61-8f6f1564663f", system: {
+                    dialog_stack:[{dialog_node: 'root'}],
+                    dialog_turn_counter: 1,
+                    dialog_request_counter: 1,
+                    _node_output_map:{
+                        "Willkommen":[0]
+                    }
+                }
+    }
 };
 
 module.exports = {
