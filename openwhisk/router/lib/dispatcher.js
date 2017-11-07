@@ -18,7 +18,7 @@ function dispatch(response) {
             return new Promise(function (resolve) {
                 var test = response;
                 console.log(response);
-                responseObject = response.response.result;
+                responseObject = response;
                 responseObject.context = context;
                 resolve(responseObject);
             });
