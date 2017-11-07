@@ -16,8 +16,7 @@ function dispatch(response) {
         return action(name, blocking, result, params).then(function (response) {
             console.log("openwhisk response: " + JSON.stringify(response));
             return new Promise(function (resolve) {
-                console.log('--------------DEBUG-------------');
-                responseObject = response.response.result;
+                responseObject = response.response.resulttestesttest;
                 responseObject.context = context;
                 resolve(responseObject);
             });
