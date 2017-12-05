@@ -16,24 +16,32 @@
 ##############################################################################
 # set -x trace
 set -e # terminate after non-null return value
+
+# install wsk cli
 LINK=https://openwhisk.ng.bluemix.net/cli/go/download/linux/amd64/wsk
-
 echo "Downloading OpenWhisk CLI from '$LINK'...\n"
-
 curl -O $LINK
 chmod u+x wsk
 export PATH=$PATH:`pwd`
-echo "Configuring CLI from apihost and API key\n"
 
+# config and login in deploy scripts
+echo "Configuring CLI from apihost and API key\n"
 wsk property set --apihost openwhisk.ng.bluemix.net --auth $OPENWHISK_KEY > /dev/null 2>&1
 wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
+<<<<<<< HEAD
+=======
 
-echo "Configure local.env"
-touch local.env #Configurations defined in travis-ci console
+# fake local.env (Configurations defined in travis-ci console)
+touch local.env
+>>>>>>> ba769fa618beaaecf1839b371c6126cec755bb1b
 
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Deploying wsk actions for testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Deploying wsk test actions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
 ./deploy_test.sh --install
-echo "Running tests"
+
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Running tests~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 echo "Running test joke"
 cd openwhisk/joke
@@ -61,3 +69,7 @@ npm install
 npm test
 
 cd ../..
+
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Undeploying wsk test actions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+./deploy_test.sh --uninstall
