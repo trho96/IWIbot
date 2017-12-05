@@ -25,7 +25,11 @@ script:
     - grunt uglify
     - sed 's/$CONVERSATION_USERNAME/'"\'${CONVERSATION_USERNAME}\'"'/g' -i openwhisk/router/lib/conversation.js
     - sed 's/$CONVERSATION_PASSWORD/'"\'${CONVERSATION_PASSWORD}\'"'/g' -i openwhisk/router/lib/conversation.js
+<<<<<<< HEAD
     # url with username and password is in Weather action (still not working)
+=======
+    - sed 's/$CONVERSATION_WORKSPACE_ID/'"\'${CONVERSATION_WORKSPACE_ID}\'"'/g' -i openwhisk/router/lib/conversation.js
+>>>>>>> ba769fa618beaaecf1839b371c6126cec755bb1b
     - sed 's%$WEATHER_COMPANY_URL%'"\'${WEATHER_COMPANY_URL}\'"'%g' -i openwhisk/weather/lib/Weather.js
     - ./travis_test.sh
     - export PATH=$PATH:`pwd`  # make openwhisk cli available here
