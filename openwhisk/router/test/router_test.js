@@ -2,18 +2,11 @@
  * Created by Armin on 11.06.2017.
  */
 var request = require('request');
-<<<<<<< HEAD
-var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/8bcfac1b2e290d7c624a362c87384ca2a7e87ca8552f084a095f1fd8411d26e9/iwibotTest/router';
-=======
 var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+process.env.WSK_API_CODE+'/iwibotTest/router';
->>>>>>> ba769fa618beaaecf1839b371c6126cec755bb1b
 var params = {
     use_unauthenticated: true,
     semester: 5,
     courseOfStudies: 'INFB',
-<<<<<<< HEAD
-    context: {"conversation_id":"43f56489-9724-412b-b051-7445bc6610ac","system":{"dialog_stack":[],"dialog_turn_counter":2,"dialog_request_counter":2,"_node_output_map":{"Willkommen":[0],"node_1_1504124913816":[0]}},"timezone":"CET"}
-=======
     context: { // If this test is not successful, try to get a new context! (Log and paste it here!)
         conversation_id: process.env.CONVERSATION_ID,
         system: {
@@ -25,7 +18,6 @@ var params = {
             }
         }
     }
->>>>>>> ba769fa618beaaecf1839b371c6126cec755bb1b
 };
 
 console.log(JSON.stringify(params))
