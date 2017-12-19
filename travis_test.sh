@@ -28,12 +28,9 @@ export PATH=$PATH:`pwd`
 echo "Configuring CLI from apihost and API key\n"
 wsk property set --apihost openwhisk.ng.bluemix.net --auth $OPENWHISK_KEY > /dev/null 2>&1
 wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-<<<<<<< HEAD
-=======
 
 # fake local.env (Configurations defined in travis-ci console)
 touch local.env
->>>>>>> ba769fa618beaaecf1839b371c6126cec755bb1b
 
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Deploying wsk test actions~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
