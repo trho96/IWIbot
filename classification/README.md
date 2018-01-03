@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Run the app.
   ```
-python hello.py
+python classifier.py
   ```
 
  View your app at: http://localhost:8000
