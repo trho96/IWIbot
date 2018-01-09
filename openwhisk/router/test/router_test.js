@@ -24,12 +24,10 @@ console.log(JSON.stringify(params))
 
 module.exports = {
     'Router Action Test (timetables)': function (test) {
-        console.log("TESTING ROUTER: ACTION TIMETABLE \n");
-        console.log('actionUrl: ' + actionUrl + "\n");
         test.expect(2);
         params.payload = 'timetable friday';
         request.post({
-            headers: { 'content-type': 'text/plain' },
+            headers: {'content-type': 'text/plain'},
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
@@ -43,11 +41,10 @@ module.exports = {
         });
     },
     'Router Action Test (meal)': function (test) {
-        console.log("TESTING ROUTER: ACTION MEAL");
         test.expect(2);
         params.payload = 'Food 1';
         request.post({
-            headers: { 'content-type': 'text/plain' },
+            headers: {'content-type': 'text/plain'},
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
@@ -61,11 +58,10 @@ module.exports = {
         });
     },
     'Router Action Test (joke)': function (test) {
-        console.log("TESTING ROUTER: ACTION JOKE");
         test.expect(1);
         params.payload = 'joke';
         request.post({
-            headers: { 'content-type': 'text/plain' },
+            headers: {'content-type': 'text/plain'},
             url: actionUrl,
             body: JSON.stringify(params)
         }, function (err, response, body) {
