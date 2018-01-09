@@ -27,6 +27,7 @@ script:
     - sed 's/$CONVERSATION_PASSWORD/'"\'${CONVERSATION_PASSWORD}\'"'/g' -i openwhisk/router/lib/conversation.js
     - sed 's/$CONVERSATION_WORKSPACE_ID/'"\'${CONVERSATION_WORKSPACE_ID}\'"'/g' -i openwhisk/router/lib/conversation.js
     - sed 's%$WEATHER_COMPANY_URL%'"\'${WEATHER_COMPANY_URL}\'"'%g' -i openwhisk/weather/lib/Weather.js
+    - sed 's%$DEPLOY_HOSTNAME%'"\'${DEPLOY_HOSTNAME}\'"'%g' -i manifest.yml
     - ./travis_test.sh
     - export PATH=$PATH:`pwd`  # make openwhisk cli available here
     - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Undeploying wsk actions for testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
