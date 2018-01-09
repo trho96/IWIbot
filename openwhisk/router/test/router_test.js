@@ -23,7 +23,7 @@ var params = {
 console.log(JSON.stringify(params))
 
 module.exports = {
-    'Router Action Test (timetables)': function (test) {
+    'Router Action Test (timetables)' : function (test) {
         test.expect(2);
         params.payload = 'timetable friday';
         request.post({
@@ -40,7 +40,7 @@ module.exports = {
             test.done();
         });
     },
-    'Router Action Test (meal)': function (test) {
+    'Router Action Test (meal)' : function (test) {
         test.expect(2);
         params.payload = 'Food 1';
         request.post({
@@ -57,7 +57,7 @@ module.exports = {
             test.done();
         });
     },
-    'Router Action Test (joke)': function (test) {
+    'Router Action Test (joke)' : function (test) {
         test.expect(1);
         params.payload = 'joke';
         request.post({
