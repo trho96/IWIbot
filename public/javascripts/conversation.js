@@ -3,7 +3,8 @@
 var exports = module.exports = {};
 var chat = require("./chat.js");
 var context = null;
-var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibot/router';
+//var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibot/router';
+var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/e1109b1ff2c32a5d766f6578fa50949b5a32ed7c2c3db63d9f07b21a0cd09b46/iwibot/router';
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
 
