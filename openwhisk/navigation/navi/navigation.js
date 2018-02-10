@@ -84,7 +84,8 @@ function getNearestWaypoint(position)	{
 			nearestWaypoint = point;
 		}			
 	}
-	return nearestWaypoint;
+	return map[1];
+	//return nearestWaypoint;
 }
 
 function reachedWaypoint(position, wayPoint, threshold)	{
