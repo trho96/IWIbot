@@ -4,7 +4,7 @@ var conversation = new ConversationV1({
     username: $CONVERSATION_USERNAME,
     password: $CONVERSATION_PASSWORD,
     path: {workspace_id: $CONVERSATION_WORKSPACE_ID},
-    version_date: "2017-12-09"
+    version_date: "2018-09-01"
     //2017-13-06
     // 6/13/20171
     //"2017-02-03"
