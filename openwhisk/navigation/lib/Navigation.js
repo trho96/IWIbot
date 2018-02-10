@@ -21,32 +21,31 @@ function main(params) {
         }
 
         switch (entity) {
-            case 'bulding E':
+            case 'building E':
                 entity = 'entrance_e';
                 break;
-			case 'bulding F':
+	case 'building F':
                 entity = 'entrance_f';
                 break;
-            case 'bulding G':
+            case 'building G':
                 entity = 'entrance_g';
                 break;
         }
 		
-		var result;
-		if ("geolocation" in navigator) {
-			result = navigateToWaypoint(entity);
-		} else {
+	var result;
+	if ("geolocation" in navigator) {
+		result = navigateToWaypoint(entity);
+	} else {
 		result = ['Please allow access to your position data to use the navigation service.'];
-		}
+	}
 		
-		var navigationResponse = {};
+	var navigationResponse = {};
 
-		navigationResponse.payload = result[0];
-		navigationResponse.voice = voice;
+	navigationResponse.payload = result[0];
+	navigationResponse.voice = voice;
 
-		resolve(navigationResponse);
-
-		});
+	resolve(navigationResponse);
+	});
 }
 
 exports.main = main;
