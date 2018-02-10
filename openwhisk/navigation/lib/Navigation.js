@@ -7,8 +7,8 @@ var yyyy = today.getFullYear();
 var entity;
 
 function main(params) {
-    console.log("------Meal Action started!------");
-    console.log("Meal Action Params:" + JSON.stringify(params));
+    console.log("------Navigation Action started!------");
+    console.log("Navigation Params:" + JSON.stringify(params));
 
     return new Promise(function (resolve, reject) {
 
