@@ -6,6 +6,7 @@ cache:
   directories:
     - "node_modules"
     - "openwhisk/joke/node_modules"
+    - "openwhisk/navigation/node_modules"
     - "openwhisk/meal/node_modules"
     - "openwhisk/router/node_modules"
     - "openwhisk/timetables/node_modules"
