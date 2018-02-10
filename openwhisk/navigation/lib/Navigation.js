@@ -12,7 +12,7 @@ function main(params) {
 
     return new Promise(function (resolve, reject) {
 
-        if ('entities' in params && params.entities.length !== 0) {
+        /*if ('entities' in params && params.entities.length !== 0) {
             console.log("Entity found in Params");
             entity = params.entities[0].value;
         } else {
@@ -43,8 +43,8 @@ function main(params) {
 
 	navigationResponse.payload = result[0];
 	navigationResponse.voice = voice;
-
-	resolve(navigationResponse);
+	*/
+	resolve('a');//navigationResponse);
 	});
 }
 
