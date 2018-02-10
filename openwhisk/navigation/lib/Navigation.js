@@ -1,9 +1,6 @@
 var request = require('request');
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1;
-var yyyy = today.getFullYear();
-
+var navigationResponse = {};
+var voice = "en-US_MichaelVoice";
 var entity;
 
 function main(params) {
@@ -44,6 +41,8 @@ function main(params) {
 	navigationResponse.payload = result[0];
 	navigationResponse.voice = voice;
 	*/
+	navigationResponse.payload = 'a';
+        navigationResponse.voice = voice;
 	resolve('a');//navigationResponse);
 	});
 }
