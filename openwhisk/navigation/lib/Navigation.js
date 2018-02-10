@@ -43,7 +43,7 @@ function main(params) {
 	*/
 	navigationResponse.payload = 'a';
         navigationResponse.voice = voice;
-	resolve('a');//navigationResponse);
+	resolve(navigationResponse);
 	});
 }
 
