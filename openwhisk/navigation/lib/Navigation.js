@@ -34,7 +34,7 @@ function main(params) {
 		
 	var result;
 	if ("geolocation" in navigator) {
-		result = navigateToWaypoint(entity);
+		result = navigateToWaypoint('entrance_e');
 	} else {
 		result = ['Please allow access to your position data to use the navigation service.'];
 	}
