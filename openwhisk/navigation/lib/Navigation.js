@@ -29,14 +29,15 @@ function main(params) {
                 break;
         }
 		
-	var result;
+	/*var result;
 	//if ("geolocation" in navigator) {
 		result = navigateToWaypoint('entrance_e');
 	/*} else {
 		result = ['Please allow access to your position data to use the navigation service.'];
 	}
 	*/	
-	navigationResponse.payload = result[0];
+	//navigationResponse.payload = result[0];
+	navigationResponse.payload = entity;
 	
 	navigationResponse.voice = voice;
 	resolve(navigationResponse);
