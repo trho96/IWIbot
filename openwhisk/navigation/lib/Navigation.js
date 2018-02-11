@@ -29,20 +29,16 @@ function main(params) {
                 break;
         }
 		
-	/*var result;
-	if ("geolocation" in navigator) {
+	var result;
+	//if ("geolocation" in navigator) {
 		result = navigateToWaypoint('entrance_e');
-	} else {
+	/*} else {
 		result = ['Please allow access to your position data to use the navigation service.'];
 	}
-		
-	var navigationResponse = {};
-
+	*/	
 	navigationResponse.payload = result[0];
+	
 	navigationResponse.voice = voice;
-	*/
-	navigationResponse.payload = entity;
-        navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
 }
