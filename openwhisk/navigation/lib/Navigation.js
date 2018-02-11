@@ -17,7 +17,7 @@ function main(params) {
             entity = "-1";
         }
 
-        switch (entity) {
+        /*switch (entity) {
             case 'building E':
                 entity = 'entrance_e';
                 break;
@@ -29,7 +29,7 @@ function main(params) {
                 break;
         }
 		
-	/*var result;
+	var result;
 	//if ("geolocation" in navigator) {
 		result = navigateToWaypoint('entrance_e');
 	/*} else {
@@ -37,7 +37,8 @@ function main(params) {
 	}
 	*/	
 	//navigationResponse.payload = result[0];
-	navigationResponse.payload = entity;
+	//navigationResponse.payload = entity;
+	navigationResponse.payload = 'a';
 	
 	navigationResponse.voice = voice;
 	resolve(navigationResponse);
