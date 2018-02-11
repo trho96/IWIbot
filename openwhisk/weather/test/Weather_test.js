@@ -11,11 +11,11 @@ var params = {
 module.exports = {
     'Weather Action Test' : function (test) {
         test.expect(2);
-        request.post({
+        request.get(/*{
             headers: {'content-type': 'text/plain'},
-            url: actionUrl,
-            body: JSON.stringify(params)
-        }, function (err, response, body) {
+            url: */actionUrl,
+            //body: JSON.stringify(params)
+        /*}*/, function (err, response, body) {
             console.log('Body: ' + body);
             console.log('Error: ' + err);
             console.log('Response: ' + JSON.stringify(response));
