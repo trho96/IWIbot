@@ -4,18 +4,18 @@
 var request = require('request');
 var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+process.env.WSK_API_CODE+'/iwibotTest/weather';
 var params = {
-    semester: 5,
-    courseOfStudies: 'INFB'
+    //semester: 5,
+    //courseOfStudies: 'INFB'
 };
 
 module.exports = {
     'Weather Action Test' : function (test) {
         test.expect(2);
-        request.get(/*{
+        request.post({
             headers: {'content-type': 'text/plain'},
-            url: */actionUrl,
-            //body: JSON.stringify(params)
-        /*},*/ function (err, response, body) {
+            url: actionUrl,
+            body: JSON.stringify(params)
+        }, function (err, response, body) {
             console.log('Body: ' + body);
             console.log('Error: ' + err);
             console.log('Response: ' + JSON.stringify(response));
