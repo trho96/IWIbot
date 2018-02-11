@@ -15,7 +15,7 @@ module.exports = {
             headers: {'content-type': 'text/plain'},
             url: */actionUrl,
             //body: JSON.stringify(params)
-        /*}*/, function (err, response, body) {
+        /*},*/ function (err, response, body) {
             console.log('Body: ' + body);
             console.log('Error: ' + err);
             console.log('Response: ' + JSON.stringify(response));
