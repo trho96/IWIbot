@@ -37,10 +37,10 @@ function main(params) {
 	}
 		
 	var navigationResponse = {};
+	
 	navigationResponse.payload = result[0];
 	navigationResponse.voice = voice;
-	*/
-	    
+	*/    
 	navigationResponse.payload = entity;
         navigationResponse.voice = voice;
 	resolve(navigationResponse);
