@@ -14,7 +14,7 @@ module.exports = {
         request.post({
             headers: {'content-type': 'text/plain'},
             url: actionUrl,
-            body: "wuuza"//JSON.stringify(params)
+            body: "watabaza"//JSON.stringify(params)
         }, function (err, response, body) {
             console.log('Body: ' + body);
             console.log('Error: ' + err);
