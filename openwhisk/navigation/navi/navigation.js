@@ -72,4 +72,4 @@ iwiNavigator.getNavigationPath = function(coords, target)	{
 	return t;
 }
 
-export.iwiNavigator = iwiNavigator;
+exports.iwiNavigator = iwiNavigator;
