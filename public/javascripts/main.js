@@ -49,7 +49,7 @@ $(document).ready(function () {
         event.preventDefault();
         conversation.sendMessage(false ,chat.chatSubmit(), positionFlag)
 	.then(function (result) {
-	    if("positionFlag" in result)	{
+	    if(typeof result["positionFlag"] !== "undefined")	{
 		positionFlag = result.positionFlag;
 	    }
 	}); 
