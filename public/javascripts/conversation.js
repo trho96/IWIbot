@@ -7,7 +7,7 @@ var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + $WS
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
 
-exports.sendMessage = function (init, result, posiionFlag) {
+exports.sendMessage = function (init, result, positionFlag) {
         var requestObject = {};
         if(init) {
             requestObject.conInit = true;
