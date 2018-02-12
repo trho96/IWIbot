@@ -7,7 +7,7 @@ var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + $WS
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
 
-exports.sendMessage = function (init, result) {
+exports.sendMessage = function (init, result, posiionFlag) {
         var requestObject = {};
         if(init) {
             requestObject.conInit = true;
@@ -24,37 +24,49 @@ exports.sendMessage = function (init, result) {
             requestObject.courseOfStudies = sessionStorage.getItem("courseOfStudies");
             requestObject.semester = sessionStorage.getItem("semester");
         }
+        if(positionFlag)	{
+	        var watchID = navigator.geolocation.getCurrentPosition(function(position) {
+			requestObject.position = [position;longitude,position.langitude];
+			continueSendMessage();
+		});
+	}
+	else	{
+		continueSendMessage();
+	}
 
-        console.log("CONVERSATION_RequestObject : " + JSON.stringify(requestObject));
+	function continueSendMessage()	{
+		
+                console.log("CONVERSATION_RequestObject : " + JSON.stringify(requestObject));
 
-        var options = {
-            url: url,
-            type: 'POST',
-            data: JSON.stringify(requestObject),
-            contentType: "application/json",
-            processData: false,
-            success: function (data) {
-                console.log("CONVERSATION_recivedData: " + JSON.stringify(data));
+                var options = {
+                    url: url,
+                    type: 'POST',
+                    data: JSON.stringify(requestObject),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (data) {
+                        console.log("CONVERSATION_recivedData: " + JSON.stringify(data));
 
-                var dataObj = JSON.parse(data);
-                var payload = dataObj.payload.toString();
+                        var dataObj = JSON.parse(data);
+                        var payload = dataObj.payload.toString();
 
-                chat.appendReceivedMessage(payload);
+                        chat.appendReceivedMessage(payload);
 
-                if("htmlText" in dataObj) {
-                    chat.appendReceivedMessage(dataObj.htmlText.toString());
-                }
-                if("context" in dataObj) {
-                    context = dataObj.context;
-                }
+                        if("htmlText" in dataObj) {
+                            chat.appendReceivedMessage(dataObj.htmlText.toString());
+                        }
+                        if("context" in dataObj) {
+                            context = dataObj.context;
+                        }
 
-            },
-            error: function (/*err*/) {
-                //remove loader animation and show recording button
-                $mainDiv.removeClass("loader");
-                $btnCircle.show();
-            }
-        };
-
-    return $.ajax(options);
+                    },
+                    error: function (/*err*/) {
+                        //remove loader animation and show recording button
+                        $mainDiv.removeClass("loader");
+                        $btnCircle.show();
+                    }
+                };
+                
+                return $.ajax(options);
+        }
 };
