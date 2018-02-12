@@ -25,13 +25,15 @@ exports.sendMessage = function (init, result, positionFlag) {
             requestObject.semester = sessionStorage.getItem("semester");
         }
         if(!!positionFlag)	{
-	        var watchID = navigator.geolocation.getCurrentPosition(function(position) {
-			requestObject.position = [position.longitude,position.langitude];
-			continueSendMessage();
+		return new Promise(function(resolve, reject)	{
+			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
+				requestObject.position = [position;longitude,position.langitude];
+				resolve(continueSendMessage());
+			});
 		});
 	}
 	else	{
-		continueSendMessage();
+		return continueSendMessage();
 	}
 
 	function continueSendMessage()	{
