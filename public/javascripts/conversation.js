@@ -53,7 +53,7 @@ exports.sendMessage = function (init, result) {
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
 
-			if(positionFlag in dataObj)	{
+			if("positionFlag" in dataObj)	{
 				positionFlag = dataObj.positionFlag;
 	    		}
                         chat.appendReceivedMessage(payload + positionFlag);
