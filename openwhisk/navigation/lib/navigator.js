@@ -7,7 +7,8 @@ var iwiNavigator = {};
 iwiNavigator.readCoordinateFile = function()	{
     var allText = fs.readFileSync(__dirname + "/coordinates.txt").toString();
     allText = allText.replace(/\s/g,'');
-        var wayPoints = allText.split(';');
+    return allText;
+	/*var wayPoints = allText.split(';');
         if(wayPoints[wayPoints.length-1] === '')	{
 		wayPoints.splice(wayPoints.length - 1, 1);
 	}
@@ -34,7 +35,7 @@ iwiNavigator.readCoordinateFile = function()	{
 			}
 		}
 	}
-	graph = new Graph(map);
+	graph = new Graph(map);*/
 }
 
 iwiNavigator.getDistance = function(p1,p2){
@@ -59,9 +60,10 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 }
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
-	iwiNavigator.readCoordinateFile();
+	var x = iwiNavigator.readCoordinateFile();
 	//return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var t = ['a','b','c'];
+	t[0] = x;
 	return t;
 	
 }
