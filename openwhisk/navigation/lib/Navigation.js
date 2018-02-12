@@ -1,4 +1,6 @@
 var request = require('request');
+var navi = require('../navi/navigator');
+
 var navigationResponse = {};
 var voice = "en-US_MichaelVoice";
 var entity;
@@ -29,7 +31,7 @@ function main(params) {
                 break;
         }
 		
-	result = iwiNavigator.getNavigationPath(params.position, entity);
+	result = navi.iwiNavigator.getNavigationPath(params.position, entity);
 		
 	var navigationResponse = {};
 
