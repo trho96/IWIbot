@@ -1,3 +1,4 @@
+
 var map = {};
 var coordinateMap = {}
 var iwiNavigator = {};
