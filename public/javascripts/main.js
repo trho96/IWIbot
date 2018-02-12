@@ -12,7 +12,6 @@ $(document).ready(function () {
     var $modalTrigger = $("#modal_trigger");
     
     var notificationNumber = 0;
-    var positionFlag = false;
     
     conversation.sendMessage(true, {}).then(function () {
         notificationNumber++;
@@ -24,11 +23,8 @@ $(document).ready(function () {
         $recordingButton.removeClass("notRecording").addClass("recording");
 
         stt().then(function (result) {
-        	return conversation.sendMessage(false ,result, positionFlag);
+        	return conversation.sendMessage(false ,result);
         }).then(function (result) {
-            if(typeof result["positionFlag"] !== "undefined")	{
-		positionFlag = result.positionFlag;
-	    }
             //Add new notification, stop loader animation and show recording button again
             notificationNumber++;
             $("#mainDiv").removeClass("loader");
@@ -47,12 +43,7 @@ $(document).ready(function () {
     //Chat Submit
     $chatForm.submit(function (event) {
         event.preventDefault();
-        conversation.sendMessage(false ,chat.chatSubmit(), positionFlag)
-	.then(function (result) {
-	    if(typeof result["positionFlag"] !== "undefined")	{
-		positionFlag = result.positionFlag;
-	    }
-	}); 
+        conversation.sendMessage(false ,chat.chatSubmit()); 
     });
     //Open Login Window
     $modalTrigger.leanModal({
