@@ -1,3 +1,9 @@
+/**
+	Changes:
+	ALLES
+*/
+
+
 /*
 Ueberpruefung auf Kurvenart:
 
@@ -19,13 +25,11 @@ Graph (x1,y1).(x2,y2) = (y2-y1/x2-x1)x - (y1-((y2-y1/x2-x1)*x1))
 */
 
 
-
-
-var fileDisplayArea = document.getElementById('fileDisplayArea');
 var map = {};
 var coordinateMap = {}
+var iwiNavigator = {};
 
-function readCoordinateFile()	{
+iwiNavigator.readCoordinateFile = function()	{
     var file = "coordinates.txt";
 	var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
@@ -68,36 +72,35 @@ function readCoordinateFile()	{
     rawFile.send(null);
 }
 
-readCoordinateFile();
+iwiNavigator.readCoordinateFile();
 
-function getDistance(p1,p2){
+iwiNavigator.getDistance = function(p1,p2){
 	return Math.sqrt(Math.abs(p1.longitude - p2.longitude) + Math.abs(p1.latitude - p2.latitude));
 }
 
-function getNearestWaypoint(position)	{
+iwiNavigator.getNearestWaypoint = function(position)	{
 	var smallestDistance = null;
 	var nearestWaypoint = null;
 	for(point in map)	{
-		var distance = getDistance(coordinateMap[point], position);
+		var distance = iwiNavigator.getDistance(coordinateMap[point], position);
 		if(smallestDistance === null || distance < smallestDistance)	{
 			smallestDistance = distance;
 			nearestWaypoint = point;
 		}			
 	}
-	return map[1];
-	//return nearestWaypoint;
+	return nearestWaypoint;
 }
 
-function reachedWaypoint(position, wayPoint, threshold)	{
-	return getDistance(wayPoint, position) < threshold;
+iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
+	return iwiNavigator.getDistance(wayPoint, position) < threshold;
 }
 
-function navigateToWaypoint(target)	{
+/*iwiNavigator.navigateToWaypoint = function(target)	{
 	var passedWaypoints = 0;
 	var watchID = navigator.geolocation.watchPosition(function(position) {
 		
 		if(typeof start === 'undefined')	{
-			var start = getNearestWaypoint(position.coords);
+			var start = iwiNavigator.getNearestWaypoint(position.coords);
 		}
 		if(typeof path === 'undefined' && typeof start !== 'undefined'){
 			var path = graph.findShortestPath(start, target);
@@ -108,7 +111,7 @@ function navigateToWaypoint(target)	{
 		}
 		else{
 			console.log(path);
-			if(reachedWaypoint(position.coords, coordinateMap[path[passedWaypoints]], 0.2))	{
+			if(iwiNavigator.reachedWaypoint(position.coords, coordinateMap[path[passedWaypoints]], 0.2))	{
 				passedWaypoints++;
 				if(passedWaypoints >= path.length)	{
 					alert('You have reached your destination');
@@ -127,4 +130,8 @@ function navigateToWaypoint(target)	{
 		accuracy: 1,
 		distanceFilter: 1
 	});
+}*/
+	
+iwiNavigator.getNavigationPath = function(coords, target)	{
+	return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 }
