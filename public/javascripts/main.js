@@ -26,7 +26,7 @@ $(document).ready(function () {
         stt().then(function (result) {
         	return conversation.sendMessage(false ,result, positionFlag);
         }).then(function (result) {
-            if("positionFlag" in result)	{
+            if(typeof result["positionFlag"] !== "undefined")	{
 		positionFlag = result.positionFlag;
 	    }
             //Add new notification, stop loader animation and show recording button again
