@@ -40,6 +40,7 @@ iwiNavigator.readCoordinateFile = function()	{
 						}
 					}
 					graph = new Graph(map);
+			    		resolve(graph);
 				}
 		}
 	    }
