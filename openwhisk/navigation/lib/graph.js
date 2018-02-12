@@ -142,3 +142,5 @@ var Graph = (function (undefined) {
 	return Graph;
 
 })();
+
+exports.graphConstr = Graph;
