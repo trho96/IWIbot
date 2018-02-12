@@ -43,6 +43,7 @@ iwiNavigator.readCoordinateFile = function()	{
 			    		resolve(graph);
 				}
 		}*/
+		resolve(true);
 	    }
 	    rawFile.send(null);
 	});
