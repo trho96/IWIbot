@@ -26,7 +26,10 @@ $(document).ready(function () {
         stt().then(function (result) {
         	return conversation.sendMessage(false ,result, positionFlag);
         }).then(function (result) {
-            //Add new notification, stop loader animation and show recording button again
+            if("positionFlag" in result)	{
+				positionFlag = result.positionFlag;
+			}
+		    //Add new notification, stop loader animation and show recording button again
             notificationNumber++;
             $("#mainDiv").removeClass("loader");
             $recordingButton.show();
@@ -44,7 +47,7 @@ $(document).ready(function () {
     //Chat Submit
     $chatForm.submit(function (event) {
         event.preventDefault();
-        conversation.sendMessage(false ,chat.chatSubmit());
+        conversation.sendMessage(false ,chat.chatSubmit(), positionFlag);
     });
     //Open Login Window
     $modalTrigger.leanModal({
