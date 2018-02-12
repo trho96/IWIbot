@@ -1,5 +1,7 @@
 
 var fs = require('fs');
+var graphImport = require('./graph');
+var graphConstr = graphImport.graphConstr;
 var map = {};
 var coordinateMap = {}
 var iwiNavigator = {};
@@ -28,13 +30,13 @@ iwiNavigator.readCoordinateFile = function()	{
 		var neighbours = Object.keys(map[point]);
 		for(var i=0; i < neighbours.length; i++)	{
 			if(map[point][neighbours[i]] === -1 || map[neighbours[i]][point] === -1)	{
-			/*	var distance = iwiNavigator.getDistance(coordinateMap[point], coordinateMap[neighbours[i]]);
+				var distance = iwiNavigator.getDistance(coordinateMap[point], coordinateMap[neighbours[i]]);
 				map[point][neighbours[i]] = distance;
-				map[neighbours[i]][point] = distance;*/
+				map[neighbours[i]][point] = distance;
 			}
 		}
 	}
-	graph = new Graph(map);
+	graph = new GraphConstr(map);
 }
 
 iwiNavigator.getDistance = function(p1,p2){
