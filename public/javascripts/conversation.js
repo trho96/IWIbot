@@ -6,8 +6,9 @@ var context = null;
 var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + $WSK_API_CODE + '/iwibot/router';
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
+var positionFlag = false;
 
-exports.sendMessage = function (init, result, positionFlag) {
+exports.sendMessage = function (init, result) {
         var requestObject = {};
         if(init) {
             requestObject.conInit = true;
@@ -52,6 +53,9 @@ exports.sendMessage = function (init, result, positionFlag) {
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
 
+			if(positionFlag in dataObj)	{
+				positionFlag = dataObj.positionFlag;
+	    		}
                         chat.appendReceivedMessage(payload + positionFlag);
 
                         if("htmlText" in dataObj) {
