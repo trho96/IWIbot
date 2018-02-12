@@ -5,51 +5,36 @@ var coordinateMap = {}
 var iwiNavigator = {};
 
 iwiNavigator.readCoordinateFile = function()	{
-    var file = "coordinates.txt";
-    return fs.readFileSync(file).toString();
-	/*var rawFile = new XMLHttpRequest();
-    	/*return new Promise(function(resolve, reject)	{
-	    rawFile.open("GET", file, false);
-	    rawFile.onreadystatechange = function ()	{
-		if(rawFile.readyState === 4)	{
-		    if(rawFile.status === 200 || rawFile.status == 0)	{
-			var allText = rawFile.responseText.replace(/\s/g,'');
-					var wayPoints = allText.split(';');
-					if(wayPoints[wayPoints.length-1] === '')	{
-						wayPoints.splice(wayPoints.length - 1, 1);
-					}
-					for(var i=0; i<wayPoints.length; i++)	{
-						var point = wayPoints[i].split(':');
-						map[point[1]] = {};
-						var coordinates = point[0].split(',');
-						coordinateMap[point[1]] = {
-							longitude: coordinates[0], 
-							latitude: coordinates[1]
-						};
-						var neighbours = point[2].split(',');
-						for(var j = 0; j < neighbours.length; j++)	{
-							map[point[1]][neighbours[j]] = -1;
-						}
-					}
-					for(point in map)	{
-						var neighbours = Object.keys(map[point]);
-						for(var i=0; i < neighbours.length; i++)	{
-							if(map[point][neighbours[i]] === -1 || map[neighbours[i]][point] === -1)	{
-								var distance = iwiNavigator.getDistance(coordinateMap[point], coordinateMap[neighbours[i]]);
-								map[point][neighbours[i]] = distance;
-								map[neighbours[i]][point] = distance;
-							}
-						}
-					}
-					graph = new Graph(map);
-			    		resolve(graph);
-				}
+    var allText = fs.readFileSync("./coordinates.txt").toString();
+    /*allText = allText.replace(/\s/g,'');
+        var wayPoints = allText.split(';');
+        if(wayPoints[wayPoints.length-1] === '')	{
+		wayPoints.splice(wayPoints.length - 1, 1);
+	}
+	for(var i=0; i<wayPoints.length; i++)	{
+		var point = wayPoints[i].split(':');
+		map[point[1]] = {};
+		var coordinates = point[0].split(',');
+		coordinateMap[point[1]] = {
+			longitude: coordinates[0], 
+			latitude: coordinates[1]
+		};
+		var neighbours = point[2].split(',');
+		for(var j = 0; j < neighbours.length; j++)	{
+			map[point[1]][neighbours[j]] = -1;
 		}
-		resolve(true);
-	    }
-	    rawFile.send(null);
-		resolve(true);
-	});*/
+	}
+	for(point in map)	{
+		var neighbours = Object.keys(map[point]);
+		for(var i=0; i < neighbours.length; i++)	{
+			if(map[point][neighbours[i]] === -1 || map[neighbours[i]][point] === -1)	{
+				var distance = iwiNavigator.getDistance(coordinateMap[point], coordinateMap[neighbours[i]]);
+				map[point][neighbours[i]] = distance;
+				map[neighbours[i]][point] = distance;
+			}
+		}
+	}
+	graph = new Graph(map);*/
 }
 
 iwiNavigator.getDistance = function(p1,p2){
@@ -75,9 +60,7 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
-	/*.then(function()	{
-		//return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
-	});*/
+	//return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var t = ['a','b','c'];
 	return t;
 	
