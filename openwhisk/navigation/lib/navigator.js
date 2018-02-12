@@ -1,4 +1,5 @@
 
+var fs = require('fs');
 var map = {};
 var coordinateMap = {}
 var iwiNavigator = {};
@@ -6,8 +7,9 @@ var iwiNavigator = {};
 iwiNavigator.readCoordinateFile = function()	{
     var file = "./coordinates.txt";
     var rawFile = new XMLHttpRequest();
-    return new Promise(function(resolve, reject)	{
-	    /*rawFile.open("GET", file, false);
+    return fs.readFileSync('file.txt').toString();
+	/*return new Promise(function(resolve, reject)	{
+	    rawFile.open("GET", file, false);
 	    rawFile.onreadystatechange = function ()	{
 		if(rawFile.readyState === 4)	{
 		    if(rawFile.status === 200 || rawFile.status == 0)	{
@@ -45,9 +47,9 @@ iwiNavigator.readCoordinateFile = function()	{
 		}
 		resolve(true);
 	    }
-	    rawFile.send(null);*/
+	    rawFile.send(null);
 		resolve(true);
-	});
+	});*/
 }
 
 iwiNavigator.getDistance = function(p1,p2){
