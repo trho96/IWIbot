@@ -56,7 +56,7 @@ exports.sendMessage = function (init, result) {
 			if("positionFlag" in dataObj)	{
 				positionFlag = dataObj.positionFlag;
 	    		}
-                        chat.appendReceivedMessage(payload + positionFlag);
+                        chat.appendReceivedMessage(payload);
 
                         if("htmlText" in dataObj) {
                             chat.appendReceivedMessage(dataObj.htmlText.toString());
