@@ -5,9 +5,9 @@ var coordinateMap = {}
 var iwiNavigator = {};
 
 iwiNavigator.readCoordinateFile = function()	{
-    var file = "./coordinates.txt";
+    var file = "coordinates.txt";
     var rawFile = new XMLHttpRequest();
-    return fs.readFileSync('file.txt').toString();
+    return fs.readFileSync(file).toString();
 	/*return new Promise(function(resolve, reject)	{
 	    rawFile.open("GET", file, false);
 	    rawFile.onreadystatechange = function ()	{
