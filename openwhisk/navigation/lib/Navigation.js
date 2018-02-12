@@ -29,7 +29,7 @@ function main(params) {
                 break;
         }
 		
-	result = getNavigationPath(params.position, entity);
+	result = iwiNavigator.getNavigationPath(params.position, entity);
 		
 	var navigationResponse = {};
 
