@@ -33,7 +33,8 @@ function main(params) {
 		
 	var navigationResponse = {};
 
-	navigationResponse.payload = result[0];
+	    
+	navigationResponse.payload = result.join(');
         navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
