@@ -7,9 +7,8 @@ var iwiNavigator = {};
 iwiNavigator.readCoordinateFile = function()	{
     var allText = fs.readFileSync(__dirname + "/coordinates.txt").toString();
     allText = allText.replace(/\s/g,'');
-    return allText;
-	/*var wayPoints = allText.split(';');
-        if(wayPoints[wayPoints.length-1] === '')	{
+    	var wayPoints = allText.split(';');
+        if(wayPoints.length > 0 && wayPoints[wayPoints.length-1] === '')	{
 		wayPoints.splice(wayPoints.length - 1, 1);
 	}
 	for(var i=0; i<wayPoints.length; i++)	{
@@ -25,7 +24,7 @@ iwiNavigator.readCoordinateFile = function()	{
 			map[point[1]][neighbours[j]] = -1;
 		}
 	}
-	for(point in map)	{
+	/*for(point in map)	{
 		var neighbours = Object.keys(map[point]);
 		for(var i=0; i < neighbours.length; i++)	{
 			if(map[point][neighbours[i]] === -1 || map[neighbours[i]][point] === -1)	{
@@ -63,7 +62,6 @@ iwiNavigator.getNavigationPath = function(coords, target)	{
 	var x = iwiNavigator.readCoordinateFile();
 	//return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var t = ['a','b','c'];
-	t[0] = x;
 	return t;
 	
 }
