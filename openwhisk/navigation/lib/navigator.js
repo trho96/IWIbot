@@ -5,7 +5,7 @@ var coordinateMap = {}
 var iwiNavigator = {};
 
 iwiNavigator.readCoordinateFile = function()	{
-    var allText = fs.readFileSync("./coordinates.txt").toString();
+    var allText = fs.readFileSync(__dirname + "/coordinates.txt").toString();
     /*allText = allText.replace(/\s/g,'');
         var wayPoints = allText.split(';');
         if(wayPoints[wayPoints.length-1] === '')	{
