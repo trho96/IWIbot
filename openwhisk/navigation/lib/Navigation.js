@@ -1,5 +1,5 @@
 var request = require('request');
-var navi = require('../navi/navigation');
+var navi = require('./navigator');
 
 var navigationResponse = {};
 var voice = "en-US_MichaelVoice";
