@@ -34,7 +34,7 @@ function main(params) {
 	var navigationResponse = {};
 
 	    
-	navigationResponse.payload = result.join(');
+	navigationResponse.payload = result.join(',');
         navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
