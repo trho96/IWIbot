@@ -1,7 +1,7 @@
 
 var fs = require('fs');
 var graphImport = require('./graph');
-var graphConstr = graphImport.graphConstr;
+var GraphConstr = graphImport.graphConstr;
 var map = {};
 var coordinateMap = {}
 var iwiNavigator = {};
