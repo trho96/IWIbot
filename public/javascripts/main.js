@@ -27,9 +27,9 @@ $(document).ready(function () {
         	return conversation.sendMessage(false ,result, positionFlag);
         }).then(function (result) {
             if("positionFlag" in result)	{
-				positionFlag = result.positionFlag;
-			}
-		    //Add new notification, stop loader animation and show recording button again
+		positionFlag = result.positionFlag;
+	    }
+            //Add new notification, stop loader animation and show recording button again
             notificationNumber++;
             $("#mainDiv").removeClass("loader");
             $recordingButton.show();
@@ -47,7 +47,12 @@ $(document).ready(function () {
     //Chat Submit
     $chatForm.submit(function (event) {
         event.preventDefault();
-        conversation.sendMessage(false ,chat.chatSubmit(), positionFlag);
+        conversation.sendMessage(false ,chat.chatSubmit(), positionFlag)
+	.then(function (result) {
+	    if("positionFlag" in result)	{
+		positionFlag = result.positionFlag;
+	    }
+	}); 
     });
     //Open Login Window
     $modalTrigger.leanModal({
