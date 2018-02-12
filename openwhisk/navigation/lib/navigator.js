@@ -6,7 +6,7 @@ var iwiNavigator = {};
 
 iwiNavigator.readCoordinateFile = function()	{
     var allText = fs.readFileSync(__dirname + "/coordinates.txt").toString();
-    /*allText = allText.replace(/\s/g,'');
+    allText = allText.replace(/\s/g,'');
         var wayPoints = allText.split(';');
         if(wayPoints[wayPoints.length-1] === '')	{
 		wayPoints.splice(wayPoints.length - 1, 1);
@@ -34,7 +34,7 @@ iwiNavigator.readCoordinateFile = function()	{
 			}
 		}
 	}
-	graph = new Graph(map);*/
+	graph = new Graph(map);
 }
 
 iwiNavigator.getDistance = function(p1,p2){
