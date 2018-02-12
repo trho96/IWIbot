@@ -7,9 +7,9 @@ iwiNavigator.readCoordinateFile = function()	{
     var file = "./coordinates.txt";
     var rawFile = new XMLHttpRequest();
     return new Promise(function(resolve, reject)	{
-	    rawFile.open("GET", file, false);
+	    /*rawFile.open("GET", file, false);
 	    rawFile.onreadystatechange = function ()	{
-		/*if(rawFile.readyState === 4)	{
+		if(rawFile.readyState === 4)	{
 		    if(rawFile.status === 200 || rawFile.status == 0)	{
 			var allText = rawFile.responseText.replace(/\s/g,'');
 					var wayPoints = allText.split(';');
@@ -42,10 +42,11 @@ iwiNavigator.readCoordinateFile = function()	{
 					graph = new Graph(map);
 			    		resolve(graph);
 				}
-		}*/
+		}
 		resolve(true);
 	    }
-	    rawFile.send(null);
+	    rawFile.send(null);*/
+		resolve(true);
 	});
 }
 
