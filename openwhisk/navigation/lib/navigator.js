@@ -53,7 +53,8 @@ iwiNavigator.getNearestWaypoint = function(position)	{
 			nearestWaypoint = point;
 		}			
 	}
-	return nearestWaypoint;
+	var returner = [nearestWaypoint, position.longitude, position.langitude, smallestDistance];
+	return returner;//nearestWaypoint;
 }
 
 iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
@@ -62,7 +63,8 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
-	return graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
+	var pointDebug = iwiNavigator.getNearestWaypoint(coords);
+	return graph.findShortestPath(pointDebug[0], target).concat(pointDebug);
 }
 
 exports.iwiNavigator = iwiNavigator;
