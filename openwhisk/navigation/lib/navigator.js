@@ -18,8 +18,8 @@ iwiNavigator.readCoordinateFile = function()	{
 		map[point[1]] = {};
 		var coordinates = point[0].split(',');
 		coordinateMap[point[1]] = {
-			longitude: coordinates[0], 
-			latitude: coordinates[1]
+			latitude: coordinates[0], 
+			longitude: coordinates[1]
 		};
 		var neighbours = point[2].split(',');
 		for(var j = 0; j < neighbours.length; j++)	{
@@ -63,7 +63,7 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
-	var pointDebug = iwiNavigator.getNearestWaypoint(coords);
+	var pointDebug = iwiNavigator.getNearestWaypoint(coords.coords);
 	return graph.findShortestPath(pointDebug[0], target).concat(pointDebug);
 }
 
