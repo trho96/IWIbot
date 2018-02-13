@@ -29,8 +29,8 @@ function main(params) {
         response.semester = semester;
         response.courseOfStudies = courseOfStudies;
         response.position = typeof position !== 'undefined' ? {
-            latitude: position[0],
-            longitude: position[1]
+            latitude: position[1],
+            longitude: position[0]
         } : position;
         return dispatcher.dispatch(response);
 
