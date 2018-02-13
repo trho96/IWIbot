@@ -1,9 +1,9 @@
-49.014702,8.390610:	crossroad_e:		crossroad_f,entrance_e;
-49.015611,8.390690:	crossroad_f:		crossroad_e,crossroad_g,entrance_f;
-49.016119,8.390760:	crossroad_g:		crossroad_f,entrance_g;
-49.015032,8.390393:	entrance_e:		crossroad_e,crossroad_cafe_south;
-49.015610,8.390435:	entrance_f:		crossroad_f,crossroad_cafe_south;  
-49.016167,8.390498:	entrance_g:		crossroad_g,crossroad_cafe_north;
+49.014702,8.390610:	crossroad_e:		crossroad_f,entrance_e,crossroad_cafe_south;
+49.015611,8.390690:	crossroad_f:		crossroad_e,crossroad_g,entrance_f,crossroad_cafe_south;
+49.016119,8.390760:	crossroad_g:		crossroad_f,entrance_g,crossroad_cafe_north;
+49.015032,8.390393:	entrance_e:		crossroad_e;
+49.015610,8.390435:	entrance_f:		crossroad_f;  
+49.016167,8.390498:	entrance_g:		crossroad_g;
 49.015556,8.391201:	crossroad_cafe_south:	crossroad_e,crossroad_f,cafe;
 49.016016,8.391128:	crossroad_cafe_north:	crossroad_g,cafe;
 49.015719,8.391342:	cafe:			crossroad_cafe_south,crossroad_cafe_north;
