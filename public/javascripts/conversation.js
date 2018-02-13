@@ -28,7 +28,7 @@ exports.sendMessage = function (init, result) {
         if(!!positionFlag)	{
 		return new Promise(function(resolve, reject)	{
 			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
-				requestObject.position = [position.longitude,position.langitude];
+				requestObject.position = [position.coords.longitude,position.coords.langitude];
 				resolve(continueSendMessage());
 			});
 		});
