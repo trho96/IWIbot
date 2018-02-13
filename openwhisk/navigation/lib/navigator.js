@@ -63,7 +63,7 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
-	var pointDebug = iwiNavigator.getNearestWaypoint(coords.coords);
+	var pointDebug = iwiNavigator.getNearestWaypoint(coords);
 	return graph.findShortestPath(pointDebug[0], target).concat(pointDebug);
 }
 
