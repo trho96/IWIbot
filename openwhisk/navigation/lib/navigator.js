@@ -53,7 +53,7 @@ iwiNavigator.getNearestWaypoint = function(position)	{
 			nearestWaypoint = point;
 		}			
 	}
-	var returner = [nearestWaypoint, position.longitude, Object.keys(position).toString(), smallestDistance];
+	var returner = [nearestWaypoint, position.longitude, position.latitude, Object.keys(position).toString(), smallestDistance];
 	return returner;//nearestWaypoint;
 }
 
