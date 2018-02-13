@@ -3,7 +3,7 @@
 var exports = module.exports = {};
 var chat = require("./chat.js");
 var context = null;
-var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+process.env.WSK_API_CODE+'/iwibot/router';
+var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+ $WSK_API_CODE +'/iwibot/router';
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
 
