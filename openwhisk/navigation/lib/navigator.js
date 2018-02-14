@@ -40,7 +40,7 @@ iwiNavigator.readCoordinateFile = function()	{
 }
 
 iwiNavigator.getDistance = function(p1,p2){
-	return Math.sqrt(Math.abs(p1.longitude - p2.longitude) + Math.abs(p1.latitude - p2.latitude));
+	return Math.sqrt(Math.pow(p1.longitude - p2.longitude,2) + Math.pow(p1.latitude - p2.latitude,2));
 }
 
 iwiNavigator.getNearestWaypoint = function(position)	{
@@ -62,16 +62,12 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
-	cords = {
-		latitude: 49.014976, 
-		longitude: 8.389863
-	};
 	var path = graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var returner = [];
 	for(var i=0; i<path.length; i++)	{
 		returner.push({
-			latitude: iwiNavigator.getDistance(coords, coordinateMap['crossroad_e']), //coordinateMap[path[i]].latitude,
-			longitude: iwiNavigator.getDistance(coords, coordinateMap['crossroad_cafe_north']),//coordinateMap[path[i]].longitude,
+			latitude: coordinateMap[path[i]].latitude,
+			longitude: coordinateMap[path[i]].longitude,
 			name: path[i]
 		});
 	}
