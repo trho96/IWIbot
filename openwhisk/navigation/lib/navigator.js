@@ -65,7 +65,11 @@ iwiNavigator.getNavigationPath = function(coords, target)	{
 	var path = graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var returner = [];
 	for(point in path)	{
-		returner.push(coordinateMap[point]);
+		returner.push({
+			latitude: coordinateMap[point].latitude,
+			longitude: coordinateMap[point].longitude,
+			name: point
+		});
 	}
 	return returner;
 }
