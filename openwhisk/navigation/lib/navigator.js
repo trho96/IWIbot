@@ -64,11 +64,11 @@ iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
 	var path = graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var returner = [];
-	for(point in path)	{
+	for(var i=0; i<path.length; i++)	{
 		returner.push({
-			latitude: coordinateMap[point].latitude,
-			longitude: coordinateMap[point].longitude,
-			name: point
+			latitude: coordinateMap[path[i]].latitude,
+			longitude: coordinateMap[path[i]].longitude,
+			name: path[i]
 		});
 	}
 	return returner;
