@@ -62,6 +62,10 @@ iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
 	
 iwiNavigator.getNavigationPath = function(coords, target)	{
 	iwiNavigator.readCoordinateFile();
+	cords = {
+		latitude: 49.014976, 
+		longitude: 8.389863
+	};
 	var path = graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var returner = [];
 	for(var i=0; i<path.length; i++)	{
