@@ -43,6 +43,6 @@ function main(params) {
 	navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
-}
+} 
 
 exports.main = main;
