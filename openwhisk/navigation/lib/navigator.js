@@ -130,7 +130,7 @@ iwiNavigator.getDirectionOrder = function(c0, c1, c2)	{
 		return 'Bitte rechts abbiegen'; 
 	}
 	else if(degree > 10 && c0_c1_y < c1_c2_y)	{
-		return 'Bitte links abbiegen'
+		return 'Bitte links abbiegen';
 	}
 	else{
 		return 'Bitte geradeaus weiterlaufen';
