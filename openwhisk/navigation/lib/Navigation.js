@@ -31,7 +31,7 @@ function main(params) {
                 break;
         }
 		
-	result = navi.iwiNavigator.getNavigationPath(params.position, entity);
+	var result = navi.iwiNavigator.getNavigationPath(params.position, entity);
 		
 	var parsedResult = '';
 	for(var i=0; i<result.length; i++)	{
