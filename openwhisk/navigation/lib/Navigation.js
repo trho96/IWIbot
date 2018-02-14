@@ -35,7 +35,7 @@ function main(params) {
 		
 	var parsedResult = '';
 	for(var i=0; i<result.length; i++)	{
-		parsedResult = parsedResult + 'step:' + (i+1) + ',name:' + result[i].name + ',longitude:' + result[i].longitude'  + ',latitude:' + result[i].latitude + ';';
+		parsedResult = parsedResult + 'step:' + (i+1) + ',name:' + result[i].name + ',longitude:' + result[i].longitude  + ',latitude:' + result[i].latitude + ';';
 	}
 
 	var navigationResponse = {};    
