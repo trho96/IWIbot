@@ -33,11 +33,14 @@ function main(params) {
 		
 	result = navi.iwiNavigator.getNavigationPath(params.position, entity);
 		
-	var navigationResponse = {};
+	var parsedResult = '';
+	for(var i=0; i<result.length; i++)	{
+		parsedResult = parsedResult + 'step:' + (i+1) + ',name:' + result[i].name + ',longitude:' + result[i].longitude'  + ',latitude:' + result[i].latitude + ';';
+	}
 
-	    
-	navigationResponse.payload = result.join(',');
-        navigationResponse.voice = voice;
+	var navigationResponse = {};    
+        navigationResponse.payload = parsedResult;
+	navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
 }
