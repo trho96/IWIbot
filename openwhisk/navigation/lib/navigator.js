@@ -70,8 +70,8 @@ iwiNavigator.getNavigationPath = function(coords, target)	{
 	var returner = [];
 	for(var i=0; i<path.length; i++)	{
 		returner.push({
-			latitude: coordinateMap[path[i]].latitude,
-			longitude: coordinateMap[path[i]].longitude,
+			latitude: iwiNavigator.getDistance(getNearestWaypoint(coordinateMap['crossroad_e']), ')//coordinateMap[path[i]].latitude,
+			longitude: iwiNavigator.getDistance(getNearestWaypoint(coordinateMap['crossroad_cafe_north']),//coordinateMap[path[i]].longitude,
 			name: path[i]
 		});
 	}
