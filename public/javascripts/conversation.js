@@ -6,6 +6,8 @@ var context = null;
 var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + $WSK_API_CODE + '/iwibot/router';
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
+// Entscheidet ob GPS-Daten erhoben und zum Backend mitgesendet werden. Wird momentan angeschaltet von der Antwort des Conversation-
+// Service auf den ersten Teil der GPS-Anfrage (="Navigation", "Zeige mir den Weg", etc)
 var positionFlag = false;
 
 exports.sendMessage = function (init, result) {
@@ -25,6 +27,8 @@ exports.sendMessage = function (init, result) {
             requestObject.courseOfStudies = sessionStorage.getItem("courseOfStudies");
             requestObject.semester = sessionStorage.getItem("semester");
         }
+	// Ueberprueft, ob das positionFlag gesetzt ist und fordert wenn gesetzt GPS-Daten an. Speichert die Koordinaten in dem Object,
+	// welches dann spaeter im AJAX-Call an den Router.js im OpenWhisk mituebergeben wird.
         if(!!positionFlag)	{
 		return new Promise(function(resolve, reject)	{
 			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
@@ -37,6 +41,7 @@ exports.sendMessage = function (init, result) {
 		return continueSendMessage();
 	}
 
+	// Fortfuehrung von sendMessage. Notwendig wegen Asynchronitaet des GPS-Aufrufes.
 	function continueSendMessage()	{
 		
                 console.log("CONVERSATION_RequestObject : " + JSON.stringify(requestObject));
@@ -52,7 +57,9 @@ exports.sendMessage = function (init, result) {
 
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
-
+			    
+			// Ueberprueft, ob das JSON aus dem Conversation-Service eine Anfrage zur Aenderung des positionFlag enthaelt
+			// und aendert das Flag auf den im JSON angegebenen Wert.
 			if("positionFlag" in dataObj)	{
 				positionFlag = dataObj.positionFlag;
 	    		}
