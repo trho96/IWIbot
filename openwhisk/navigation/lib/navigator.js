@@ -6,13 +6,19 @@ var map = {};
 var coordinateMap = {}
 var iwiNavigator = {};
 
+/** 
+ * Liest die Koordinaten aus coordinates.txt und formt sie in ein Object, welches von der Dijkstra-Algorithmus-Implementation
+ * in graph.js benutzt werden kann
+ */
 iwiNavigator.readCoordinateFile = function()	{
+    // Liest die Datei
     var allText = fs.readFileSync(__dirname + "/coordinates.txt").toString();
     allText = allText.replace(/\s/g,'');
     	var wayPoints = allText.split(';');
         if(wayPoints.length > 0 && wayPoints[wayPoints.length-1] === '')	{
 		wayPoints.splice(wayPoints.length - 1, 1);
 	}
+	// Liest die Coordinaten und Vebindungen zwischen den Wegpunkten
 	for(var i=0; i<wayPoints.length; i++)	{
 		var point = wayPoints[i].split(':');
 		map[point[1]] = {};
@@ -26,6 +32,7 @@ iwiNavigator.readCoordinateFile = function()	{
 			map[point[1]][neighbours[j]] = -1;
 		}
 	}
+	// Bestimmt die Entfernungen zwischen den verschiedenen Wegpunkten
 	for(point in map)	{
 		var neighbours = Object.keys(map[point]);
 		for(var i=0; i < neighbours.length; i++)	{
@@ -36,13 +43,16 @@ iwiNavigator.readCoordinateFile = function()	{
 			}
 		}
 	}
+	// Baut das Object fuer den Dijkstra
 	graph = new GraphConstr(map);
 }
 
+// Bestimmt Distanz ziwschen 2 Wegpunkten
 iwiNavigator.getDistance = function(p1,p2){
 	return Math.sqrt(Math.pow(p1.longitude - p2.longitude,2) + Math.pow(p1.latitude - p2.latitude,2));
 }
 
+// Bestimmt den (nach Luftlinie) naechstgelegen Wegpunkt zu einem Coordinatenpaar.
 iwiNavigator.getNearestWaypoint = function(position)	{
 	var smallestDistance = null;
 	var nearestWaypoint = null;
@@ -54,10 +64,6 @@ iwiNavigator.getNearestWaypoint = function(position)	{
 		}			
 	}
 	return nearestWaypoint;
-}
-
-iwiNavigator.reachedWaypoint = function(position, wayPoint, threshold)	{
-	return iwiNavigator.getDistance(wayPoint, position) < threshold;
 }
 
 //latitude = X; longitude = Y
@@ -136,11 +142,19 @@ iwiNavigator.getDirectionOrder = function(c0, c1, c2)	{
 		return 'Bitte geradeaus weiterlaufen';
 	}
 };
-	
+
+/** 
+ * Berechnet aus einem Start-Koordinatenpaar (muss kein Wegpunkt aus coordinates.txt sein) und einem Zielwegpunkt (muss ein Wegpunkt 
+ * aus coordinates.txt sein; target=name des Wegpunkts als String) den kuerzesten Pfad nach Dijkstra. Ubernimmt auch notwendige vorberechnung
+ (=momentan: naechsten Wegpunkt zu Startkoordinaten berechnen & Graph aufbauen).
+*/
 iwiNavigator.getNavigationPath = function(coords, target)	{
+	// Lese coordinates.txt ein und erstelle Graph-Object
 	iwiNavigator.readCoordinateFile();
+	// Nachsten Wegpunkt zu Startkoordinaten finden und Dijkstra durchfuehren
 	var path = graph.findShortestPath(iwiNavigator.getNearestWaypoint(coords), target);
 	var returner = [];
+	// Parse das Ergebnis zu [{wegpunktNr im Pfad, Wegpunkt-Name, latitude, longitude},...]
 	for(var i=0; i<path.length; i++)	{
 		returner.push({
 			latitude: coordinateMap[path[i]].latitude,
