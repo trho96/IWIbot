@@ -5,7 +5,10 @@ function dispatch(response) {
     console.log('skip: ' + JSON.stringify(response));
     var context = response.context;
     var responseObject = {};
-    if ("actionToInvoke" in response.output) {
+    if ("positionFlag" in response.output) {
+		responseObject.positionFlag = response.output.positionFlag;
+	}	
+	if ("actionToInvoke" in response.output) {
         console.log("Action to be invoked: " + response.output.actionToInvoke);
         console.log("Context : " + JSON.stringify(context));
         var params = response;
@@ -16,7 +19,7 @@ function dispatch(response) {
         return action(name, blocking, result, params).then(function (response) {
             console.log("openwhisk response: " + JSON.stringify(response));
             return new Promise(function (resolve) {
-                responseObject = response.response.result;
+                responseObject = response;
                 responseObject.context = context;
                 resolve(responseObject);
             });
