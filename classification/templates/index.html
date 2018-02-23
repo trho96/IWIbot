@@ -35,9 +35,29 @@
             	//POST request to API to create a new visitor entry in the database
                 $.ajax({
 				  method: "POST",
-				  url: "./api/classify",
+				  url: "./api/getIntent",
 				  contentType: "application/json",
-				  data: JSON.stringify({sentence: sentence })
+				  data: JSON.stringify(
+				      {
+                          sentence: sentence,
+                          context : {
+                              conversation_id: "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+                              priorIntent: [
+                                  {
+                                      intent: "meal"
+                                  }
+                              ],
+                              system:{
+                                  dialog_stack:[],
+                                  dialog_turn_counter:1,
+                                  dialog_request_counter:1,
+                                  _node_output_map:[]
+                              }
+                          },
+                          init: "",
+                          param: ""
+				      }
+                  )
 				})
                 .done(function(data) {
                     $('#response').html(AntiXSS.sanitizeInput(data));
