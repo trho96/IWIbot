@@ -10,8 +10,9 @@ $(document).ready(function () {
     var $recordingButton = $(".btn-circle");
     var $historyToggle = $(".historyToggle");
     var $modalTrigger = $("#modal_trigger");
+    
     var notificationNumber = 0;
-
+    
     conversation.sendMessage(true, {}).then(function () {
         notificationNumber++;
         $(".notification").show().text(notificationNumber.toString());
@@ -22,7 +23,7 @@ $(document).ready(function () {
         $recordingButton.removeClass("notRecording").addClass("recording");
 
         stt().then(function (result) {
-            return conversation.sendMessage(false ,result);
+        	return conversation.sendMessage(false ,result);
         }).then(function (result) {
             //Add new notification, stop loader animation and show recording button again
             notificationNumber++;
@@ -42,7 +43,7 @@ $(document).ready(function () {
     //Chat Submit
     $chatForm.submit(function (event) {
         event.preventDefault();
-        conversation.sendMessage(false ,chat.chatSubmit());
+        conversation.sendMessage(false ,chat.chatSubmit()); 
     });
     //Open Login Window
     $modalTrigger.leanModal({
