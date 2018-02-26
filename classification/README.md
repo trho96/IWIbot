@@ -72,9 +72,9 @@ Login to your IBM Cloud account
 cf login
   ```
 
-From within the *get-started-python* directory push your app to IBM Cloud
+From within the *classification* directory push your app to IBM Cloud
   ```
-cf push
+cf push IWIBotClassifier -b https://github.com/cloudfoundry/buildpack-python.git
   ```
 
 This can take a minute. If there is an error in the deployment process you can use the command `cf logs <Your-App-Name> --recent` to troubleshoot.

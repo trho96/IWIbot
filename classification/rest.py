@@ -8,8 +8,8 @@ import nltk
 from cloudant import Cloudant
 from flask import Flask, render_template, request
 
-from classification.classifier.classifier import Classifier
-from classification.classifier.startup import populate
+from classifier.classifier import Classifier
+from classifier.startup import populate
 ###
 # Text Classification using Artificial Neural Networks (ANN)
 # Based on https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6

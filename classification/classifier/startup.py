@@ -1,4 +1,4 @@
-from classification.classifier.trainer import Trainer
+from trainer import Trainer
 
 
 def populate(client):
