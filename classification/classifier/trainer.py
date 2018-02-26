@@ -21,6 +21,7 @@ def sigmoid(x):
     output = 1 / (1 + np.exp(-x))
     return output
 
+
 # trains a neuronal network
 def train(context, db, X, y, classes, words, hidden_neurons=10, alpha=1.0, epochs=50000, dropout=False,
           dropout_percent=0.5):
@@ -148,6 +149,11 @@ class Trainer:
             self.training_data = list(trainer['training_data'])
         else:
             self.training_data = list()
+            data = dict([('_id', self.context), ('context', self.context),
+                         ('training_data', self.training_data)])
+
+            # Create a document using the Database API
+            self.trainer_db.create_document(data)
         self.synapse_db = client["synapse"]
 
     # /**
@@ -165,11 +171,10 @@ class Trainer:
         entry = dict([('class', intend), ('sentence', sentence)])
         if entry not in self.training_data:
             self.training_data.append(entry)
-            data = dict([('_id', self.context), ('context', self.context),
-                         ('training_data', self.training_data)])
 
-            # Create a document using the Database API
-            self.trainer_db.create_document(data)
+            trainer = self.trainer_db[self.context]
+            trainer['training_data'] = self.training_data
+            trainer.save()
 
     # /**
     #  * Removes an example for an intent from the training set and retrains the neuronal network for the context and
@@ -187,11 +192,9 @@ class Trainer:
         if entry in self.training_data:
             self.training_data.remove(entry)
 
-            data = dict([('_id', self.context), ('context', self.context),
-                         ('training_data', self.training_data)])
-
-            # Create a document using the Database API
-            self.trainer_db.create_document(data)
+            trainer = self.trainer_db[self.context]
+            trainer['training_data'] = self.training_data
+            trainer.save()
 
     # /**
     #  * Trains the neuronal network for the context and persists it in the database

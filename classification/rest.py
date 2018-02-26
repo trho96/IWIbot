@@ -47,7 +47,7 @@ elif os.path.isfile('vcap-local.json'):
         client = Cloudant(user, password, url=url, connect=True)
 
 cache = dict()
-if client:
+if client is not None:
     # populate database with base data and train all neuronal netwroks
     populate(client)
 
@@ -84,7 +84,7 @@ def home():
 def testIntent():
     request_object = request.json
     sentence = request.json['sentence']
-    if client:
+    if client is not None:
         if 'intents' not in cache.keys():
             cache["intents"] = Classifier("intents", client)
 
@@ -113,7 +113,7 @@ def testIntent():
 def getIntent():
     request_object = request.json
     sentence = request.json['sentence']
-    if client:
+    if client is not None:
         if 'intents' not in cache.keys():
             cache["intents"] = Classifier("intents", client)
 
@@ -144,7 +144,7 @@ def getEntity():
     request_object = request.json
     sentence = request.json['sentence']
     prior_intents = request.json['context']["priorIntents"]["intent"]
-    if client:
+    if client is not None:
         classifier_name = "entities@" + prior_intents
 
         if classifier_name not in cache.keys():
@@ -176,7 +176,7 @@ def getEntity():
 def addIntent():
     sentence = request.json['sentence']
     intent = request.json['intent']
-    if client:
+    if client is not None:
         intents = Trainer("intents", client)
         intents.add_to_traingset(sentence, intent, True)
 
@@ -188,7 +188,7 @@ def addIntent():
 #  */
 @app.route('/api/trainIntents', methods=['POST'])
 def trainIntents():
-    if client:
+    if client is not None:
         intents = Trainer("intents", client)
         intents.start_training()
         if 'intents' not in cache.keys():
@@ -208,7 +208,7 @@ def addEntity():
     intent = request.json['intent']
     sentence = request.json['sentence']
     entity = request.json['entity']
-    if client:
+    if client is not None:
         classifier_name = "entities@" + intent
         entities = Trainer(classifier_name, client)
         entities.add_to_traingset(sentence, entity, True)
@@ -222,7 +222,7 @@ def addEntity():
 @app.route('/api/trainEntity', methods=['POST'])
 def trainEntity():
     intent = request.json['intent']
-    if client:
+    if client is not None:
         classifier_name = "entities@" + intent
         entities = Trainer(classifier_name, client)
         entities.start_training()
