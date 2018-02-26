@@ -5,12 +5,12 @@ import os
 import metrics_tracker_client
 # use natural language toolkit
 import nltk
-from cloudant import Cloudant
-from flask import Flask, render_template, request
-
 from classifier.classifier import Classifier
 from classifier.startup import populate
 from classifier.trainer import Trainer
+from cloudant import Cloudant
+from flask import Flask, render_template, request
+
 ###
 # Text Classification using Artificial Neural Networks (ANN)
 # Based on https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6
@@ -80,6 +80,35 @@ def home():
 #  *
 #  * @return A JSON response with the classification
 #  */
+@app.route('/api/testIntent', methods=['POST'])
+def testIntent():
+    request_object = request.json
+    sentence = request.json['sentence']
+    if client:
+        if 'intents' not in cache.keys():
+            cache["intents"] = Classifier("intents", client)
+
+        classifier = cache["intents"]
+
+        results = classifier.classify(sentence)
+
+        classification = dict()
+        if len(results) > 0:
+            classification['intent'] = results[0][0]
+        else:
+            classification['intent'] = ""
+
+        request_object = removekey(request_object, "sentence")
+        request_object["classifications"] = classification
+
+        return 'Results: %s' % request_object
+
+
+# /**
+#  * Endpoint to classify a conversation service request JSON for the intent.
+#  *
+#  * @return A JSON response with the classification
+#  */
 @app.route('/api/getIntent', methods=['POST'])
 def getIntent():
     request_object = request.json
@@ -102,8 +131,6 @@ def getIntent():
         request_object["classifications"] = classification
 
         return request_object
-#       For testing via Index.html
-#        return 'Results: %s' % request_object
 
 
 # /**
@@ -137,8 +164,7 @@ def getEntity():
         request_object["classifications"] = classification
 
         return request_object
-#       For testing via Index.html
-#        return 'Results: %s' % request_object
+
 
 # /**
 #  * Endpoint to add a classification to a training set for classifying
@@ -146,8 +172,10 @@ def getEntity():
 #  *
 #  * @return No response
 #  */
-@app.route('/api/addIntent/<sentence>/<intent>', methods=['POST'])
-def addIntent(sentence, intent):
+@app.route('/api/addIntent', methods=['POST'])
+def addIntent():
+    sentence = request.json['sentence']
+    intent = request.json['intent']
     if client:
         intents = Trainer("intents", client)
         intents.add_to_traingset(sentence, intent, True)
@@ -175,8 +203,11 @@ def trainIntents():
 #  *
 #  * @return No response
 #  */
-@app.route('/api/addEntity/<intent>/<sentence>/<entity>', methods=['POST'])
-def addEntity(intent, sentence, entity):
+@app.route('/api/addEntity', methods=['POST'])
+def addEntity():
+    intent = request.json['intent']
+    sentence = request.json['sentence']
+    entity = request.json['entity']
     if client:
         classifier_name = "entities@" + intent
         entities = Trainer(classifier_name, client)
@@ -188,8 +219,9 @@ def addEntity(intent, sentence, entity):
 #  *
 #  * @return No response
 #  */
-@app.route('/api/trainEntity/<intent>', methods=['POST'])
-def trainEntity(intent):
+@app.route('/api/trainEntity', methods=['POST'])
+def trainEntity():
+    intent = request.json['intent']
     if client:
         classifier_name = "entities@" + intent
         entities = Trainer(classifier_name, client)
