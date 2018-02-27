@@ -60,8 +60,8 @@ if client is not None:
     # create Classifier cache on startup
     cache["intents"] = Classifier("intents", client)
     cache["intents"].load()
-    cache["entities@weekdays"] = Classifier("entities@weekdays", client)
-    cache["entities@weekdays"].load()
+    cache["entities@timetables"] = Classifier("entities@timetables", client)
+    cache["entities@timetables"].load()
     cache["entities@meal"] = Classifier("entities@meal", client)
     cache["entities@meal"].load()
 
