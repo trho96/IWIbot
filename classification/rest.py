@@ -159,7 +159,7 @@ def getIntent():
 def getEntity():
     request_object = request.json
     sentence = request.json['sentence']
-    prior_intents = request.json['context']["priorIntents"]["intent"]
+    prior_intents = request.json['context']["priorIntent"]["intent"]
     if client is not None:
         classifier_name = "entities@" + prior_intents
 
