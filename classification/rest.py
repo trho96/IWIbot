@@ -2,6 +2,7 @@ import atexit
 import json
 import os
 
+import cf_deployment_tracker
 import metrics_tracker_client
 # use natural language toolkit
 import nltk
@@ -9,7 +10,7 @@ from classifier.classifier import Classifier
 from classifier.startup import populate
 from classifier.trainer import Trainer
 from cloudant import Cloudant
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 ###
 # Text Classification using Artificial Neural Networks (ANN)
@@ -20,6 +21,7 @@ from flask import Flask, render_template, request
 nltk.download('punkt')
 
 # Emit Bluemix deployment event
+cf_deployment_tracker.track()
 metrics_tracker_client.DSX('org/repo')
 
 app = Flask(__name__)
@@ -36,6 +38,8 @@ if 'VCAP_SERVICES' in os.environ:
         password = creds['password']
         url = 'https://' + creds['host']
         client = Cloudant(user, password, url=url, connect=True)
+        client.create_database('trainer', throw_on_exists=False)
+        client.create_database('synapse', throw_on_exists=False)
 elif os.path.isfile('vcap-local.json'):
     with open('vcap-local.json') as f:
         vcap = json.load(f)
@@ -45,6 +49,8 @@ elif os.path.isfile('vcap-local.json'):
         password = creds['password']
         url = 'https://' + creds['host']
         client = Cloudant(user, password, url=url, connect=True)
+        client.create_database('trainer', throw_on_exists=False)
+        client.create_database('synapse', throw_on_exists=False)
 
 cache = dict()
 if client is not None:
@@ -97,11 +103,16 @@ def testIntent():
             classification['intent'] = results[0][0]
         else:
             classification['intent'] = ""
+    else:
+        print("NO DATABASE")
 
-        request_object = removekey(request_object, "sentence")
-        request_object["classifications"] = classification
+        classification = dict()
+        classification['intent'] = "NO DATABASE"
 
-        return 'Results: %s' % request_object
+    response_object = removekey(request_object, "sentence")
+    response_object["classifications"] = classification
+
+    return 'Results: %s' % classification['intent']
 
 
 # /**
@@ -126,11 +137,16 @@ def getIntent():
             classification['intent'] = results[0][0]
         else:
             classification['intent'] = ""
+    else:
+        print("NO DATABASE")
 
-        request_object = removekey(request_object, "sentence")
-        request_object["classifications"] = classification
+        classification = dict()
+        classification['intent'] = "NO DATABASE"
 
-        return request_object
+    response_object = removekey(request_object, "sentence")
+    response_object["classifications"] = classification
+
+    return jsonify(response_object)
 
 
 # /**
@@ -159,11 +175,16 @@ def getEntity():
             classification['entity'] = results[0][0]
         else:
             classification['entity'] = ""
+    else:
+        print("NO DATABASE")
 
-        request_object = removekey(request_object, "sentence")
-        request_object["classifications"] = classification
+        classification = dict()
+        classification['entity'] = "NO DATABASE"
 
-        return request_object
+    response_object = removekey(request_object, "sentence")
+    response_object["classifications"] = classification
+
+    return jsonify(response_object)
 
 
 # /**
@@ -179,6 +200,10 @@ def addIntent():
     if client is not None:
         intents = Trainer("intents", client)
         intents.add_to_traingset(sentence, intent, True)
+        return jsonify([])
+    else:
+        print("NO DATABASE")
+        return "NO DATABASE"
 
 
 # /**
@@ -195,6 +220,10 @@ def trainIntents():
             cache['intents'] = Classifier('intents', client)
         else:
             cache['intents'].load()
+        return jsonify([])
+    else:
+        print("NO DATABASE")
+        return "NO DATABASE"
 
 
 # /**
@@ -212,6 +241,10 @@ def addEntity():
         classifier_name = "entities@" + intent
         entities = Trainer(classifier_name, client)
         entities.add_to_traingset(sentence, entity, True)
+        return jsonify([])
+    else:
+        print("NO DATABASE")
+        return "NO DATABASE"
 
 
 # /**
@@ -230,11 +263,15 @@ def trainEntity():
             cache[classifier_name] = Classifier(classifier_name, client)
         else:
             cache[classifier_name].load()
+        return jsonify([])
+    else:
+        print("NO DATABASE")
+        return "NO DATABASE"
 
 
 @atexit.register
 def shutdown():
-    if client:
+    if client is not None:
         client.disconnect()
 
 
