@@ -54,11 +54,6 @@ elif os.path.isfile('vcap-local.json'):
 
 cache = dict()
 if client is not None:
-    # populate database with base data and train all neuronal netwroks
-    populate_intents(client)
-    populate_entities_for_meal(client)
-    populate_entities_for_timetables(client)
-
     # create Classifier cache on startup
     cache["intents"] = Classifier("intents", client)
     cache["intents"].load()
@@ -93,18 +88,27 @@ def testIntent():
     request_object = request.json
     sentence = request.json['sentence']
     if client is not None:
-        if 'intents' not in cache.keys():
-            cache["intents"] = Classifier("intents", client)
+        if sentence == 'populate':
+            # populate database with base data and train all neuronal netwroks
+            populate_intents(client)
+            populate_entities_for_meal(client)
+            populate_entities_for_timetables(client)
 
-        classifier = cache["intents"]
-
-        results = classifier.classify(sentence)
-
-        classification = dict()
-        if len(results) > 0:
-            classification['intent'] = results[0][0]
+            classification = dict()
+            classification['entity'] = "Populated"
         else:
-            classification['intent'] = ""
+            if 'intents' not in cache.keys():
+                cache["intents"] = Classifier("intents", client)
+
+            classifier = cache["intents"]
+
+            results = classifier.classify(sentence)
+
+            classification = dict()
+            if len(results) > 0:
+                classification['intent'] = results[0][0]
+            else:
+                classification['intent'] = ""
     else:
         print("NO DATABASE")
 
