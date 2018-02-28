@@ -66,7 +66,7 @@ exports.sendMessage = function (init, result) {
                 positionFlag = dataObj.positionFlag;
                 }
                 
-            //If there is navigation Data in the answer, start a new navigation
+            //If there is navigation Data in the answer, start a new
             if ("navigationData" in dataObj) {
                 var navigationData = dataObj.navigationData;
                 console.log("Location Data: " + JSON.stringify(navigationData));
