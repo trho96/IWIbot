@@ -44,9 +44,7 @@ function main(params) {
 	}
 	*/
 	var navigationResponse = {};    
-        // Setzen des Ergebnis als payload, damit es im Chat ausgegeben wird. Wenn das Ergebnis in eine andere Variable als payload
-	// geschrieben wird wird sie ebenfalls ans Frontend mitzurueckgegeben, aber nicht im Chat ausgegeben (Der Chat gibt nach aktueller
-	// Implmenetierung immer den String aus der in payload steht).
+    //Schreiben des Ergebnisses in den navigationData Parameter. Der Client kann diesen auslesen und weiterverwerten.
     navigationResponse.payload = "Navigation nach " + entity + " gestartet! Laufe nach " + result[0].name + "!";
     navigationResponse.navigationData = parsedResult;
 	navigationResponse.voice = voice;

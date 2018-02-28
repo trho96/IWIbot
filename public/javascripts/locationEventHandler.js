@@ -6,7 +6,7 @@ var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
 
-
+//Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new locationEvents!")
     console.log(JSON.stringify(navigation));
@@ -18,6 +18,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     }
 }; 
 
+//Add LocationEvents to the LocationEvents-List
 exports.addLocationEvents = function addLocationEvents(events) {
     console.log("Setting new locationEvents!")
     locationEvents = locationEvents.push().apply(locationEvents, events)
@@ -26,7 +27,7 @@ exports.addLocationEvents = function addLocationEvents(events) {
     }
 }; 
 
-
+//Toggle the use of location for navigation and events
 exports.toggleLocationEvents = function toggleLocationEvents() {
     if (!locationWatcher) {
         //Since watchPosition does not work properly, getCurrentPosition and setInterval will be used until fixed
@@ -51,13 +52,14 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
     }
 };
 
+//Is called when the client reaches a new position
 function onNewPosition(position) {
     console.log(position);
     //Check Navigation
-    for (var i = 0; i < events.currentNavigationWaypoints.length; i++) {
+    for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
-        if (checkIfInRange(position.latitude, events[i].latitude - 0.0001, events[i].latitude + 0.0001) &&
-         checkIfInRange(position.longitude, events[i].longitude - 0.0001, events[i].longitude + 0.0001)) {
+        if (checkIfInRange(position.latitude, currentNavigationWaypoints[i].latitude - 0.0001, currentNavigationWaypoints[i].latitude + 0.0001) &&
+         checkIfInRange(position.longitude, currentNavigationWaypoints[i].longitude - 0.0001, currentNavigationWaypoints[i].longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
           if (i = currentNavigationWaypoints.length - 1) {
               //Navigation beenden
@@ -75,6 +77,7 @@ function onNewPosition(position) {
     //TODO
   };
 
+  //Helper function to calculate if a number is between two other numbers
 function checkIfInRange(number, range1, range2) {
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
