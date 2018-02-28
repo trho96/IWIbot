@@ -5,7 +5,7 @@ $(document).ready(function () {
     var tts = require("./textToSpeech");
     var chat = require("./chat.js");
     var login = require("./login");
-   // var navigationEventHandler = require("./locationEventHandler");
+    var locationEventHandler = require("./locationEventHandler.js");
 
     var $chatForm = $('#chatForm');
     var $recordingButton = $(".btn-circle");
