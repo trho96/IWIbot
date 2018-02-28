@@ -64,11 +64,16 @@ exports.sendMessage = function (init, result) {
 			// und aendert das Flag auf den im JSON angegebenen Wert.
 			if("positionFlag" in dataObj)	{
                 positionFlag = dataObj.positionFlag;
+                }
+                
+            if ("locationData" in dataObj) {
                 var locationData = dataObj.locationData;
                 console.log("Location Data: " + JSON.stringify(locationData));
                 locationEventHandler.setEvents(locationData.waypoints);
+            }
 
-	    		}
+
+
                         chat.appendReceivedMessage(payload);
 
                         if("htmlText" in dataObj) {
