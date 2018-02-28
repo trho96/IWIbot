@@ -11,7 +11,7 @@ exports.setEvents = function setEvents(events) {
     if (!locationWatcher) {
         exports.toggleLocationEvents();
     }
-} 
+}; 
 
 exports.toggleLocationEvents = function toggleLocationEvents() {
     locationEventsActive = !locationEventsActive;
@@ -26,7 +26,7 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
         navigator.geolocation.clearWatch(locationWatcher);
         locationWatcher = null;
     }
-}
+};
 
 
 
@@ -40,10 +40,10 @@ onNewPosition = function onNewPosition(position) {
           console.log("Detected Geofence Trigger");
         }
     }
-  }
+  };
 
   checkIfInRange = function checkIfInRange(number, range1, range2) {
     const min = Math.min.apply(Math, [range1, range2]);
     const max = Math.max.apply(Math, [range1, range2]);
   return number > min && number < max;
-  }
+  };
