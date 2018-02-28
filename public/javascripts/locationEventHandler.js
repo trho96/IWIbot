@@ -1,5 +1,3 @@
-var chat = require("./chat.js");
-
 var exports = module.exports = {};
 var locationWatcher = null;
 var locationEvents = [];
@@ -43,7 +41,7 @@ onNewPosition = function onNewPosition(position) {
   };
 
   checkIfInRange = function checkIfInRange(number, range1, range2) {
-    const min = Math.min.apply(Math, [range1, range2]);
-    const max = Math.max.apply(Math, [range1, range2]);
+    var min = Math.min.apply(Math, [range1, range2]);
+    var max = Math.max.apply(Math, [range1, range2]);
   return number > min && number < max;
   };
