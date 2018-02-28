@@ -28,7 +28,7 @@ exports.addLocationEvents = function addLocationEvents(events) {
 
 
 exports.toggleLocationEvents = function toggleLocationEvents() {
-    if (locationWatcher) {
+    if (!locationWatcher) {
         //Since watchPosition does not work properly, getCurrentPosition and setInterval will be used until fixed
         /*
         locationWatcher = navigator.geolocation.watchPosition(function(position) {
