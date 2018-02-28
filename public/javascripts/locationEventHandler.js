@@ -26,14 +26,25 @@ exports.addLocationEvents = function addLocationEvents(events) {
     }
 }; 
 
+
 exports.toggleLocationEvents = function toggleLocationEvents() {
     if (locationWatcher) {
+        //Since watchPosition does not work properly, getCurrentPosition and setInterval will be used until fixed
+        /*
         locationWatcher = navigator.geolocation.watchPosition(function(position) {
             onNewPosition({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
         });
+        */
+        locationWatcher = setInterval(navigator.geolocation.getCurrentPosition(function(position) {
+            onNewPosition({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        }), 1000);
+
     } else {
         navigator.geolocation.clearWatch(locationWatcher);
         locationWatcher = null;
