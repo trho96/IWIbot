@@ -2,10 +2,11 @@ var chat = require("./chat.js");
 
 var exports = module.exports = {};
 var locationWatcher = null;
-var locationEvents;
+var locationEvents = [];
 
 exports.setEvents = function (events) {
-    locationEvents = events;
+    console.log("Setting new locationEvents!")
+    locationEvents.concat(events);
     console.log(locationEvents);
     if (!locationWatcher) {
         exports.toggleLocationEvents();
@@ -28,11 +29,14 @@ exports.toggleLocationEvents = function() {
 }
 
 
+
+
 onNewPosition = function(position) {
     console.log(position);
     for (var event of locationEvents) {
-        if (this.checkIfInRange(position.latitude, event.coordinates.lat1, event.coordinates.lat2) &&
-         this.checkIfInRange(position.longitude, event.coordinates.lng1, event.coordinates.lng2)) {
+        //About 7m in each direction
+        if (this.checkIfInRange(position.latitude, event.latitude - 0.0001, event.latitude + 0.0001) &&
+         this.checkIfInRange(position.longitude, event.longitude - 0.0001, event.longitude + 0.0001)) {
           console.log('Detected Geofence Trigger');
         }
     }
