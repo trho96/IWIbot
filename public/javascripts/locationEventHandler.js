@@ -14,8 +14,8 @@ exports.setEvents = function setEvents(events) {
 exports.toggleLocationEvents = function toggleLocationEvents() {
     locationEventsActive = !locationEventsActive;
     if (locationWatcher) {
-        locationWatcher = navigator.geolocation.watchPosition((position) => {
-            this.onNewPosition({
+        locationWatcher = navigator.geolocation.watchPosition(function(position) {
+            onNewPosition({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
