@@ -64,7 +64,7 @@ exports.sendMessage = function (init, result) {
 			// und aendert das Flag auf den im JSON angegebenen Wert.
 			if("positionFlag" in dataObj)	{
                 positionFlag = dataObj.positionFlag;
-                var locationData = JSON.parse(dataObj.locationData);
+                var locationData = dataObj.locationData;
                 console.log("Location Data: " + JSON.stringify(locationData));
                 locationEventHandler.setEvents(locationData.waypoints);
 
