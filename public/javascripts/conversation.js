@@ -59,7 +59,7 @@ exports.sendMessage = function (init, result) {
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
                         var locationData = dataObj.locationData;
-                        //console.log("Location Data: " + JSON.stringify(locationData));
+                        console.log("Location Data: " + JSON.stringify(locationData));
 			    
 			// Ueberprueft, ob das JSON aus dem Conversation-Service eine Anfrage zur Aenderung des positionFlag enthaelt
 			// und aendert das Flag auf den im JSON angegebenen Wert.
