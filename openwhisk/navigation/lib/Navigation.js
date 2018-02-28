@@ -37,7 +37,7 @@ function main(params) {
 	var result = navi.iwiNavigator.getNavigationPath(params.position, entity);
 		
 	// Ergebis-Array zu String umwandeln
-	var parsedResult = JSON.stringify({'waypoints': result, 'navigationEndpoint': entity});
+	var parsedResult = JSON.stringify({waypoints: result, navigationEndpoint: entity});
     /*
     for(var i=0; i<result.length; i++)	{
 		parsedResult = parsedResult + 'step:' + (i+1) + ',name:' + result[i].name + ',longitude:' + result[i].longitude  + ',latitude:' + result[i].latitude + ';';

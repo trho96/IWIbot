@@ -58,17 +58,18 @@ exports.sendMessage = function (init, result) {
 
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
-                        var locationData = dataObj.locationData;
-                        console.log("Location Data: " + JSON.stringify(locationData));
+                        
 			    
 			// Ueberprueft, ob das JSON aus dem Conversation-Service eine Anfrage zur Aenderung des positionFlag enthaelt
 			// und aendert das Flag auf den im JSON angegebenen Wert.
 			if("positionFlag" in dataObj)	{
-				positionFlag = dataObj.positionFlag;
+                positionFlag = dataObj.positionFlag;
+                var locationData = JSON.parse(dataObj.locationData);
+                console.log("Location Data: " + JSON.stringify(locationData));
+                locationEventHandler.setEvents(locationData.waypoints);
+
 	    		}
                         chat.appendReceivedMessage(payload);
-                        locationEventHandler.setEvents(locationData.waypoints);
-
 
                         if("htmlText" in dataObj) {
                             chat.appendReceivedMessage(dataObj.htmlText.toString());
