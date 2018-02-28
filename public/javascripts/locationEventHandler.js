@@ -24,12 +24,13 @@ exports.addLocationEvents = function addLocationEvents(events) {
     console.log("Setting new locationEvents!")
     locationEvents = locationEvents.push().apply(locationEvents, events)
     if (!locationWatcher) {
-        exports.toggleLocationEvents();
+        toggleLocationEvents();
     }
 }; 
 
 //Toggle the use of location for navigation and events
-exports.toggleLocationEvents = function toggleLocationEvents() {
+function toggleLocationEvents() {
+    console.log("Toggle locationEvents")
     if (!locationWatcher) {
         //Since watchPosition does not work properly, getCurrentPosition and setInterval will be used until fixed
         /*
