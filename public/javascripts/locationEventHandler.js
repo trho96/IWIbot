@@ -4,7 +4,7 @@ var exports = module.exports = {};
 var locationWatcher = null;
 var locationEvents = [];
 
-exports.setEvents = function (events) {
+exports.setEvents = function setEvents(events) {
     console.log("Setting new locationEvents!")
     locationEvents = locationEvents.concat(events);
     console.log(locationEvents);
@@ -13,7 +13,7 @@ exports.setEvents = function (events) {
     }
 } 
 
-exports.toggleLocationEvents = function() {
+exports.toggleLocationEvents = function toggleLocationEvents() {
     locationEventsActive = !locationEventsActive;
     if (locationWatcher) {
         locationWatcher = navigator.geolocation.watchPosition((position) => {
@@ -31,18 +31,18 @@ exports.toggleLocationEvents = function() {
 
 
 
-onNewPosition = function(position) {
+onNewPosition = function onNewPosition(position) {
     console.log(position);
     for (var event of locationEvents) {
         //About 7m in each direction
         if (this.checkIfInRange(position.latitude, event.latitude - 0.0001, event.latitude + 0.0001) &&
          this.checkIfInRange(position.longitude, event.longitude - 0.0001, event.longitude + 0.0001)) {
-          console.log('Detected Geofence Trigger');
+          console.log("Detected Geofence Trigger");
         }
     }
   }
 
-  checkIfInRange = function(number, range1, range2) {
+  checkIfInRange = function checkIfInRange(number, range1, range2) {
     const min = Math.min.apply(Math, [range1, range2]);
     const max = Math.max.apply(Math, [range1, range2]);
   return number > min && number < max;
