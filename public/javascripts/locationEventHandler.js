@@ -54,11 +54,11 @@ function toggleLocationEvents() {
 
 //Is called when the client reaches a new position
 function onNewPosition(position) {
-    console.log(position);
     //Check Navigation
+    console.log("Checking" + currentNavigationWaypoints.length + "positions.")
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
-        if (checkIfInRange(position.latitude, JSON.parse(currentNavigationWaypoints[i]).latitude - 0.0001, JSON.parse(currentNavigationWaypoints[i]).latitude + 0.0001) &&
+        if (checkIfInRange(position.latitude, currentNavigationWaypoints[i].latitude - 0.0001, currentNavigationWaypoints[i].latitude + 0.0001) &&
          checkIfInRange(position.longitude, currentNavigationWaypoints[i].longitude - 0.0001, currentNavigationWaypoints[i].longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
           if (i = currentNavigationWaypoints.length - 1) {
