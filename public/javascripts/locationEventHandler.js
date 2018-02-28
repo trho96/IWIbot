@@ -31,10 +31,10 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
 
 function onNewPosition(position) {
     console.log(position);
-    for (var event of locationEvents) {
+    for (var i=0; i<events.length; i++) {
         //About 7m in each direction
-        if (this.checkIfInRange(position.latitude, event.latitude - 0.0001, event.latitude + 0.0001) &&
-         this.checkIfInRange(position.longitude, event.longitude - 0.0001, event.longitude + 0.0001)) {
+        if (this.checkIfInRange(position.latitude, events[i].latitude - 0.0001, events[i].latitude + 0.0001) &&
+         this.checkIfInRange(position.longitude, events[i].longitude - 0.0001, events[i].longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
         }
     }
