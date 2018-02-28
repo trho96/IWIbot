@@ -45,7 +45,7 @@ function main(params) {
 	*/
 	var navigationResponse = {};    
     //Schreiben des Ergebnisses in den navigationData Parameter. Der Client kann diesen auslesen und weiterverwerten.
-    navigationResponse.payload = "Navigation nach " + entity + " gestartet! Laufe nach " + result[0].name + "!";
+    navigationResponse.payload = "Navigation nach " + entity + " gestartet!";
     navigationResponse.navigationData = parsedResult;
 	navigationResponse.voice = voice;
 	resolve(navigationResponse);

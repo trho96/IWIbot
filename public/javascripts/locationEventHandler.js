@@ -8,9 +8,10 @@ var currentNavigationDestination = "None";
 
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
-    console.log("Setting new locationEvents!")
+    console.log("Setting new navigationWaypoints to " + navigation.navigationDestination + "!")
     console.log(JSON.stringify(navigation));
-    currentNavigationWaypoints = navigation.waypoints;
+    chat.appendReceivedMessage("Laufe nach " + navigation.navigationDestination + "!");
+    currentNavigationWaypoints = JSON.parse(navigation.waypoints);
     currentNavigationDestination = navigation.navigationDestination;
     console.log(currentNavigationWaypoints);
     if (!locationWatcher) {
