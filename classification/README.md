@@ -146,3 +146,25 @@ cf push IWIBotClassifier -b https://github.com/cloudfoundry/buildpack-python.git
   ```
 
 Schaue die Instanz an unter der gelisteten URL in der Ausgabe des push Befehls, zum Beispiel, *iwibotclassifier.mybluemix.net*.
+
+## 7. Hilfreiche Links ##
+
+* [IBM-Cloud Get-Started-Python](https://github.com/IBM-Cloud/get-started-python)
+* [Cloudant Client Dokumentation](https://github.com/cloudant/python-cloudant)
+* [Text Classification using Neural Networks](https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6)
+
+## Aufbau ##
+
+Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schnittstelle
+* **Trainer:** Zuständig die verwaltung der Trainingsdaten für ein Neuronalen Netz (NN) und zum Training des NN basierend auf den gegebenen Trainingsdaten. Der Trainer persistiert Trainingsdaten und NN in je einem Dokument in einer Datenbank. Das NN kann nach abschließenden Training und speichern vom Classifier aus der Datenbank geladen werden und darauf basierend eine Klassifizierung für einen Text geben. 
+
+* **Classifier:** Gibt eine Prognose über den Intend den der Satz beinhaltet basierend auf dem gegebenen NN des Trainers.
+
+* **REST:** Ist die Schnittstelle des Classifiers nach außen Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entitäten als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
+
+##  Ausblick ##
+Im Rahmen des Projekts wurden auch schon der Grundstein gelegt den Classifier zu erweitern. Folgende Ideen sind Teilweise schon umgesetzt:
+
+Der Classifier kann schon erweitert werden, der nächste logische Schritt wäre eine Strategie zu entwickeln wie Feedback von Nutzern in die Trainingsdaten eingeführt werden kann, dabei kommen 2 möglichkeiten in Frage:
+* **Threshold:** Wen ein Nutzer eine Anfrage stellt und das Resultat negativ ist kann der Nutzer eine Antwort geben welches Resultat den Richtig wäre, geben viele Nutzer zu einem Satz das gleiche Endresultat als Feedback kann dieses den Trainingsdaten hinzugefügt werden und der Trainer neu trainiert werden.
+* **Trusted Sources:** Bei dieser Variante gibt der Nutzer Nutzer zwar auch Feedback dieses wird aber erst übernommen wenn eine vertraute Person dieses auch verifiziert. Es ist auch möglich einige Nutzer aus vertraut einzustufen und ihr Feedback sofort zu übernehmen. Der Trainer besitzt bereits ein trusted flag beim Hinzufügen von Trainingsdaten, die Logik dafür ist aber noch nicht Implementiert.
