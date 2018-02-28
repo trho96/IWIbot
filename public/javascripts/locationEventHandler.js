@@ -58,8 +58,8 @@ function onNewPosition(position) {
     console.log("Checking" + currentNavigationWaypoints.length + "positions.")
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
-        if (checkIfInRange(position.latitude, currentNavigationWaypoints[i].latitude - 0.0001, currentNavigationWaypoints[i].latitude + 0.0001) &&
-         checkIfInRange(position.longitude, currentNavigationWaypoints[i].longitude - 0.0001, currentNavigationWaypoints[i].longitude + 0.0001)) {
+        if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
+         checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i]).longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
           if (i = currentNavigationWaypoints.length - 1) {
               //Navigation beenden
@@ -79,8 +79,9 @@ function onNewPosition(position) {
 
   //Helper function to calculate if a number is between two other numbers
 function checkIfInRange(number, range1, range2) {
-    console.log("Comparing" + number + " " + range1 + " " + range2);
+    console.log("Comparing " + number + " " + range1 + " " + range2);
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
+    console.log((number > min) && (number < max));
   return (number > min) && (number < max);
   };
