@@ -10,12 +10,12 @@ var currentNavigationDestination = "None";
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     console.log(navigation);
-    chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).navigationDestination + "!");
+    chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).waypoints[0].name + "!");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
     console.log(currentNavigationWaypoints);
     if (!locationWatcher) {
-        exports.toggleLocationEvents();
+        toggleLocationEvents();
     }
 }; 
 
