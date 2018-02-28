@@ -2,7 +2,7 @@
 
 var exports = module.exports = {};
 var chat = require("./chat.js");
-var locationEventHandler = require("./locationEventHandler.js");
+//var locationEventHandler = require("./locationEventHandler.js");
 var context = null;
 var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+ $WSK_API_CODE +'/iwibot/router';
 var $mainDiv = $("#mainDiv");
@@ -59,7 +59,7 @@ exports.sendMessage = function (init, result) {
                         var dataObj = JSON.parse(data);
                         var payload = dataObj.payload.toString();
                         var locationData = dataObj.locationData;
-                        console.log("Location Data: " + JSON.stringify(locationData));
+                        //console.log("Location Data: " + JSON.stringify(locationData));
 			    
 			// Ueberprueft, ob das JSON aus dem Conversation-Service eine Anfrage zur Aenderung des positionFlag enthaelt
 			// und aendert das Flag auf den im JSON angegebenen Wert.
