@@ -41,13 +41,12 @@ function toggleLocationEvents() {
             });
         });
         */
-        locationWatcher = setInterval(navigator.geolocation.getCurrentPosition(function(position) {
+        locationWatcher = setInterval(function () {navigator.geolocation.getCurrentPosition(function(position) {
             onNewPosition({
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude
             });
-        }), 1000);
-
+        })}, 1000);
     } else {
         clearInterval(locationWatcher);
         locationWatcher = false;
