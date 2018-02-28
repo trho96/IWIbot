@@ -6,7 +6,7 @@ var locationEvents = [];
 
 exports.setEvents = function (events) {
     console.log("Setting new locationEvents!")
-    locationEvents.concat(events);
+    locationEvents = locationEvents.concat(events);
     console.log(locationEvents);
     if (!locationWatcher) {
         exports.toggleLocationEvents();
