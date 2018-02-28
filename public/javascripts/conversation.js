@@ -66,10 +66,10 @@ exports.sendMessage = function (init, result) {
                 positionFlag = dataObj.positionFlag;
                 }
                 
-            if ("locationData" in dataObj) {
-                var locationData = dataObj.locationData;
-                console.log("Location Data: " + JSON.stringify(locationData));
-                locationEventHandler.setEvents(locationData);
+            if ("navigationData" in dataObj) {
+                var navigationData = dataObj.navigationData;
+                console.log("Location Data: " + JSON.stringify(navigationData));
+                locationEventHandler.setNewNavigation(navigationData);
             }
 
 

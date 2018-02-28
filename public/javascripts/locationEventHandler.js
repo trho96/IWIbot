@@ -1,13 +1,26 @@
+var chat = require("./chat.js");
+
 var exports = module.exports = {};
 var locationWatcher = null;
 var locationEvents = [];
+var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
 
-exports.setEvents = function setEvents(events) {
+
+exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new locationEvents!")
-    locationEvents = locationEvents.push.apply(locationEvents, events.waypoints);
-    currentNavigationDestination = events.navigationDestination;
-    console.log(locationEvents);
+    console.log(JSON.stringify(navigation));
+    currentNavigationWaypoints = navigation.waypoints;
+    currentNavigationDestination = navigation.navigationDestination;
+    console.log(currentNavigationWaypoints);
+    if (!locationWatcher) {
+        exports.toggleLocationEvents();
+    }
+}; 
+
+exports.addLocationEvents = function addLocationEvents(events) {
+    console.log("Setting new locationEvents!")
+    locationEvents = locationEvents.push().apply(locationEvents, events)
     if (!locationWatcher) {
         exports.toggleLocationEvents();
     }
@@ -27,18 +40,28 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
     }
 };
 
-
-
-
 function onNewPosition(position) {
     console.log(position);
-    for (var i=0; i<events.length; i++) {
+    //Check Navigation
+    for (var i = 0; i < events.currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
-        if (this.checkIfInRange(position.latitude, events[i].latitude - 0.0001, events[i].latitude + 0.0001) &&
-         this.checkIfInRange(position.longitude, events[i].longitude - 0.0001, events[i].longitude + 0.0001)) {
+        if (checkIfInRange(position.latitude, events[i].latitude - 0.0001, events[i].latitude + 0.0001) &&
+         checkIfInRange(position.longitude, events[i].longitude - 0.0001, events[i].longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
+          if (i = currentNavigationWaypoints.length - 1) {
+              //Navigation beenden
+              chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
+              currentNavigationWaypoints = [];
+              currentNavigationDestination = "None";
+          } else {
+              //Gebe nächsten Wegpunkt an
+              chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!")
+          }
+         
         }
     }
+    //Check other Events
+    //TODO
   };
 
 function checkIfInRange(number, range1, range2) {
