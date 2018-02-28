@@ -9,7 +9,6 @@ var currentNavigationDestination = "None";
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
-    console.log(navigation);
     chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).waypoints[0].name + "!");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
@@ -59,7 +58,7 @@ function onNewPosition(position) {
     //Check Navigation
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
-        if (checkIfInRange(position.latitude, currentNavigationWaypoints[i].latitude - 0.0001, currentNavigationWaypoints[i].latitude + 0.0001) &&
+        if (checkIfInRange(position.latitude, JSON.parse(currentNavigationWaypoints[i]).latitude - 0.0001, JSON.parse(currentNavigationWaypoints[i]).latitude + 0.0001) &&
          checkIfInRange(position.longitude, currentNavigationWaypoints[i].longitude - 0.0001, currentNavigationWaypoints[i].longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
           if (i = currentNavigationWaypoints.length - 1) {
@@ -80,6 +79,7 @@ function onNewPosition(position) {
 
   //Helper function to calculate if a number is between two other numbers
 function checkIfInRange(number, range1, range2) {
+    console.log("Comparing" + number + " " + range1 + " " + range2);
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
   return (number > min) && (number < max);
