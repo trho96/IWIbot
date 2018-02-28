@@ -29,7 +29,6 @@ exports.addLocationEvents = function addLocationEvents(events) {
 
 //Toggle the use of location for navigation and events
 function toggleLocationEvents() {
-    console.log("Toggle locationEvents")
     if (!locationWatcher) {
         //Since watchPosition does not work properly, getCurrentPosition and setInterval will be used until fixed
         /*
@@ -55,22 +54,20 @@ function toggleLocationEvents() {
 //Is called when the client reaches a new position
 function onNewPosition(position) {
     //Check Navigation
-    console.log("Checking " + currentNavigationWaypoints.length + " positions.")
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
          (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {
-          console.log("Detected Geofence Trigger");
           if (i == currentNavigationWaypoints.length - 1) {
-              //Navigation beenden
+              //Wenn letzter Wegpunkt: Navigation beenden
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
+              toggleLocationEvents();
           } else {
-              //Gebe nächsten Wegpunkt an
+              //Sonst: Gebe Richtung zum nächsten Wegpunkt an
               chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
-              currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
-
+              currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);              
           }
          
         }
@@ -81,7 +78,6 @@ function onNewPosition(position) {
 
   //Helper function to calculate if a number is between two other numbers
 function checkIfInRange(number, range1, range2) {
-    console.log("Comparing " + number + " " + range1 + " " + range2);
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
     console.log((number > min) && (number < max));
