@@ -61,7 +61,7 @@ function onNewPosition(position) {
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
          checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i]).longitude + 0.0001)) {
           console.log("Detected Geofence Trigger");
-          if (i = currentNavigationWaypoints.length - 1) {
+          if (i == currentNavigationWaypoints.length - 1) {
               //Navigation beenden
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
