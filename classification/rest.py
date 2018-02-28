@@ -98,7 +98,7 @@ def testIntent():
             cache["entities@meal"].load()
 
             classification = dict()
-            classification['entity'] = "Populated"
+            classification['intent'] = "Populated"
         else:
             if 'intents' not in cache.keys():
                 cache["intents"] = Classifier("intents", client)
