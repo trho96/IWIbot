@@ -93,6 +93,9 @@ def testIntent():
             populate_intents(client)
             populate_entities_for_meal(client)
             populate_entities_for_timetables(client)
+            cache["intents"].load()
+            cache["entities@timetables"].load()
+            cache["entities@meal"].load()
 
             classification = dict()
             classification['entity'] = "Populated"
