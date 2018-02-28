@@ -7,7 +7,7 @@ import metrics_tracker_client
 # use natural language toolkit
 import nltk
 from classifier.classifier import Classifier
-from classifier.startup import populate
+from classifier.startup import populate_intents, populate_entities_for_meal, populate_entities_for_timetables
 from classifier.trainer import Trainer
 from cloudant import Cloudant
 from flask import Flask, render_template, request, jsonify
@@ -55,7 +55,9 @@ elif os.path.isfile('vcap-local.json'):
 cache = dict()
 if client is not None:
     # populate database with base data and train all neuronal netwroks
-    populate(client)
+    populate_intents(client)
+    populate_entities_for_meal(client)
+    populate_entities_for_timetables(client)
 
     # create Classifier cache on startup
     cache["intents"] = Classifier("intents", client)

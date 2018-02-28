@@ -1,7 +1,7 @@
 from .trainer import Trainer
 
 
-def populate(client):
+def populate_intents(client):
     intents = Trainer("intents", client)
     intents.add_to_traingset("Guten Tag", "greeting", True)
     intents.add_to_traingset("Good day", "greeting", True)
@@ -46,12 +46,11 @@ def populate(client):
     intents.add_to_traingset("Ich habe Hunger", "meal", True)
     intents.add_to_traingset("Was gibt es zu Essen", "meal", True)
     intents.add_to_traingset("Was gibt es in der Mensa", "meal", True)
-    intents.add_to_traingset("Was gibt es heute als Wahlessen 1?", "meal", True)
-    intents.add_to_traingset("Was gibt es heute als Wahlessen 2?", "meal", True)
-    intents.add_to_traingset("Was gibt es heute in der Aktionstheke?", "meal", True)
-    intents.add_to_traingset("Was gibt es heute bei Gut & Günstig?", "meal", True)
-    intents.add_to_traingset("Was gibt es heute beim Buffet?", "meal", True)
-    intents.add_to_traingset("Was gibt es heute bei der Schnitzelbar?", "meal", True)
+    intents.add_to_traingset("Wahlessen", "meal", True)
+    intents.add_to_traingset("Aktionstheke", "meal", True)
+    intents.add_to_traingset("Gut & Günstig", "meal", True)
+    intents.add_to_traingset("Buffet", "meal", True)
+    intents.add_to_traingset("Schnitzelbar", "meal", True)
     intents.add_to_traingset("Garnicht", "notAtAll", True)
     intents.add_to_traingset("Not at all", "notAtAll", True)
     intents.add_to_traingset("Give me my timetable", "timetables", True)
@@ -83,6 +82,8 @@ def populate(client):
     intents.add_to_traingset("Who are you?", "who", True)
     intents.start_training()
 
+
+def populate_entities_for_meal(client):
     entities_for_meal = Trainer("entities@meal", client)
     entities_for_meal.add_to_traingset("1", "essen1")
     entities_for_meal.add_to_traingset("Wahlessen 1", "essen1")
@@ -111,6 +112,7 @@ def populate(client):
     entities_for_meal.add_to_traingset("Sechs", "schnitzelbar")
     entities_for_meal.start_training()
 
+def populate_entities_for_timetables(client):
     entities_for_timetables = Trainer("entities@timetables", client)
     entities_for_timetables.add_to_traingset("1", "Montag")
     entities_for_timetables.add_to_traingset("Monday", "Montag")
@@ -134,4 +136,3 @@ def populate(client):
     entities_for_timetables.add_to_traingset("Sunday", "Sonntag")
     entities_for_timetables.add_to_traingset("Sonntag", "Sonntag")
     entities_for_timetables.start_training()
-
