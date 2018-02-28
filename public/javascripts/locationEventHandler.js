@@ -1,7 +1,7 @@
 var chat = require("./chat.js");
 
 var exports = module.exports = {};
-var locationWatcher = null;
+var locationWatcher = false;
 var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
@@ -46,8 +46,8 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
         }), 1000);
 
     } else {
-        navigator.geolocation.clearWatch(locationWatcher);
-        locationWatcher = null;
+        clearInterval(locationWatcher);
+        locationWatcher = false;
     }
 };
 
