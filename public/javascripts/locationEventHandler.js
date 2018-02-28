@@ -68,7 +68,9 @@ function onNewPosition(position) {
               currentNavigationDestination = "None";
           } else {
               //Gebe nächsten Wegpunkt an
-              chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!")
+              chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
+              currentNavigationWaypoints.slice(0, i + 1);
+
           }
          
         }
