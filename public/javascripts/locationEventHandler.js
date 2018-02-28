@@ -29,7 +29,7 @@ exports.toggleLocationEvents = function toggleLocationEvents() {
 
 
 
-onNewPosition = function onNewPosition(position) {
+function onNewPosition(position) {
     console.log(position);
     for (var event of locationEvents) {
         //About 7m in each direction
@@ -39,8 +39,8 @@ onNewPosition = function onNewPosition(position) {
         }
     }
   };
-
-  checkIfInRange = function checkIfInRange(number, range1, range2) {
+  
+function checkIfInRange(number, range1, range2) {
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
   return number > min && number < max;
