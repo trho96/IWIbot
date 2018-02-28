@@ -69,7 +69,7 @@ exports.sendMessage = function (init, result) {
             if ("locationData" in dataObj) {
                 var locationData = dataObj.locationData;
                 console.log("Location Data: " + JSON.stringify(locationData));
-                locationEventHandler.setEvents(locationData.waypoints);
+                locationEventHandler.setEvents(locationData);
             }
 
 

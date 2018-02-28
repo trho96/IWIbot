@@ -1,10 +1,12 @@
 var exports = module.exports = {};
 var locationWatcher = null;
 var locationEvents = [];
+var currentNavigationDestination = "None";
 
 exports.setEvents = function setEvents(events) {
     console.log("Setting new locationEvents!")
-    locationEvents = locationEvents.concat(events);
+    locationEvents = locationEvents.push.apply(locationEvents, events.waypoints);
+    currentNavigationDestination = events.navigationDestination;
     console.log(locationEvents);
     if (!locationWatcher) {
         exports.toggleLocationEvents();
