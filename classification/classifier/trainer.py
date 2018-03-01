@@ -100,13 +100,15 @@ def train(context, db, X, y, classes, words, hidden_neurons=10, alpha=1.0, epoch
                'classes': classes
                }
 
-    data = dict([('_id', context), ('context', context),
-                 ('synapse', synapse)])
-
     # Create a document using the Database API
-    synapses = db.create_document(data)
-    synapses['synapse'] = synapse
-    synapses.save()
+    if Document(db, context).exists():
+        synapses = db[context]
+        synapses['synapse'] = synapse
+        synapses.save()
+    else:
+        data = dict([('_id', context), ('context', context),
+                     ('synapse', synapse)])
+        synapses = db.create_document(data)
 
     # Check that the document exists in the database
     if synapses.exists():
