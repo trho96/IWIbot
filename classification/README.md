@@ -160,6 +160,7 @@ Nach dem ersten Start des Classifiers ist die Datenbank noch leer zum Füllen de
 ## Aufbau
 
 Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schnittstelle
+
 * **Trainer:** Zuständig die verwaltung der Trainings-Daten für ein Neuronalen Netz (NN) und zum Training des NN basierend auf den gegebenen Trainings-Daten. Der Trainer speichert Trainings-Daten und NN in je einem Dokument in einer Datenbank. Das NN kann nach abschließenden Training und speichern vom Classifier aus der Datenbank geladen werden und darauf basierend eine Klassifizierung für einen Text geben. 
 
 * **Classifier:** Gibt eine Prognose über den Intend den der Satz beinhaltet basierend auf dem gegebenen NN des Trainers.
@@ -169,11 +170,17 @@ Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schni
 ## REST Schnittstelle
 Endpunkte:
 * **/api/testIntent** Zum Testen des Classifiers durch die Web-Oberfläche.
+
 * **/api/getIntent** Gibt den Intent eines Satzes zurück. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die einen Intent beinhaltet.
+
 * **/api/getEntity** Gibt eine Entity eines Satzes zurück basierend auf den mitgegebenen vorherigen Intent. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence" und einen vorherigen Intent unter dem Pfad "/context/priorIntent/intent". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die eine Entity beinhaltet.
+
 * **/api/addIntent** Fügt einen Satz mit dem entsprechenden Intent dem Classifier für die Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz und "intent" für den dazu gewollten Intent
+
 * **/api/trainIntents** Trainiert den Classifier für die Intents neu.
+
 * **/api/addIntent** Fügt einen Satz mit der entsprechenden Entity zum entsprechenden Classifier für die Entities des übergebenen Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz, "entity" für die gewollte Entity und "intent" für den entsprechenden Intent, zu dem diese Entity gehört.
+
 * **/api/trainEntity** Trainiert den Classifier für die Entities zu einem Intents neu. Erwartet ein JSON mit dem "intent" für den die Entities neu trainiert werden sollen.
 
 
@@ -181,5 +188,7 @@ Endpunkte:
 Im Rahmen des Projekts wurden auch schon der Grundstein gelegt den Classifier zu erweitern. Folgende Ideen sind Teilweise schon umgesetzt:
 
 Der Classifier kann schon erweitert werden, der nächste logische Schritt wäre eine Strategie zu entwickeln wie Feedback von Nutzern in die Trainings-Daten eingeführt werden kann, dabei kommen 2 möglichkeiten in Frage:
+
 * **Threshold:** Wen ein Nutzer eine Anfrage stellt und das Resultat negativ ist kann der Nutzer eine Antwort geben welches Resultat den Richtig wäre, geben viele Nutzer zu einem Satz das gleiche Endresultat als Feedback kann dieses den Trainings-Daten hinzugefügt werden und der Trainer neu trainiert werden.
+
 * **Trusted Sources:** Bei dieser Variante gibt der Nutzer Nutzer zwar auch Feedback dieses wird aber erst übernommen wenn eine vertraute Person dieses auch verifiziert. Es ist auch möglich einige Nutzer aus vertraut einzustufen und ihr Feedback sofort zu übernehmen. Der Trainer besitzt bereits ein trusted flag beim Hinzufügen von Trainings-Daten, die Logik dafür ist aber noch nicht Implementiert.
