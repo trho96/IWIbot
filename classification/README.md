@@ -1,6 +1,6 @@
 # IWIbot Classifier
 
-IWIbot Classifier ist ein Text Classification Module, das Neuronale Netzwerke benutzt. Es basiert auf den Algorithmen aus [Text Classification using Neural Networks](https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6) und ist Teil des IWIbot Projekts der [Hochschule Karlsruhe](https://hs-karlsruhe.de). Das Classification Module wird als eine Python Flask App bereitgestellt und kann auf die IBM Cloud deployt werden.
+IWIbot Classifier ist ein Text Classification Module, das Neuronale Netzwerke benutzt. Es basiert auf den Algorithmen aus [Text Classification using Neural Networks](https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6) und ist Teil des IWIbot Projekts der [Hochschule Karlsruhe](https://hs-karlsruhe.de). Das Classification Module wird als eine Python Flask App bereitgestellt und kann auf die IBM Cloud deployed werden.
 
 Dieses Dokument soll dabei helfen die Entwicklungsumgebung für den IWIbot Classifier aufzusetzen und soll hilfreiche Tipps geben für die weitere Entwicklung. 
 
@@ -26,7 +26,7 @@ cd IWIbot/classification
 
 Installiere die Abhängigkeiten die in der [requirements.txt](https://pip.readthedocs.io/en/stable/user_guide/#requirements-files) gelistet sind um den Classifier lokal ausführen zu können.
 
-Es ist möglich optional eine [virtuellle Umgebung](https://packaging.python.org/installing/#creating-and-using-virtual-environments) zu erstellen um zu verhindern das die Abhängigkeiten mit anderen in anderen Python Projekten konfligieren oder dem Betriebssystem.
+Es ist möglich optional eine [virtuelle Umgebung](https://packaging.python.org/installing/#creating-and-using-virtual-environments) zu erstellen um zu verhindern das die Abhängigkeiten mit anderen Python Projekten oder dem Betriebssystem kollidieren.
   ```
 pip install -r requirements.txt
   ```
@@ -52,7 +52,7 @@ Das manifest.yml beinhaltet Basis-Informationen über die zu den Classifier, wie
    memory: 128M
  ```
 
-## 4. Deploye den Classifier
+## 4. Deployment des Classifier
 
 Es ist möglich den Classifier über die Cloud Foundry CLI zu deployen.
 
@@ -82,7 +82,7 @@ Aus dem *classification* Verzeichnis heraus pushe den Classifier in die IBM Clou
   ```
 cf push IWIBotClassifier -b https://github.com/cloudfoundry/buildpack-python.git
   ```
-Der Classifier wird immer mit der aktuellen Python Version deployt in der **runtime.txt** kann die Python Version angepasst werden.
+Der Classifier wird immer mit der aktuellen Python Version deployed in der **runtime.txt** kann die Python Version angepasst werden.
 
 Das Deployen kann einige Minuten dauern. Kommt es zu Fehlern im Deployment Prozess kann mit dem Befehl `cf logs IWIBotClassifier --recent` der Fehler gesucht werden.
 
@@ -138,35 +138,35 @@ oder starte den Classifier in PyCharm.
 
   Der Classifier kann unter: http://localhost:8000 getestet werden. Der Text der in das Feld eingeben wird, wird dann klassifiziert und das Resultat wird ausgegeben.
 
-5. Mache die Änderungen die du willst und re-deploye zur IBM Cloud!
+5. Mache die Änderungen die du willst und deploye erneut zur IBM Cloud!
   ```
 cf push IWIBotClassifier -b https://github.com/cloudfoundry/buildpack-python.git
   ```
 
 Schaue die Instanz an unter der gelisteten URL in der Ausgabe des push Befehls, zum Beispiel, *iwibotclassifier.mybluemix.net*.
 
-## 7. Datenbank füllen ##
+## 7. Datenbank füllen
 
 Nach dem ersten Start des Classifiers ist die Datenbank noch leer zum Füllen der Datenbank nach dem ersten Start kann in der Web-Schnittstelle der Satz "populate" in das Textfeld eingegeben werden. Der Classifier initialisiert seine Trainer und Classifiers mit vorgegebenen Werten.
 
 **Warnung:** abhängig von der gewählten Strategie der Datenbank ist es der Fall das es beim Füllen der Datenbank zu Fehlern kommt da nicht genügend Datenbank zugriffe pro Sekunde erlaubt sind, daher kann es notwendig sei mehrmals "populate" auszuführen. Die Demo-Seite quittiert nach erfolgreichem Initialisieren mit einem "POPULATED" Resultat.      
 
-## 8. Hilfreiche Links ##
+## 8. Hilfreiche Links
 
 * [IBM-Cloud Get-Started-Python](https://github.com/IBM-Cloud/get-started-python)
 * [Cloudant Client Dokumentation](https://github.com/cloudant/python-cloudant)
 * [Text Classification using Neural Networks](https://machinelearnings.co/text-classification-using-neural-networks-f5cd7b8765c6)
 
-## Aufbau ##
+## Aufbau
 
 Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schnittstelle
-* **Trainer:** Zuständig die verwaltung der Trainingsdaten für ein Neuronalen Netz (NN) und zum Training des NN basierend auf den gegebenen Trainingsdaten. Der Trainer persistiert Trainingsdaten und NN in je einem Dokument in einer Datenbank. Das NN kann nach abschließenden Training und speichern vom Classifier aus der Datenbank geladen werden und darauf basierend eine Klassifizierung für einen Text geben. 
+* **Trainer:** Zuständig die verwaltung der Trainings-Daten für ein Neuronalen Netz (NN) und zum Training des NN basierend auf den gegebenen Trainings-Daten. Der Trainer speichert Trainings-Daten und NN in je einem Dokument in einer Datenbank. Das NN kann nach abschließenden Training und speichern vom Classifier aus der Datenbank geladen werden und darauf basierend eine Klassifizierung für einen Text geben. 
 
 * **Classifier:** Gibt eine Prognose über den Intend den der Satz beinhaltet basierend auf dem gegebenen NN des Trainers.
 
-* **REST:** Ist die Schnittstelle des Classifiers nach außen Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entitäten als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
+* **REST:** Ist die Schnittstelle des Classifiers nach außen Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entities als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
 
-## REST Schnittstelle ##
+## REST Schnittstelle
 Endpunkte:
 * **/api/testIntent** Zum Testen des Classifiers durch die Web-Oberfläche.
 * **/api/getIntent** Gibt den Intent eines Satzes zurück. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die einen Intent beinhaltet.
@@ -177,9 +177,9 @@ Endpunkte:
 * **/api/trainEntity** Trainiert den Classifier für die Entities zu einem Intents neu. Erwartet ein JSON mit dem "intent" für den die Entities neu trainiert werden sollen.
 
 
-##  Ausblick ##
+##  Ausblick
 Im Rahmen des Projekts wurden auch schon der Grundstein gelegt den Classifier zu erweitern. Folgende Ideen sind Teilweise schon umgesetzt:
 
-Der Classifier kann schon erweitert werden, der nächste logische Schritt wäre eine Strategie zu entwickeln wie Feedback von Nutzern in die Trainingsdaten eingeführt werden kann, dabei kommen 2 möglichkeiten in Frage:
-* **Threshold:** Wen ein Nutzer eine Anfrage stellt und das Resultat negativ ist kann der Nutzer eine Antwort geben welches Resultat den Richtig wäre, geben viele Nutzer zu einem Satz das gleiche Endresultat als Feedback kann dieses den Trainingsdaten hinzugefügt werden und der Trainer neu trainiert werden.
-* **Trusted Sources:** Bei dieser Variante gibt der Nutzer Nutzer zwar auch Feedback dieses wird aber erst übernommen wenn eine vertraute Person dieses auch verifiziert. Es ist auch möglich einige Nutzer aus vertraut einzustufen und ihr Feedback sofort zu übernehmen. Der Trainer besitzt bereits ein trusted flag beim Hinzufügen von Trainingsdaten, die Logik dafür ist aber noch nicht Implementiert.
+Der Classifier kann schon erweitert werden, der nächste logische Schritt wäre eine Strategie zu entwickeln wie Feedback von Nutzern in die Trainings-Daten eingeführt werden kann, dabei kommen 2 möglichkeiten in Frage:
+* **Threshold:** Wen ein Nutzer eine Anfrage stellt und das Resultat negativ ist kann der Nutzer eine Antwort geben welches Resultat den Richtig wäre, geben viele Nutzer zu einem Satz das gleiche Endresultat als Feedback kann dieses den Trainings-Daten hinzugefügt werden und der Trainer neu trainiert werden.
+* **Trusted Sources:** Bei dieser Variante gibt der Nutzer Nutzer zwar auch Feedback dieses wird aber erst übernommen wenn eine vertraute Person dieses auch verifiziert. Es ist auch möglich einige Nutzer aus vertraut einzustufen und ihr Feedback sofort zu übernehmen. Der Trainer besitzt bereits ein trusted flag beim Hinzufügen von Trainings-Daten, die Logik dafür ist aber noch nicht Implementiert.
