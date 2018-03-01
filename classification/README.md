@@ -24,9 +24,9 @@ cd IWIbot/classification
 
 ## 2. Führe den Classifier lokal aus
 
-Installiere die Abhängigkeiten die in der [requirements.txt ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://pip.readthedocs.io/en/stable/user_guide/#requirements-files) gelistet sind um den Classifier lokal ausführen zu können.
+Installiere die Abhängigkeiten die in der [requirements.txt](https://pip.readthedocs.io/en/stable/user_guide/#requirements-files) gelistet sind um den Classifier lokal ausführen zu können.
 
-Es ist möglich optional eine [virtuellle Umgebung ![External link icon](../../icons/launch-glyph.svg "External link icon")](https://packaging.python.org/installing/#creating-and-using-virtual-environments) zu erstellen um zu verhindern das die Abhängigkeiten mit anderen in anderen Python Projekten konfligieren oder dem Betriebssystem.
+Es ist möglich optional eine [virtuellle Umgebung](https://packaging.python.org/installing/#creating-and-using-virtual-environments) zu erstellen um zu verhindern das die Abhängigkeiten mit anderen in anderen Python Projekten konfligieren oder dem Betriebssystem.
   ```
 pip install -r requirements.txt
   ```
@@ -103,8 +103,6 @@ Der Classifier benötigt eine NoSQL Datenbank zum persistieren seiner Daten. Aus
 
 Umgebungsvariablen ermöglichen es die Deployment Einstellungen vom Quellcode zu separieren, es ist also nicht nötig ein Datenbank Passwort im COde zu setzen, es ist auch mögliche diese Umgebungsvariable im Quellcode zu speichern.
 
-**Warnung:** Beim ersten Starten des Classifiers auf der IBM Cloud kann es bei einer neuen Datenbank dazu kommen das mit einer Lite Strategie der Classifier nicht startet da das initiale mehr Anfragen an die Datenbank pro Sekunde stellt als die Strategie erlaubt.  Es wird empfohlen die Datenbank lokal zu fühlen mit **Breakpoints** in der popolute Funktion.
-
 ## 6. Benutze die Datenbank lokal
 
 Um den Classifier lokal auszuführen ist es nötig lokal eine Verbindung mit der Datenbank aufzubauen. Dafür wird eine JSON Datei die die Credentials für den zu benutzenden Datenbank Service speichert. Diese Datei wird NUR verwendet wenn der Classifier lokal ausgeführt wird. Falls es in der IBM Cloud ausgeführt wird, werden die Credentials aus der VCAP_SERVICES Umgebungsvariable gelesen.
@@ -147,7 +145,13 @@ cf push IWIBotClassifier -b https://github.com/cloudfoundry/buildpack-python.git
 
 Schaue die Instanz an unter der gelisteten URL in der Ausgabe des push Befehls, zum Beispiel, *iwibotclassifier.mybluemix.net*.
 
-## 7. Hilfreiche Links ##
+## 7. Datenbank füllen ##
+
+Nach dem ersten Start des Classifiers ist die Datenbank noch leer zum Füllen der Datenbank nach dem ersten Start kann in der Web-Schnittstelle der Satz "populate" in das Textfeld eingegeben werden. Der Classifier initialisiert seine Trainer und Classifiers mit vorgegebenen Werten.
+
+**Warnung:** abhängig von der gewählten Strategie der Datenbank ist es der Fall das es beim Füllen der Datenbank zu Fehlern kommt da nicht genügend Datenbank zugriffe pro Sekunde erlaubt sind, daher kann es notwendig sei mehrmals "populate" auszuführen. Die Demo-Seite quittiert nach erfolgreichem Initialisieren mit einem "POPULATED" Resultat.      
+
+## 8. Hilfreiche Links ##
 
 * [IBM-Cloud Get-Started-Python](https://github.com/IBM-Cloud/get-started-python)
 * [Cloudant Client Dokumentation](https://github.com/cloudant/python-cloudant)
@@ -161,6 +165,17 @@ Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schni
 * **Classifier:** Gibt eine Prognose über den Intend den der Satz beinhaltet basierend auf dem gegebenen NN des Trainers.
 
 * **REST:** Ist die Schnittstelle des Classifiers nach außen Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entitäten als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
+
+## REST Schnittstelle ##
+Endpunkte:
+* **/api/testIntent** Zum Testen des Classifiers durch die Web-Oberfläche.
+* **/api/getIntent** Gibt den Intent eines Satzes zurück. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die einen Intent beinhaltet.
+* **/api/getEntity** Gibt eine Entity eines Satzes zurück basierend auf den mitgegebenen vorherigen Intent. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence" und einen vorherigen Intent unter dem Pfad "/context/priorIntent/intent". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die eine Entity beinhaltet.
+* **/api/addIntent** Fügt einen Satz mit dem entsprechenden Intent dem Classifier für die Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz und "intent" für den dazu gewollten Intent
+* **/api/trainIntents** Trainiert den Classifier für die Intents neu.
+* **/api/addIntent** Fügt einen Satz mit der entsprechenden Entity zum entsprechenden Classifier für die Entities des übergebenen Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz, "entity" für die gewollte Entity und "intent" für den entsprechenden Intent, zu dem diese Entity gehört.
+* **/api/trainEntity** Trainiert den Classifier für die Entities zu einem Intents neu. Erwartet ein JSON mit dem "intent" für den die Entities neu trainiert werden sollen.
+
 
 ##  Ausblick ##
 Im Rahmen des Projekts wurden auch schon der Grundstein gelegt den Classifier zu erweitern. Folgende Ideen sind Teilweise schon umgesetzt:
