@@ -204,7 +204,14 @@ a {
 }
 
 .map {
-  height: 180px;
+  	position: absolute;
+ 	 height: 180px;
+}
+
+.mapcontainer {
+	position: absolute;
+	height: 500px;
+	width: 500px;
 }
 
 @-webkit-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
