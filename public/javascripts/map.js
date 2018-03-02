@@ -33,7 +33,7 @@ exports.removeMarker = function removeMarker(marker) {
 }
 
 exports.addPolyline = function addPolyline(waypoints) {
-    var polyline = L.polyline(waypoints, {color: 'blue'}).addTo(map);
+    var polyline = L.polyline(waypoints, {color: 'blue', dashArray: '10, 5', lineJoin: 'round'}).addTo(map);
     return polyline;
 }
 

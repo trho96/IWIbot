@@ -20,7 +20,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
         toggleLocationEvents();
         map.showMap();     
         destinationMarker = map.addMarker(currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude,
-            currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude);
+            currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
 
         var polylineLatLngs = [];
         for (var i = 0; i < currentNavigationWaypoints.length; i++) {
