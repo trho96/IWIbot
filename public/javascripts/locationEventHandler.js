@@ -27,7 +27,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
             polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
         }
         navigationPolyline = map.addPolyline(polylineLatLngs);
-        map.setBounds(navigationPolyline.getBounds());
+        map.fitBounds(navigationPolyline.getBounds());
     }
 }; 
 

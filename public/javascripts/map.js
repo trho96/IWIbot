@@ -41,6 +41,6 @@ exports.setFocus = function setFocus(latlng) {
     map.panTo(latlng)
 }
 
-exports.setBounds = function setBounds(bounds) {
-    map.setBounds(bounds);
+exports.fitBounds = function fitBounds(bounds) {
+    map.fitBounds(bounds);
 }
