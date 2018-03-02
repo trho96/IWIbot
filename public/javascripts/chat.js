@@ -33,7 +33,7 @@ exports.chatToggle = function chatToggle() {
 
     var $notification = $(".notification");
     var $toggleIcon = $("i.toggleIcon");
-    var $voiceChatToggle = $(".voice , .history");
+    var $voiceChatToggle = $(".voice , .history, .mapcontainer");
     var $chatForm = $('#chatForm');
 
     $notification.hide().text();
