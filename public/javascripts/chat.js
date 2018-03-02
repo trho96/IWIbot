@@ -15,7 +15,7 @@ exports.appendSendMessage = function appendSendMessage(msg) {
         '</div><div class="col-lg-4"><div class="msg-send">' +
         msg + '</div></div><div class="col-lg-3"></div></div>';
     $(msgSend).appendTo("#chat div.container").hide().fadeIn();
-    $("html, body").animate({ scrollTop: $(document).height()-$(window).scrollHeight() });};
+    $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });};
     $(".chatcontainer").scrollTop($(".chatcontainer").prop('scrollHeight'));
     
 exports.appendReceivedMessage = function appendReceivedMessage(msg) {
