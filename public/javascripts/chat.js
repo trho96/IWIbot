@@ -16,7 +16,7 @@ exports.appendSendMessage = function appendSendMessage(msg) {
         msg + '</div></div><div class="col-lg-3"></div></div>';
     $(msgSend).appendTo("#chat div.container").hide().fadeIn();
     $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });};
-    $(".chatcontainer").scrollTop($(".chatcontainer").prop('scrollHeight'));
+    $(".chatcontainer").animate({scrollTop: $(".chatcontainer").prop('scrollHeight')});
     
 exports.appendReceivedMessage = function appendReceivedMessage(msg) {
     var isMsgWithHtml = msg.indexOf('<ul>') !== -1;
@@ -26,7 +26,7 @@ exports.appendReceivedMessage = function appendReceivedMessage(msg) {
         msg + '</div></div><div class="col-lg-5"></div></div>';
 
     $(msgReceived).appendTo("#chat div.container").hide().fadeIn();
-    $(".chatcontainer").scrollTop($(".chatcontainer").prop('scrollHeight'));
+    $(".chatcontainer").animate({scrollTop: $(".chatcontainer").prop('scrollHeight')});
 };
 
 exports.chatSubmit = function chatSubmit() {
@@ -58,7 +58,7 @@ exports.chatToggle = function chatToggle() {
     };
     options.complete = function () {
         $(window).scrollTop(exports.getLastScrollPosition());
-        $(".chatcontainer").scrollTop($(".chatcontainer").prop('scrollHeight'));
+        $(".chatcontainer").animate({scrollTop: $(".chatcontainer").prop('scrollHeight')});
     };
     $voiceChatToggle.toggle(options);
     $chatForm.toggle();

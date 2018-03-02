@@ -23,18 +23,24 @@ exports.hideMap = function hideMap() {
     $('.chatcontainer').css('max-height', 'calc(100vw - 250px');
 }
 
-exports.addMarker = function addMarker(lat, long) {
-    var marker = {};
-
+exports.addMarker = function addMarker(lat, lng) {
+    var marker = L.marker([lat, lng]).addTo(map);
     return marker;
 }
 
 exports.removeMarker = function removeMarker(marker) {
-
+    map.removeLayer(marker);
 }
 
-exports.addPath = function addPath(waypoints) {
-    var path = {};
-    
-    return path;
+exports.addPolyline = function addPolyline(waypoints) {
+    var polyline = L.polyline(waypoints, {color: 'blue'}).addTo(map);
+    return polyline;
+}
+
+exports.setFocus = function setFocus(latlng) {
+    map.panTo(latlng)
+}
+
+exports.setBounds = function setBounds(bounds) {
+    map.setBounds(bounds);
 }

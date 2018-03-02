@@ -6,6 +6,8 @@ var locationWatcher = false;
 var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
+var destinationMarker;
+var navigationPolyline;
 
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
@@ -16,7 +18,16 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log(currentNavigationWaypoints);
     if (!locationWatcher) {
         toggleLocationEvents();
-        map.showMap();       
+        map.showMap();     
+        destinationMarker = map.addMarker(currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude,
+            currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude);
+
+        var polylineLatLngs = [];
+        for (var i = 0; i < currentNavigationWaypoints.length; i++) {
+            polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
+        }
+        navigationPolyline = map.addPolyline(polylineLatLngs);
+        map.setBounds(navigationPolyline.getBounds());
     }
 }; 
 
