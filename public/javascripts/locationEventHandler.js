@@ -94,6 +94,5 @@ function onNewPosition(position) {
 function checkIfInRange(number, range1, range2) {
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
-    console.log((number > min) && (number < max));
   return (number > min) && (number < max);
   };
