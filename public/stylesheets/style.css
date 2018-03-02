@@ -204,8 +204,9 @@ a {
 }
 
 .map {
-  	position: absolute;
- 	 height: 180px;
+  	  position: absolute;
+	  height: 500px;
+	  width: 500px;
 }
 
 .mapcontainer {
