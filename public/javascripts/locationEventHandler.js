@@ -1,4 +1,5 @@
 var chat = require("./chat.js");
+var map = require("./map.js");
 
 var exports = module.exports = {};
 var locationWatcher = false;
@@ -15,6 +16,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log(currentNavigationWaypoints);
     if (!locationWatcher) {
         toggleLocationEvents();
+        map.showMap();       
     }
 }; 
 
@@ -64,6 +66,7 @@ function onNewPosition(position) {
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
               toggleLocationEvents();
+              map.hideMap();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
               chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");

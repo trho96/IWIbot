@@ -5,6 +5,7 @@ $(document).ready(function () {
     var tts = require("./textToSpeech");
     var chat = require("./chat.js");
     var login = require("./login");
+    var map = require("./map.js");
     var locationEventHandler = require("./locationEventHandler.js");
 
     var $chatForm = $('#chatForm');
@@ -14,11 +15,7 @@ $(document).ready(function () {
     
     var notificationNumber = 0;
 
-    var map = L.map('map').setView([51.505, -0.09], 13);
-    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});		
-	map.addLayer(osm);
+    map.initMap();
     
     conversation.sendMessage(true, {}).then(function () {
         notificationNumber++;

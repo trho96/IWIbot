@@ -1,8 +1,15 @@
 var exports = module.exports = {};
 var lastScrollPosition;
 
-exports.appendSendMessage = function appendSendMessage(msg) {
+var map = require("./map.js");
 
+exports.appendSendMessage = function appendSendMessage(msg) {
+    if (msg === "showMap") {
+        map.showMap();
+    }
+    if (msg === "hideMap") {
+        map.hideMap();
+    }
 
     var msgSend = '<div class="row msg "><div class="col-lg-5">' +
         '</div><div class="col-lg-4"><div class="msg-send">' +
