@@ -12,12 +12,12 @@ exports.initMap = function initMap() {
 }
 
 exports.showMap = function showMap() {
-    $('.mapcontainer').css('display') = 'block';
+    $('.mapcontainer').css('display', 'block');
     map.invalidateSize();
 }
 
 exports.hideMap = function hideMap() {
-    $('.mapcontainer').css('display') = 'none';
+    $('.mapcontainer').css('display', 'none');
 }
 
 exports.addMarker = function addMarker(lat, long) {
