@@ -13,6 +13,8 @@ $(document).ready(function () {
     var $modalTrigger = $("#modal_trigger");
     
     var notificationNumber = 0;
+
+    var mymap = L.map('map').setView([51.505, -0.09], 13);
     
     conversation.sendMessage(true, {}).then(function () {
         notificationNumber++;
@@ -63,4 +65,6 @@ $(document).ready(function () {
             $(this).collapse('hide');
         }
     });
+
+
 });
