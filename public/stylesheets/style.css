@@ -210,13 +210,18 @@ a {
 }
 
 .mapcontainer {
-	position: absolute;
+	position: fixed;
 	min-height: 30vw;
 	width: 100vw;
 	left:0;
 	right:0;
 	bottom:0;
 	display: none;
+}
+
+.chatcontainer {
+	overflow: scroll;
+	max-height: calc (100vw - 250px);
 }
 
 @-webkit-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

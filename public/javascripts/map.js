@@ -13,11 +13,14 @@ exports.initMap = function initMap() {
 
 exports.showMap = function showMap() {
     $('.mapcontainer').css('display', 'block');
+    $('.chatcontainer').css('max-height', 'calc(70vw - 250px');
+
     map.invalidateSize();
 }
 
 exports.hideMap = function hideMap() {
     $('.mapcontainer').css('display', 'none');
+    $('.chatcontainer').css('max-height', 'calc(100vw - 250px');
 }
 
 exports.addMarker = function addMarker(lat, long) {
