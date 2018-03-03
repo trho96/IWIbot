@@ -86,7 +86,7 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
-    chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace('_',' ') + ".");
+    chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/:/g,' ') + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
     console.log(currentNavigationWaypoints);
