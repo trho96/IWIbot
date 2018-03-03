@@ -88,7 +88,7 @@ function onNewPosition(position) {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polyline
               chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
               var polylineLatLngs = [];
-              polylineLatLngs.push([currentNavigationWaypoints[i].longitude, currentNavigationWaypoints[i].latitude]);
+              polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
               for (var j = 0; j < currentNavigationWaypoints.length; j++) {
