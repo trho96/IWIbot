@@ -47,7 +47,8 @@ function main(params) {
 	// geschrieben wird wird sie ebenfalls ans Frontend mitzurueckgegeben, aber nicht im Chat ausgegeben (Der Chat gibt nach aktueller
 	// Implmenetierung immer den String aus der in payload steht).
 	navigationResponse.payload = "Navigation nach " + entity + " gestartet!";
--	navigationResponse.navigationData = parsedResult;navigationResponse.voice = voice;
+	navigationResponse.navigationData = parsedResult;
+	navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
 } 
