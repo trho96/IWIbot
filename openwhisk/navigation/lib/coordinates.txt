@@ -8,7 +8,7 @@
 49.016167,8.390498:	zum Haupteingang vom M Gebaeude:				zur Kreuzung vor dem M Gebaeude,zum Uebergang vom Gebaude M in das Gebaude LI;
 49.015013,8.392184:	zum Haupteingang vom R Gebaeude:				zur Kreuzung vor dem R Gebaeude;
 49.015538,8.391474:	zum Haupteingang vom A Gebaeude:				zum Haupteingang vom P Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F,zur Kreuzung vor dem R Gebaeude;
-49.015173, 8.391275:	zum Haupteingang vom P Gebaeude:				zu den Treppen vor der Cafeteria nahe dem Gebaude F,zum Haupteingang vom A Gebaeude,zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude;
+49.015173,8.391275:	zum Haupteingang vom P Gebaeude:				zu den Treppen vor der Cafeteria nahe dem Gebaude F,zum Haupteingang vom A Gebaeude,zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude;
 49.016417,8.389547:	zum Eingang vom LI Gebaude bei der Knielinger-Allee:		zum Uebergang vom Gebaude M in das Gebaude LI,zur Kreuzung der Knielinger-Allee beim M Gebaeude;
 49.015082,8.389098:	zum Eingang vom LI Gebaude beim Parkplatz an der Moltkestrasse:	zur Schranke beim Parkplatz vor Gebaeude LI,zum Uebergang vom Gebaude E in das Gebaude LI;
 49.015577,8.391129:	zu den Treppen vor der Cafeteria nahe dem Gebaude M:		zur Kreuzung vor dem M Gebaeude,die Treppe runter zur Cafeteria;
