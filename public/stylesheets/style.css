@@ -211,8 +211,8 @@ a {
 
 .mapcontainer {
 	position: fixed;
-	min-height: 30vw;
-	width: 100vw;
+	min-height: 40vh;
+	width: 100vh;
 	left:0;
 	right:0;
 	bottom:0;
@@ -221,7 +221,7 @@ a {
 
 .chatcontainer {
 	overflow: scroll;
-	max-height: calc (100vw - 250px);
+	max-height: calc (100vh - 150px);
 }
 
 @-webkit-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

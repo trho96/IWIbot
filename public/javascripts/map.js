@@ -13,14 +13,14 @@ exports.initMap = function initMap() {
 
 exports.showMap = function showMap() {
     $('.mapcontainer').css('display', 'block');
-    $('.chatcontainer').css('max-height', 'calc(70vw - 250px');
+    $('.chatcontainer').css('max-height', 'calc(60vh - 150px');
 
     map.invalidateSize();
 }
 
 exports.hideMap = function hideMap() {
     $('.mapcontainer').css('display', 'none');
-    $('.chatcontainer').css('max-height', 'calc(100vw - 250px');
+    $('.chatcontainer').css('max-height', 'calc(100vh - 150px');
 }
 
 exports.addMarker = function addMarker(lat, lng) {
@@ -43,4 +43,5 @@ exports.setFocus = function setFocus(latlng) {
 
 exports.fitBounds = function fitBounds(bounds) {
     map.fitBounds(bounds);
+    map.zoomOut(1);
 }
