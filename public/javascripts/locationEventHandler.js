@@ -6,10 +6,87 @@ var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
 
+//latitude = X; longitude = Y
+/**
+ * Methode zur Bestimmung des Abbiegewinkels aus drei Punkten c0,c1 und c2. Der berechnete Winkel gibt an um wie viel Grad der
+ * neue Weg c1->c2 vom bisherigen Weg c0->c1 abweicht. Beispiel: Der Algorithmus berechnet 10Grad. Das bedeutet dann das der Navigierte,
+  der aus Richtung c0 kommt, am Punkt c1 um 10 Grad nach rechts/lnks laufen muss um in Richtung von c2 zu laufen.
+  Aus dem Winkel wird zudem berechnet, ob derjenige nun geradeaus, nach links oder nach rechts laufen muss.
+ */
+var getDirectionOrder = function(c0, c1, c2)	{
+	K//Koeffizienten fuer die Geraden c0_c1 und c1_c2
+	var a1 = ((c1.longitude-c0.longitude)/(c1.latitude-c0.latitude)),
+		b1 = (c0.longitude-(a1*c0.latitude)),
+		a2 = ((c2.longitude-c1.longitude)/(c2.latitude-c1.latitude)),
+		b2 = (c1.longitude-(a2*c1.latitude));
+	
+	// Hilfsfunktion um das x des Schnittpunktes zweier Funktionen mit den Koeffizienten a&b und b&c zu berechnen. 
+	var crossing = function(a,b,c,d)	{
+		return (d-b)/(a-c);
+	}
+	
+	// Hilfsfunktion zur Abstandsberechnung zwischen zwei Punkten.
+	var distance = function(p1,p2)	{
+		return Math.sqrt((p2.latitude-p1.latitude)*(p2.latitude-p1.latitude)+(p2.longitude-p1.longitude)*(p2.longitude-p1.longitude));
+	}
+	
+	var graphC0_C1 = function(x)	{
+		return a1*x+b1;
+	}
+	var graphC1_C2 = function(x)	{
+		return a2*x+b2
+	}
+	
+	// Koefizienten der Normalen-Geraden von c0_c1. Schneidet c0_c1 garantiert an einem hoeheren x-Wert als es c1_c2 tut. 
+	var	aN = -(1/a1),
+		bN = c1.longitude - (c1.latitude*aN)+((Math.sign(a1)));
+	
+	var graphNormal = function(x)	{
+		return aN*x+bN;
+	}
+	
+	
+	// Berechnet den Schnittpunkt der Normalen-Geraden mit c0_c1.
+	var result1 = crossing(a1,b1,aN,bN);
+	var cN1 = {
+		latitude: result1,
+		longitude: graphC0_C1(result1)
+	};
+	
+	// Berechnet den Schnittpunkt der Normalen-Geraden mit c1_c2.
+	var result2 = crossing(a2,b2,aN,bN);
+	var cN2	= {
+		latitude: result2,
+		longitude: graphC1_C2(result2)
+	};
+	
+	/*Berechnet ein gleichschenkliges Dreieck aus c0_c1, c1_c2 und Normalen mit den Ecken c1, cN1 und cN2. 
+	  Berechnet den Winkel an c1 (= der Endergebniswinkel).*/
+	var hypothenuse = distance(c1,cN2),
+		nebenKatete = distance(c1,cN1),
+		gegenKatete = distance(cN1,cN2);
+		degree = Math.asin(gegenKatete/hypothenuse) * 180/Math.PI;
+
+	var c0_c1_y = graphC0_C1(cN1.latitude),
+	    c1_c2_y = graphC1_C2(cN1.latitude);
+	
+	/* Fallunterscheidung ob der Weg nach links, rechts oder geradeaus geht. Momentan wird wird links/rechts ausgegeben
+	wenn der Winkel mehr als 10 Grad ist.*/
+	if(degree > 10 && c0_c1_y > c1_c2_y)	{
+		return 'rechts'; 
+	}
+	else if(degree > 10 && c0_c1_y < c1_c2_y)	{
+		return 'links';
+	}
+	else{
+		return 'geradeaus';
+	}
+};
+
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
-    chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).waypoints[0].name + "!");
+    chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
     console.log(currentNavigationWaypoints);
@@ -66,7 +143,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
-              chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
+              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name + "!");
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);                    
           }
          
