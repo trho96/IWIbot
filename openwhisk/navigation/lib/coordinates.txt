@@ -1,9 +1,32 @@
-49.014702,8.390610:	crossroad_e:		crossroad_f,entrance_e,crossroad_cafe_south;
-49.015611,8.390690:	crossroad_f:		crossroad_e,crossroad_g,entrance_f,crossroad_cafe_south;
-49.016119,8.390760:	crossroad_g:		crossroad_f,entrance_g,crossroad_cafe_north;
-49.015032,8.390393:	entrance_e:		crossroad_e;
-49.015610,8.390435:	entrance_f:		crossroad_f;  
-49.016167,8.390498:	entrance_g:		crossroad_g;
-49.015556,8.391201:	crossroad_cafe_south:	crossroad_e,crossroad_f,cafe;
-49.016016,8.391128:	crossroad_cafe_north:	crossroad_g,cafe;
-49.015719,8.391342:	cafe:			crossroad_cafe_south,crossroad_cafe_north;
+49.015240,8.390664:	zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude:	zur Kreuzung vor dem F Gebaeude,zur Kreuzung vor dem E Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F,zum Haupteingang vom P Gebaeude;
+
+49.014702,8.390610:	zur Kreuzung vor dem E Gebaeude:				zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude,zum Haupteingang vom E Gebaeude,zur Kreuzung Moltkestrasse und Schimerstrasse;
+
+49.015611,8.390690:	zur Kreuzung vor dem F Gebaeude:				zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude,zur Kreuzung vor dem M Gebaeude,zum Haupteingang vom F Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F;
+
+49.016119,8.390760:	zur Kreuzung vor dem M Gebaeude:				zur Kreuzung vor dem F Gebaeude,zum Haupteingang vom M Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude M,zur Kreuzung der Knielinger-Allee beim M Gebaeude;
+
+49.014995,8.392002:	zur Kreuzung vor dem R Gebaeude:				zum Haupteingang vom A Gebaeude,zum Haupteingang der Hochschule,zum Haupteingang vom R Gebaeude;
+49.015032,8.390393:	zum Haupteingang vom E Gebaeude:				zur Kreuzung vor dem E Gebaeude,zum Uebergang vom Gebaude E in das Gebaude LI;
+
+49.015610,8.390435:	zum Haupteingang vom F Gebaeude:				zur Kreuzung vor dem F Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI;  
+
+49.016167,8.390498:	zum Haupteingang vom M Gebaeude:				zur Kreuzung vor dem M Gebaeude,zum Uebergang vom Gebaude M in das Gebaude LI;
+49.015013,8.392184:	zum Haupteingang vom R Gebaeude:				zur Kreuzung vor dem R Gebaeude;
+49.015538,8.391474:	zum Haupteingang vom A Gebaeude:				zum Haupteingang vom P Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F,zur Kreuzung vor dem R Gebaeude;
+49.015173, 8.391275:	zum Haupteingang vom P Gebaeude:				zu den Treppen vor der Cafeteria nahe dem Gebaude F,zum Haupteingang vom A Gebaeude,zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude;
+49.016417,8.389547:	zum Eingang vom LI Gebaude bei der Knielinger-Allee:		zum Uebergang vom Gebaude M in das Gebaude LI,zur Kreuzung der Knielinger-Allee beim M Gebaeude;
+49.015082,8.389098:	zum Eingang vom LI Gebaude beim Parkplatz an der Moltkestrasse:	zur Schranke beim Parkplatz vor Gebaeude LI,zum Uebergang vom Gebaude E in das Gebaude LI;
+49.015577,8.391129:	zu den Treppen vor der Cafeteria nahe dem Gebaude M:		zur Kreuzung vor dem M Gebaeude,die Treppe runter zur Cafeteria;
+49.016046,8.391051:	zu den Treppen vor der Cafeteria nahe dem Gebaude F:		zur Kreuzung vor dem F Gebaeude,zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude,die Treppe runter zur Cafeteria,zum Haupteingang vom A Gebaeude,zum Haupteingang vom P Gebaeude;
+49.015785,8.391355:	die Treppe runter zur Cafeteria:				zu den Treppen vor der Cafeteria nahe dem Gebaude M,zu den Treppen vor der Cafeteria nahe dem Gebaude F;
+49.014679,8.390634:	zur Kreuzung Moltkestrasse und Schimerstrasse:			zur Kreuzung vor dem E Gebaeude,zur Schranke beim Parkplatz vor Gebaeude LI,zum Haupteingang der Hochschule;
+49.014818,8.388872:	zur Schranke beim Parkplatz vor Gebaeude LI:			zum Eingang vom LI Gebaude beim Parkplatz an der Moltkestrasse,zur Kreuzung Moltkestrasse und Schimerstrasse;
+49.014625,8.392047:	zum Haupteingang der Hochschule:				zur Kreuzung vor dem R Gebaeude,zur Kreuzung Moltkestrasse und Schimerstrasse,Zum Anne-Frank-Haus;
+49.016345,8.390900:	zur Kreuzung der Knielinger-Allee beim M Gebaeude:		zur Kreuzung vor dem M Gebaeude,zum Eingang vom LI Gebaude bei der Knielinger-Allee,zum Ende der Moltkestrasse bei der Jugendherberge;
+49.016000,8.392825:	zum Ende der Moltkestrasse bei der Jugendherberge:		zur Kreuzung der Knielinger-Allee beim M Gebaeude,Zum Anne-Frank-Haus;
+49.014571,8.392731:	Zum Anne-Frank-Haus: 						zum Haupteingang der Hochschule,zum Ende der Moltkestrasse bei der Jugendherberge,zur Mensa Moltke;
+49.014553,8.393791: 	zur Mensa Moltke:						Zum Anne-Frank-Haus;
+49.015050,8.389622: 	zum Uebergang vom Gebaude E in das Gebaude LI: 			zum Haupteingang vom E Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI,zum Eingang vom LI Gebaeude beim Parkplatz an der Moltkestrasse;
+49.015627,8.389681: 	zum Uebergang vom Gebaude F in das Gebaude LI: 			zum Haupteingang vom F Gebaeude,zum Uebergang vom Gebaude E in das Gebaude LI,zum Uebergang vom Gebaude M in das Gebaude LI;
+49.016195,8.389708: 	zum Uebergang vom Gebaude M in das Gebaude LI:			zum Haupteingang vom M Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI,zum Eingang vom LI Gebaude bei der Knielinger-Allee;
