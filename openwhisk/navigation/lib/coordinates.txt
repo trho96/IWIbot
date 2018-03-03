@@ -1,16 +1,10 @@
 49.015240,8.390664:	zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude:	zur Kreuzung vor dem F Gebaeude,zur Kreuzung vor dem E Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F,zum Haupteingang vom P Gebaeude;
-
 49.014702,8.390610:	zur Kreuzung vor dem E Gebaeude:				zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude,zum Haupteingang vom E Gebaeude,zur Kreuzung Moltkestrasse und Schimerstrasse;
-
 49.015611,8.390690:	zur Kreuzung vor dem F Gebaeude:				zur Kreuzung zwischen dem E Gebaeude und dem F Gebaeude,zur Kreuzung vor dem M Gebaeude,zum Haupteingang vom F Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F;
-
 49.016119,8.390760:	zur Kreuzung vor dem M Gebaeude:				zur Kreuzung vor dem F Gebaeude,zum Haupteingang vom M Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude M,zur Kreuzung der Knielinger-Allee beim M Gebaeude;
-
 49.014995,8.392002:	zur Kreuzung vor dem R Gebaeude:				zum Haupteingang vom A Gebaeude,zum Haupteingang der Hochschule,zum Haupteingang vom R Gebaeude;
 49.015032,8.390393:	zum Haupteingang vom E Gebaeude:				zur Kreuzung vor dem E Gebaeude,zum Uebergang vom Gebaude E in das Gebaude LI;
-
 49.015610,8.390435:	zum Haupteingang vom F Gebaeude:				zur Kreuzung vor dem F Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI;  
-
 49.016167,8.390498:	zum Haupteingang vom M Gebaeude:				zur Kreuzung vor dem M Gebaeude,zum Uebergang vom Gebaude M in das Gebaude LI;
 49.015013,8.392184:	zum Haupteingang vom R Gebaeude:				zur Kreuzung vor dem R Gebaeude;
 49.015538,8.391474:	zum Haupteingang vom A Gebaeude:				zum Haupteingang vom P Gebaeude,zu den Treppen vor der Cafeteria nahe dem Gebaude F,zur Kreuzung vor dem R Gebaeude;
