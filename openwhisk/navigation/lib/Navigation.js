@@ -37,17 +37,17 @@ function main(params) {
 	var result = navi.iwiNavigator.getNavigationPath(params.position, entity);
 		
 	// Ergebis-Array zu String umwandeln
-	var parsedResult = '';
-	for(var i=0; i<result.length; i++)	{
+	var parsedResult = JSON.stringify({"waypoints": result, "navigationDestination": entity});
+	/*for(var i=0; i<result.length; i++)	{
 		parsedResult = parsedResult + 'step:' + (i+1) + ',name:' + result[i].name + ',longitude:' + result[i].longitude  + ',latitude:' + result[i].latitude + ';';
-	}
+	}*/
 	
 	var navigationResponse = {};    
         // Setzen des Ergebnis als payload, damit es im Chat ausgegeben wird. Wenn das Ergebnis in eine andere Variable als payload
 	// geschrieben wird wird sie ebenfalls ans Frontend mitzurueckgegeben, aber nicht im Chat ausgegeben (Der Chat gibt nach aktueller
 	// Implmenetierung immer den String aus der in payload steht).
-	navigationResponse.payload = parsedResult;
-	navigationResponse.voice = voice;
+	navigationResponse.payload = "Navigation nach " + entity + " gestartet!";
+-	navigationResponse.navigationData = parsedResult;navigationResponse.voice = voice;
 	resolve(navigationResponse);
 	});
 } 
