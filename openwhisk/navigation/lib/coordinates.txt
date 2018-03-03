@@ -16,11 +16,11 @@
 49.015785,8.391355:	die Treppe runter zur Cafeteria:				zu den Treppen vor der Cafeteria nahe dem Gebaude M,zu den Treppen vor der Cafeteria nahe dem Gebaude F;
 49.014679,8.390634:	zur Kreuzung Moltkestrasse und Schimerstrasse:			zur Kreuzung vor dem E Gebaeude,zur Schranke beim Parkplatz vor Gebaeude LI,zum Haupteingang der Hochschule;
 49.014818,8.388872:	zur Schranke beim Parkplatz vor Gebaeude LI:			zum Eingang vom LI Gebaude beim Parkplatz an der Moltkestrasse,zur Kreuzung Moltkestrasse und Schimerstrasse;
-49.014625,8.392047:	zum Haupteingang der Hochschule:				zur Kreuzung vor dem R Gebaeude,zur Kreuzung Moltkestrasse und Schimerstrasse,Zum Anne-Frank-Haus;
+49.014625,8.392047:	zum Haupteingang der Hochschule:				zur Kreuzung vor dem R Gebaeude,zur Kreuzung Moltkestrasse und Schimerstrasse,zum Anne-Frank-Haus;
 49.016345,8.390900:	zur Kreuzung der Knielinger-Allee beim M Gebaeude:		zur Kreuzung vor dem M Gebaeude,zum Eingang vom LI Gebaude bei der Knielinger-Allee,zum Ende der Moltkestrasse bei der Jugendherberge;
-49.016000,8.392825:	zum Ende der Moltkestrasse bei der Jugendherberge:		zur Kreuzung der Knielinger-Allee beim M Gebaeude,Zum Anne-Frank-Haus;
-49.014571,8.392731:	Zum Anne-Frank-Haus: 						zum Haupteingang der Hochschule,zum Ende der Moltkestrasse bei der Jugendherberge,zur Mensa Moltke;
-49.014553,8.393791: 	zur Mensa Moltke:						Zum Anne-Frank-Haus;
+49.016000,8.392825:	zum Ende der Moltkestrasse bei der Jugendherberge:		zur Kreuzung der Knielinger-Allee beim M Gebaeude,zum Anne-Frank-Haus;
+49.014571,8.392731:	zum Anne-Frank-Haus: 						zum Haupteingang der Hochschule,zum Ende der Moltkestrasse bei der Jugendherberge,zur Mensa Moltke;
+49.014553,8.393791: 	zur Mensa Moltke:						zum Anne-Frank-Haus;
 49.015050,8.389622: 	zum Uebergang vom Gebaude E in das Gebaude LI: 			zum Haupteingang vom E Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI,zum Eingang vom LI Gebaeude beim Parkplatz an der Moltkestrasse;
 49.015627,8.389681: 	zum Uebergang vom Gebaude F in das Gebaude LI: 			zum Haupteingang vom F Gebaeude,zum Uebergang vom Gebaude E in das Gebaude LI,zum Uebergang vom Gebaude M in das Gebaude LI;
 49.016195,8.389708: 	zum Uebergang vom Gebaude M in das Gebaude LI:			zum Haupteingang vom M Gebaeude,zum Uebergang vom Gebaude F in das Gebaude LI,zum Eingang vom LI Gebaude bei der Knielinger-Allee;
