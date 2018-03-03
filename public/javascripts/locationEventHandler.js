@@ -11,6 +11,10 @@ var navigationPolyline;
 
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
+    if (destinationMarker) {
+        map.removeMarker(destinationMarker);
+        map.removeMarker(navigationPolyline);
+    }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).waypoints[0].name + "!");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
@@ -76,13 +80,21 @@ function onNewPosition(position) {
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
+              map.removeMarker(destinationMarker);
+              map.removeMarker(navigationPolyline);
               toggleLocationEvents();
               map.hideMap();
           } else {
-              //Sonst: Gebe Richtung zum nächsten Wegpunkt an
+              //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polyline
               chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
-              currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);              
-          }
+              currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
+              map.removeMarker(navigationPolyline);
+              var polylineLatLngs = [];
+              for (var i = 0; i < currentNavigationWaypoints.length; i++) {
+                polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
+              }
+              navigationPolyline = map.addPolyline(polylineLatLngs);             
+            }
          
         }
     }

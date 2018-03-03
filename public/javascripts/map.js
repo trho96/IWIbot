@@ -43,5 +43,4 @@ exports.setFocus = function setFocus(latlng) {
 
 exports.fitBounds = function fitBounds(bounds) {
     map.fitBounds(bounds);
-    map.zoomOut(1);
 }
