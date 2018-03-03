@@ -137,7 +137,7 @@ function onNewPosition(position) {
          (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {
           if (i == currentNavigationWaypoints.length - 1) {
               //Wenn letzter Wegpunkt: Navigation beenden
-              chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
+              chat.appendReceivedMessage("Du bist an deinem Ziel angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
               toggleLocationEvents();
