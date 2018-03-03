@@ -88,13 +88,11 @@ function onNewPosition(position) {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polyline
               chat.appendReceivedMessage("Laufe nach " + currentNavigationWaypoints[i+1].name + "!");
               var polylineLatLngs = [];
-              polylineLatLngs.push(currentNavigationWaypoints[i]);
+              polylineLatLngs.push([currentNavigationWaypoints[i].longitude, currentNavigationWaypoints[i].latitude]);
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
-              var polylineLatLngs = [];
-              polylineLatLngs.push(currentNavigationWaypoints[i])
-              for (var i = 0; i < currentNavigationWaypoints.length; i++) {
-                polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
+              for (var j = 0; j < currentNavigationWaypoints.length; j++) {
+                polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
               navigationPolyline = map.addPolyline(polylineLatLngs);             
             }
