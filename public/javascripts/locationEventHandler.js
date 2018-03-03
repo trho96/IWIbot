@@ -86,7 +86,7 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
-    chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name + ".");
+    chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace('_',' ') + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
     console.log(currentNavigationWaypoints);
@@ -143,7 +143,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
-              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name + "!");
+              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace('_',' ') + ".");
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);                    
           }
          
