@@ -23,22 +23,22 @@ function main(params) {
 	// Sucht fuer die Rueckgabe des Communications-Service den passenden Namen im Dijkstra    
         switch (entity) {
             case 'building E':
-                entity = 'zum Haupteingang vom E Gebaeude';
+                entity = 'zum_Haupteingang_vom_E_Gebaeude';
                 break;
 	    case 'building F':
-                entity = 'zum Haupteingang vom F Gebaeude';
+                entity = 'zum_Haupteingang_vom_F_Gebaeude';
                 break;
             case 'building M':
-                entity = 'zum Haupteingang vom M Gebaeude';
+                entity = 'zum_Haupteingang_vom_M_Gebaeude';
                 break;
             case 'building R':
-                entity = 'zum Haupteingang vom R Gebaeude';
+                entity = 'zum_Haupteingang_vom_R_Gebaeude';
                 break;
             case 'building A':
-                entity = 'zum Haupteingang vom A Gebaeude';
+                entity = 'zum_Haupteingang_vom_A_Gebaeude';
                 break;
             case 'building P':
-                entity = 'zum Haupteingang vom P Gebaeude';
+                entity = 'zum_Haupteingang_vom_P_Gebaeude';
                 break;
         }
 	
