@@ -143,7 +143,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
-              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace('_',' ') + ".");
+              chat.appendReceivedMessage("Gehe " + /*getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace('_',' ') + */".");
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);                    
           }
          
