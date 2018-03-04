@@ -73,13 +73,13 @@ var getDirectionOrder = function(c0, c1, c2)	{
 	/* Fallunterscheidung ob der Weg nach links, rechts oder geradeaus geht. Momentan wird wird links/rechts ausgegeben
 	wenn der Winkel mehr als 10 Grad ist.*/
 	if(degree > 10 && c0_c1_y > c1_c2_y)	{
-		return 'rechts'; 
+		return 'rechts '; 
 	}
 	else if(degree > 10 && c0_c1_y < c1_c2_y)	{
-		return 'links';
+		return 'links ';
 	}
 	else{
-		return 'geradeaus';
+		return 'geradeaus ';
 	}
 };
 
@@ -143,7 +143,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
-              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace('_',' ') + ".");
+              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);                    
           }
          
