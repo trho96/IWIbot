@@ -12,6 +12,7 @@ Es reicht in der Theorie aus eine Erreichbarkeit zwischen zwei Wegpunten einmal 
 Leerzeichen werden sind im Namen in coordinates.txt als Unterstriche anzugeben. Sprich der Name „Bau G Eingang“ sollte in coordinates.txt als „Bau_G_Eingang“ geschrieben werden. In der letzendlichen Textausgabe im IWI-Bot werden die Unterstriche wieder in Leerzeichen abgeaendert.
 
 **Aktuelle Wegpunkte (annavigierbare Wegpunkte sind rot markiert; Stand: 4.3.2018):**
+
 ![](https://github.com/StefanFCMD/IWIbot/blob/master/documentation/images/Waypoints.png?raw=true)
 
 ## Ablauf Navigationsstart
