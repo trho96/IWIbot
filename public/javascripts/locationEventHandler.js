@@ -14,7 +14,7 @@ var currentNavigationDestination = "None";
   Aus dem Winkel wird zudem berechnet, ob derjenige nun geradeaus, nach links oder nach rechts laufen muss.
  */
 var getDirectionOrder = function(c0, c1, c2)	{
-	K//Koeffizienten fuer die Geraden c0_c1 und c1_c2
+	//Koeffizienten fuer die Geraden c0_c1 und c1_c2
 	var a1 = ((c1.longitude-c0.longitude)/(c1.latitude-c0.latitude)),
 		b1 = (c0.longitude-(a1*c0.latitude)),
 		a2 = ((c2.longitude-c1.longitude)/(c2.latitude-c1.latitude)),
@@ -143,7 +143,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an
-              chat.appendReceivedMessage("Gehe " + /*getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1])*/ position.latitude + position.longitude + "XXX" + currentNavigationWaypoints[i].latitude + currentNavigationWaypoints[i].longitude + "XXX" + currentNavigationWaypoints[i+1].latitude + currentNavigationWaypoints[i+1].longitude + currentNavigationWaypoints[i+1].name.replace('_',' ') + ".");
+              chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace('_',' ') + ".");
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);                    
           }
          
