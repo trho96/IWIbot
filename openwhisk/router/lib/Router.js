@@ -9,6 +9,7 @@ function main(params) {
 
     var semester;
     var courseOfStudies;
+    var position;
 
     if("__ow_body" in params) { // For testing this action!!
         params = JSON.parse(params.__ow_body);
@@ -18,11 +19,19 @@ function main(params) {
         semester = params.semester;
         courseOfStudies = params.courseOfStudies;
     }
+    
+    if ("position" in params) {
+        position = params.position;
+    }
 
     return conversation.sendMessage("conInit" in params, params).then(function (response) {
 
         response.semester = semester;
         response.courseOfStudies = courseOfStudies;
+        response.position = typeof position !== 'undefined' ? {
+            latitude: position[1],
+            longitude: position[0]
+        } : position;
         return dispatcher.dispatch(response);
 
     }, function (reason) {
