@@ -113,9 +113,10 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
 
 function removeMarkers(markers) {
     for (var i = 0; i < markers; i++) {
-    if (marker) {
-        map.removeMarker(marker);
-    }    
+        if (marker) {
+            map.removeMarker(marker);
+        }    
+    }
 };
 
 //Add LocationEvents to the LocationEvents-List
