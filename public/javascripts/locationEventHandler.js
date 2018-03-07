@@ -112,7 +112,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
             currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
 
         var polylineLatLngs = [];
-        for (var i = 1; i < currentNavigationWaypoints.length; i++) {
+        for (var i = 0; i < currentNavigationWaypoints.length; i++) {
             polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
         }
         navigationPolyline = map.addPolyline(polylineLatLngs);
