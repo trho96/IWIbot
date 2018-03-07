@@ -90,15 +90,9 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
-    if (destinationMarker != undefined) {
-        console.log(destinationMarker);
-        console.log(typeof destinationMarker);
-        if (typeof destinationMarker != undefined) {
-            console.log("Typeof + undefined");
-        }
-        if (typeof destinationMarker != "undefinde") {
-            console.log("typeof + string");
-        }
+    console.log(destinationMarker);
+    console.log(typeof destinationMarker);
+    if (destinationMarker !== undefined) {
         map.removeMarker(currentPositionPolyline);
         currentPositionPolyline = undefined;
         map.removeMarker(navigationPolyline);
