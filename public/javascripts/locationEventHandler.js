@@ -105,18 +105,19 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
     console.log(currentNavigationWaypoints);
+    
+    map.showMap();     
+    destinationMarker = map.addMarker(currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude,
+        currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
+
+    var polylineLatLngs = [];
+    for (var i = 0; i < currentNavigationWaypoints.length; i++) {
+        polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
+    }
+    navigationPolyline = map.addPolyline(polylineLatLngs);
+    map.fitBounds(navigationPolyline.getBounds());
     if (!locationWatcher) {
         toggleLocationEvents();
-        map.showMap();     
-        destinationMarker = map.addMarker(currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude,
-            currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
-
-        var polylineLatLngs = [];
-        for (var i = 0; i < currentNavigationWaypoints.length; i++) {
-            polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
-        }
-        navigationPolyline = map.addPolyline(polylineLatLngs);
-        map.fitBounds(navigationPolyline.getBounds());
     }
 };
 
