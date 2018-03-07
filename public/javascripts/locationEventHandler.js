@@ -113,8 +113,8 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
 
 function removeMarkers(markers) {
     for (var i = 0; i < markers; i++) {
-        if (marker) {
-            map.removeMarker(marker);
+        if (markers[i]) {
+            map.removeMarker(markers[i]);
         }    
     }
 };
