@@ -91,9 +91,9 @@ var getDirectionOrder = function(c0, c1, c2)	{
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
     if (destinationMarker) {
-        removeMarker(currentPositionPolyline);
-        removeMarker(navigationPolyline);
-        removeMarker(destinationMarker);
+        map.removeMarker(currentPositionPolyline);
+        map.removeMarker(navigationPolyline);
+        map.removeMarker(destinationMarker);
     }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
