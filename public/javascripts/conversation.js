@@ -3,7 +3,7 @@
 var exports = module.exports = {};
 var chat = require("./chat.js");
 var locationEventHandler = require("./locationEventHandler.js");
-var context = null;
+var context = null;	
 var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+ $WSK_API_CODE +'/iwibot/router';
 var $mainDiv = $("#mainDiv");
 var $btnCircle = $(".btn-circle");
@@ -77,6 +77,12 @@ exports.sendMessage = function (init, result) {
                         }
                         if("context" in dataObj) {
                             context = dataObj.context;
+                        }
+			//If there is navigation Data in the answer, start a new
+                        if ("navigationData" in dataObj) {
+                            var navigationData = dataObj.navigationData;
+                            console.log("Location Data: " + JSON.stringify(navigationData));
+                            locationEventHandler.setNewNavigation(navigationData);
                         }
 
                         //If there is navigation Data in the answer, start a new
