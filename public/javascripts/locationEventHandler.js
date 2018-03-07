@@ -90,11 +90,7 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
-    if (destinationMarker) {
-        map.removeMarker(destinationMarker);
-        map.removeMarker(navigationPolyline);
-        map.removeMarker(currentPositionPolyline);
-    }
+    removeMarkers([currentPositionPolyline, navigationPolyline, destinationMarker]);
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
@@ -113,7 +109,14 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
         navigationPolyline = map.addPolyline(polylineLatLngs);
         map.fitBounds(navigationPolyline.getBounds());
     }
-}; 
+};
+
+function removeMarkers(markers) {
+    for (var i = 0; i < markers; i++) {
+    if (marker) {
+        map.removeMarker(marker);
+    }    
+};
 
 //Add LocationEvents to the LocationEvents-List
 exports.addLocationEvents = function addLocationEvents(events) {
@@ -160,9 +163,7 @@ function onNewPosition(position) {
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
-              map.removeMarker(destinationMarker);
-              map.removeMarker(navigationPolyline);
-              map.removeMarker(currentPositionPolyline);
+              removeMarkers([currentPositionPolyline, navigationPolyline, destinationMarker]);
               toggleLocationEvents();
               map.hideMap();
           } else {
@@ -171,8 +172,7 @@ function onNewPosition(position) {
               var polylineLatLngs = [];
               polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
-              map.removeMarker(navigationPolyline);
-              map.removeMarker(currentPositionPolyline);
+              removeMarkers([currentPositionPolyline, navigationPolyline]);
               for (var j = 1; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
