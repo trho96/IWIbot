@@ -6,9 +6,9 @@ var locationWatcher = false;
 var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
-var destinationMarker;
-var navigationPolyline;
-var currentPositionPolyline;
+var destinationMarker = false;
+var navigationPolyline = false;
+var currentPositionPolyline = false;
 
 //latitude = X; longitude = Y
 /**
@@ -92,8 +92,11 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
     if (destinationMarker) {
         map.removeMarker(currentPositionPolyline);
+        currentPositionPolyline = false;
         map.removeMarker(navigationPolyline);
+        navigationPolyline = false;
         map.removeMarker(destinationMarker);
+        destinationMarker = false;
     }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
@@ -167,8 +170,11 @@ function onNewPosition(position) {
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
               map.removeMarker(navigationPolyline);
+              navigationPolyline = false;
               map.removeMarker(destinationMarker);
+              destinationMarker = false;
               map.removeMarker(currentPositionPolyline);
+              destinationMarker = false;
               toggleLocationEvents();
               map.hideMap();
           } else {
@@ -177,7 +183,9 @@ function onNewPosition(position) {
               var polylineLatLngs = [];
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
-              map.removeMarker(destinationMarker);              
+              navigationPolyline = false;
+              map.removeMarker(destinationMarker);  
+              destinationMarker = false;            
               for (var j = 1; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
