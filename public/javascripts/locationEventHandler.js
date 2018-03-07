@@ -111,14 +111,6 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     }
 };
 
-function removeMarkers(markers) {
-    for (var i = 0; i < markers; i++) {
-        if (markers[i]) {
-            map.removeMarker(markers[i]);
-        }    
-    }
-};
-
 //Add LocationEvents to the LocationEvents-List
 exports.addLocationEvents = function addLocationEvents(events) {
     console.log("Setting new locationEvents!")
@@ -154,6 +146,10 @@ function toggleLocationEvents() {
 
 //Is called when the client reaches a new position
 function onNewPosition(position) {
+    if (currentNavigationDestination !== "None") {
+        map.removeMarker(currentPositionPolyline);
+        currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
+    }    
     //Check Navigation
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
@@ -164,21 +160,23 @@ function onNewPosition(position) {
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
-              removeMarkers([currentPositionPolyline, navigationPolyline, destinationMarker]);
+              map.removeMarker(navigationPolyline);
+              map.removeMarker(destinationMarker);
+              map.removeMarker(currentPositionPolyline);
               toggleLocationEvents();
               map.hideMap();
           } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polylines
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
               var polylineLatLngs = [];
-              polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
-              removeMarkers([currentPositionPolyline, navigationPolyline]);
+              map.removeMarker(navigationPolyline);
+              map.removeMarker(destinationMarker);              
               for (var j = 1; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
               navigationPolyline = map.addPolyline(polylineLatLngs);      
-              currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
+              
             }
          
         }
