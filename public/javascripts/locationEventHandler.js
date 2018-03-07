@@ -154,6 +154,7 @@ function toggleLocationEvents() {
 
 //Is called when the client reaches a new position
 function onNewPosition(position) {
+    //Wenn Navigation aktiv ist: Berechne neue Polyline zwischen aktueller Position und nächsten Navigationswegpunkt
     if (currentNavigationDestination !== "None") {
         if (currentPositionPolyline !== undefined) {
             map.removeMarker(currentPositionPolyline);
@@ -166,7 +167,7 @@ function onNewPosition(position) {
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
          (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {
           if (i == currentNavigationWaypoints.length - 1) {
-              //Wenn letzter Wegpunkt: Navigation beenden
+              //Wenn letzter Wegpunkt: Navigation beenden, Karteninhalte ausblenden und zurücksetzen
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
               currentNavigationDestination = "None";
@@ -179,7 +180,7 @@ function onNewPosition(position) {
               toggleLocationEvents();
               map.hideMap();
           } else {
-              //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polylines
+              //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Karte
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
               var polylineLatLngs = [];
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
@@ -198,7 +199,7 @@ function onNewPosition(position) {
     //TODO
   };
 
-  //Helper function to calculate if a number is between two other numbers
+  //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
 function checkIfInRange(number, range1, range2) {
     var min = Math.min.apply(Math, [range1, range2]);
     var max = Math.max.apply(Math, [range1, range2]);
