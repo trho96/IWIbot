@@ -90,7 +90,11 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
-    removeMarkers([currentPositionPolyline, navigationPolyline, destinationMarker]);
+    if (destinationMarker) {
+        removeMarker(currentPositionPolyline);
+        removeMarker(navigationPolyline);
+        removeMarker(destinationMarker);
+    }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
@@ -147,7 +151,9 @@ function toggleLocationEvents() {
 //Is called when the client reaches a new position
 function onNewPosition(position) {
     if (currentNavigationDestination !== "None") {
-        map.removeMarker(currentPositionPolyline);
+        if (currentPositionPolyline) {
+            map.removeMarker(currentPositionPolyline);
+        }
         currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
     }    
     //Check Navigation
