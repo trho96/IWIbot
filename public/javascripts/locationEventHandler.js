@@ -90,7 +90,7 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
-    if (destinationMarker) {
+    if (typeof destinationMarker === "undefined") {
         map.removeMarker(currentPositionPolyline);
         currentPositionPolyline = undefined;
         map.removeMarker(navigationPolyline);
@@ -154,7 +154,7 @@ function toggleLocationEvents() {
 //Is called when the client reaches a new position
 function onNewPosition(position) {
     if (currentNavigationDestination !== "None") {
-        if (currentPositionPolyline) {
+        if (typeof currentPositionPolyline === "undefined") {
             map.removeMarker(currentPositionPolyline);
         }
         currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
