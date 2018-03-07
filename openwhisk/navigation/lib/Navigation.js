@@ -40,7 +40,25 @@ function main(params) {
             case 'building P':
                 entity = 'zum_Haupteingang_vom_P_Gebaeude';
                 break;
-        }
+            case 'building R':
+                entity = 'zum_Haupteingang_vom_R_Gebaeude';
+                break;
+	    case 'mensa':
+                entity = 'zur_Mensa_Moltke';
+                break;
+            case 'cafeteria':
+                entity = 'die_Treppe_runter_zur_Cafeteria';
+                break;
+            case 'building LI':
+                entity = 'zur_Schranke_beim_Parkplatz_vor_Gebaeude_LI';
+                break;
+            case 'aula':
+                entity = 'zum_Haupteingang_vom_A_Gebaeude';
+                break;
+            case 'main entrance':
+                entity = 'zum_Haupteingang_der_Hochschule';
+                break;
+	}
 	
 	// Berechne Navigation
 	var result = navi.iwiNavigator.getNavigationPath(params.position, entity);
