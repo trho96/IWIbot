@@ -8,15 +8,7 @@ var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
 var destinationMarker;
 var navigationPolyline;
-
-//Set a new navigationPath
-exports.setNewNavigation = function setNewNavigation(navigation) {
-    if (destinationMarker) {
-        map.removeMarker(destinationMarker);
-        map.removeMarker(navigationPolyline);
-    }
-    console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
-    chat.appendReceivedMessage("Laufe nach " + JSON.parse(navigation).waypoints[0].name + "!");
+var currentPositionPolyline;
 
 //latitude = X; longitude = Y
 /**
@@ -27,12 +19,11 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
  */
 var getDirectionOrder = function(c0, c1, c2)	{
 	//Koeffizienten fuer die Geraden c0_c1 und c1_c2
-	var a1 = ((c1.longitude-c0.longitude)/(c1.latitude-c0.latitude)),
-		b1 = (c0.longitude-(a1*c0.latitude)),
-		a2 = ((c2.longitude-c1.longitude)/(c2.latitude-c1.latitude)),
+    var a1 = ((c1.longitude-c0.longitude)/(c1.latitude-c0.latitude)),
+        b1 = (c0.longitude-(a1*c0.latitude)),
+        a2 = ((c2.longitude-c1.longitude)/(c2.latitude-c1.latitude)),
         b2 = (c1.longitude-(a2*c1.latitude));
-    }
-	
+    
 	// Hilfsfunktion um das x des Schnittpunktes zweier Funktionen mit den Koeffizienten a&b und b&c zu berechnen. 
 	var crossing = function(a,b,c,d)	{
 		return (d-b)/(a-c);
@@ -98,6 +89,12 @@ var getDirectionOrder = function(c0, c1, c2)	{
 
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
+    //Remove old markers from map if navigation was already active before
+    if (destinationMarker) {
+        map.removeMarker(destinationMarker);
+        map.removeMarker(navigationPolyline);
+        map.removeMarker(currentPositionPolyline);
+    }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
@@ -110,7 +107,7 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
             currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
 
         var polylineLatLngs = [];
-        for (var i = 0; i < currentNavigationWaypoints.length; i++) {
+        for (var i = 1; i < currentNavigationWaypoints.length; i++) {
             polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
         }
         navigationPolyline = map.addPolyline(polylineLatLngs);
@@ -165,19 +162,22 @@ function onNewPosition(position) {
               currentNavigationDestination = "None";
               map.removeMarker(destinationMarker);
               map.removeMarker(navigationPolyline);
+              map.removeMarker(currentPositionPolyline);
               toggleLocationEvents();
               map.hideMap();
           } else {
-              //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polyline
+              //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Polylines
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
               var polylineLatLngs = [];
               polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
-              for (var j = 0; j < currentNavigationWaypoints.length; j++) {
+              map.removeMarker(currentPositionPolyline);
+              for (var j = 1; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
-              navigationPolyline = map.addPolyline(polylineLatLngs);             
+              navigationPolyline = map.addPolyline(polylineLatLngs);      
+              currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
             }
          
         }
