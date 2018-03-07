@@ -90,8 +90,6 @@ var getDirectionOrder = function(c0, c1, c2)	{
 //Set a new navigationPath
 exports.setNewNavigation = function setNewNavigation(navigation) {
     //Remove old markers from map if navigation was already active before
-    console.log(destinationMarker);
-    console.log(typeof destinationMarker);
     if (destinationMarker !== undefined) {
         map.removeMarker(currentPositionPolyline);
         currentPositionPolyline = undefined;
@@ -186,10 +184,8 @@ function onNewPosition(position) {
               var polylineLatLngs = [];
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
-              navigationPolyline = undefined;
-              map.removeMarker(destinationMarker);  
-              destinationMarker = undefined;            
-              for (var j = 1; j < currentNavigationWaypoints.length; j++) {
+              navigationPolyline = undefined;          
+              for (var j = 0; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
               navigationPolyline = map.addPolyline(polylineLatLngs);      
