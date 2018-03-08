@@ -9,6 +9,8 @@ var locationWatcher = false;
 var locationEvents = [];
 var currentNavigationWaypoints = [];
 var currentNavigationDestination = "None";
+
+//Weil anfangs keine Map gerendered wird, sind keine Marker vorhanden -> initialisiere als undefined
 var destinationMarker = undefined;
 var navigationPolyline = undefined;
 var currentPositionPolyline = undefined;
@@ -90,9 +92,9 @@ var getDirectionOrder = function(c0, c1, c2)	{
 	}
 };
 
-//Set a new navigationPath
+//Setzt den Navigationspfad und startet die Navigation
 exports.setNewNavigation = function setNewNavigation(navigation) {
-    //Remove old markers from map if navigation was already active before
+    //Clear Map
     if (destinationMarker !== undefined) {
         map.removeMarker(currentPositionPolyline);
         currentPositionPolyline = undefined;
@@ -103,14 +105,15 @@ exports.setNewNavigation = function setNewNavigation(navigation) {
     }
     console.log("Setting new navigationWaypoints to " + JSON.parse(navigation).navigationDestination + "!")
     chat.appendReceivedMessage("Gehe " + JSON.parse(navigation).waypoints[0].name.replace(/_/g,' ') + ".");
+
+    //Setze Navigationsparameter
     currentNavigationWaypoints = JSON.parse(navigation).waypoints;
     currentNavigationDestination = JSON.parse(navigation).navigationDestination;
-    console.log(currentNavigationWaypoints);
-    
+
+    //Blende Map ein und setze Markierungen
     map.showMap();     
     destinationMarker = map.addMarker(currentNavigationWaypoints[currentNavigationWaypoints.length - 1].latitude,
         currentNavigationWaypoints[currentNavigationWaypoints.length - 1].longitude);
-
     var polylineLatLngs = [];
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         polylineLatLngs.push([currentNavigationWaypoints[i].latitude, currentNavigationWaypoints[i].longitude]);
@@ -155,7 +158,7 @@ function toggleLocationEvents() {
     }
 };
 
-//Is called when the client reaches a new position
+//Is called when the client reaches a new position. Currently every second.
 function onNewPosition(position) {
     //Wenn Navigation aktiv ist: Berechne neue Polyline zwischen aktueller Position und nächsten Navigationswegpunkt
     if (currentNavigationDestination !== "None") {
@@ -164,7 +167,7 @@ function onNewPosition(position) {
         }
         currentPositionPolyline = map.addPolyline([[position.latitude, position.longitude], [currentNavigationWaypoints[0].latitude, currentNavigationWaypoints[0].longitude]]);       
     }    
-    //Check Navigation
+    //Suche in der Geofence-Liste nach Matches
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
@@ -204,7 +207,7 @@ function onNewPosition(position) {
     }
   };
 
-
+//Gibt eine Position ans Backend und gibt die Events auf dieser Position aus
   function getEventsForCurrentLocation(position) {
       var requestObject = {};
         requestObject.position = [position.longitude,position.latitude];
@@ -220,8 +223,7 @@ function onNewPosition(position) {
                 var resultObj = JSON.parse(data);
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
                 if (resultObj.numberOfEventsFound > 0) {
-                    for (var i = 0; i < resultObj.numberOfEventsFound; i++) {     
-                        console.log("<b>" + resultObj.events[i].name + "</b>: " + resultObj.events[i].description);          
+                    for (var i = 0; i < resultObj.numberOfEventsFound; i++) {              
                         chat.appendReceivedMessage("<b>" + resultObj.events[i].name + "</b>: " + resultObj.events[i].description);
                 }
             }
@@ -231,9 +233,8 @@ function onNewPosition(position) {
     return $.ajax(options);
 };
 
+//Überprüft, ob das Voice-Chat div angezeigt wird
 function checkForVoiceChat() {
-    console.log($('.history').css('display'));
-    console.log($('.voice').css('display'));
     return ($('.voice').css('display') === 'block');
 }
 

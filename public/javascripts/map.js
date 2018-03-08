@@ -1,6 +1,10 @@
 
-var map;
+/*
+Hier wird die Kartendarstellung verwaltet. Alle Funktionen im Frontend können so auf dieselbe Karte zugreifen
+und diese modifizieren.
+*/
 
+var map;
 var exports = module.exports = {};
 
 //Initialisiert die Karte mit OSM MapTiles und Zentralposition auf die HS Karlsruhe

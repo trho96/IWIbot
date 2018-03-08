@@ -29,8 +29,6 @@ var eventDatabase = [
     {id: 0, name: "Firmenkontaktmesse", description: "Die Firmenkontaktmesse findet heute in der Aula statt!", latitude: 49.015538, longitude: 8.391474}
 ]
 
-
-
 //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
 function checkIfInRange(number, range1, range2) {
     var min = Math.min.apply(Math, [range1, range2]);
