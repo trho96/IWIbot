@@ -219,7 +219,8 @@ function onNewPosition(position) {
                 console.log(JSON.stringify(data));                
             }
         }
-
+        
+        return $.ajax(options);
   }
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
