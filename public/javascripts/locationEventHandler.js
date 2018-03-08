@@ -196,7 +196,7 @@ function onNewPosition(position) {
               navigationPolyline = map.addPolyline(polylineLatLngs); 
               getEventsForCurrentLocation(position);
               if (checkForVoiceChat()) {
-                tts.tts(`{"payload": "Gehe ` + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + `."}`);
+                tts.tts('{"payload": "Gehe ' + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + '."}');
               }
             }
          
