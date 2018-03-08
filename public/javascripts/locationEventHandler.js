@@ -195,8 +195,8 @@ function onNewPosition(position) {
               }
               navigationPolyline = map.addPolyline(polylineLatLngs); 
               getEventsForCurrentLocation(position);
-              if (checkForVoiceChat) {
-                tts.tts('{"payload": "Das ist ein Test."}');
+              if (checkForVoiceChat()) {
+                tts.tts(`{"payload": "Gehe ` + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + `."}`);
               }
             }
          
@@ -218,10 +218,10 @@ function onNewPosition(position) {
             processData: false,
             success: function (data) {
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
-                if (data.numberOfEventsFound > 0) {
+                if (JSON.parse(data).numberOfEventsFound > 0) {
                     for (var i = 0; i < data.numberOfEventsFound; i++) {     
                         console.log("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);          
-                    chat.appendReceivedMessage("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);
+                        chat.appendReceivedMessage("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);
                 }
             }
             
@@ -232,7 +232,8 @@ function onNewPosition(position) {
 
 function checkForVoiceChat() {
     console.log($('.history').css('display'));
-    return ($('.history').css('display') === 'none');
+    console.log($('.voice').css('display'));
+    return ($('.voice').css('display') === 'block');
 }
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
