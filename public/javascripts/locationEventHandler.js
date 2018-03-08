@@ -168,8 +168,7 @@ function onNewPosition(position) {
     for (var i = 0; i < currentNavigationWaypoints.length; i++) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
-         (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {
-            getEventsForCurrentLocation(position);
+         (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {           
             if (i == currentNavigationWaypoints.length - 1) {
               //Wenn letzter Wegpunkt: Navigation beenden, Karteninhalte ausblenden und zurücksetzen
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
@@ -183,12 +182,10 @@ function onNewPosition(position) {
               destinationMarker = undefined;
               toggleLocationEvents();
               map.hideMap();
+              getEventsForCurrentLocation(position);
             } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Karte
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
-              if (checkForVoiceChat) {
-                tts.tts("Das ist ein Test.");
-              }
               var polylineLatLngs = [];
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
@@ -197,7 +194,10 @@ function onNewPosition(position) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
               navigationPolyline = map.addPolyline(polylineLatLngs); 
-              
+              getEventsForCurrentLocation(position);
+              if (checkForVoiceChat) {
+                tts.tts({payload: "Das ist ein Test."});
+              }
             }
          
         }
