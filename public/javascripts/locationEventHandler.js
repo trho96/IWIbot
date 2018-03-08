@@ -196,7 +196,7 @@ function onNewPosition(position) {
               navigationPolyline = map.addPolyline(polylineLatLngs); 
               getEventsForCurrentLocation(position);
               if (checkForVoiceChat) {
-                tts.tts({"payload": "Das ist ein Test."});
+                tts.tts(JSON.parse({"payload": "Das ist ein Test."}));
               }
             }
          
@@ -219,8 +219,9 @@ function onNewPosition(position) {
             success: function (data) {
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
                 if (data.numberOfEventsFound > 0) {
-                    for (var i = 0; i < data.numberOfEventsFound; i++) {               
-                    chat.appendReceivedMessage("<b>" + data.events[i].name + "</b>: " + data.events[i].description);
+                    for (var i = 0; i < data.numberOfEventsFound; i++) {     
+                        console.log("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);          
+                    chat.appendReceivedMessage("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);
                 }
             }
             
@@ -230,6 +231,7 @@ function onNewPosition(position) {
 };
 
 function checkForVoiceChat() {
+    console.log($('.history').css('display'));
     return ($('.history').css('display') === 'none');
 }
 
