@@ -22,43 +22,37 @@ function main(params) {
 
 	// Sucht fuer die Rueckgabe des Communications-Service den passenden Namen im Dijkstra    
         switch (entity) {
-            case 'building E':
+            case '1':	//aula
+                entity = 'zum_Haupteingang_vom_A_Gebaeude';
+                break;
+	    case '2':	//building E
                 entity = 'zum_Haupteingang_vom_E_Gebaeude';
                 break;
-	    case 'building F':
+            case '3':	//building F
                 entity = 'zum_Haupteingang_vom_F_Gebaeude';
                 break;
-            case 'building M':
-                entity = 'zum_Haupteingang_vom_M_Gebaeude';
-                break;
-            case 'building R':
-                entity = 'zum_Haupteingang_vom_R_Gebaeude';
-                break;
-            case 'building A':
-                entity = 'zum_Haupteingang_vom_A_Gebaeude';
-                break;
-            case 'building P':
-                entity = 'zum_Haupteingang_vom_P_Gebaeude';
-                break;
-            case 'building R':
-                entity = 'zum_Haupteingang_vom_R_Gebaeude';
-                break;
-	    case 'mensa':
-                entity = 'zur_Mensa_Moltke';
-                break;
-            case 'cafeteria':
-                entity = 'die_Treppe_runter_zur_Cafeteria';
-                break;
-            case 'building LI':
+            case '4':	//building LI
                 entity = 'zur_Schranke_beim_Parkplatz_vor_Gebaeude_LI';
                 break;
-            case 'aula':
-                entity = 'zum_Haupteingang_vom_A_Gebaeude';
+            case '5':	//building M
+                entity = 'zum_Haupteingang_vom_M_Gebaeude';
                 break;
-            case 'main entrance':
+            case '6':	//building P
+                entity = 'zum_Haupteingang_vom_P_Gebaeude';
+                break;
+            case '7':	//building R
+                entity = 'zum_Haupteingang_vom_R_Gebaeude';
+                break;
+	    case '8':	//cafeteria
+                entity = 'die_Treppe_runter_zur_Cafeteria';
+                break;
+            case '9':	//main entrance
                 entity = 'zum_Haupteingang_der_Hochschule';
                 break;
-	}
+	    case '10':	//Mensa
+                entity = 'zur_Mensa_Moltke';
+                break;
+       }
 	
 	// Berechne Navigation
 	var result = navi.iwiNavigator.getNavigationPath(params.position, entity);
