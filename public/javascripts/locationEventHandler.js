@@ -168,7 +168,8 @@ function onNewPosition(position) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(currentNavigationWaypoints[i].latitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].latitude) + 0.0001) &&
          (checkIfInRange(position.longitude, parseFloat(currentNavigationWaypoints[i].longitude) - 0.0001, parseFloat(currentNavigationWaypoints[i].longitude) + 0.0001))) {
-          if (i == currentNavigationWaypoints.length - 1) {
+            getEventsForCurrentLocation(position);
+            if (i == currentNavigationWaypoints.length - 1) {
               //Wenn letzter Wegpunkt: Navigation beenden, Karteninhalte ausblenden und zurücksetzen
               chat.appendReceivedMessage("Du bist an deinem Ziel " + currentNavigationDestination + " angekommen!")
               currentNavigationWaypoints = [];
@@ -181,7 +182,7 @@ function onNewPosition(position) {
               destinationMarker = undefined;
               toggleLocationEvents();
               map.hideMap();
-          } else {
+            } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Karte
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
               var polylineLatLngs = [];
@@ -191,14 +192,12 @@ function onNewPosition(position) {
               for (var j = 0; j < currentNavigationWaypoints.length; j++) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
-              navigationPolyline = map.addPolyline(polylineLatLngs);      
-              getEventsForCurrentLocation(position);
+              navigationPolyline = map.addPolyline(polylineLatLngs); 
+              
             }
          
         }
     }
-    //Check other Events
-    //TODO
   };
 
 
@@ -215,13 +214,15 @@ function onNewPosition(position) {
             processData: false,
             success: function (data) {
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
-                var responseObj = JSON.parse(data);
-                console.log(JSON.stringify(data));                
+                if (data.numberOfEventsFound > 0) {
+                    for (var i = 0; i < data.numberOfEventsFound; i++) {               
+                    chat.appendReceivedMessage("<b>" + data.events[i].name + "</b>: " + data.events[i].description);
+                }
             }
+            return $.ajax(options);
         }
-        
-        return $.ajax(options);
-  }
+    }
+}
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
 function checkIfInRange(number, range1, range2) {
