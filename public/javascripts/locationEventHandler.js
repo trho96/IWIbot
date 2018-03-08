@@ -192,7 +192,7 @@ function onNewPosition(position) {
                 polylineLatLngs.push([currentNavigationWaypoints[j].latitude, currentNavigationWaypoints[j].longitude]);
               }
               navigationPolyline = map.addPolyline(polylineLatLngs);      
-              
+              getEventsForCurrentLocation(position);
             }
          
         }
