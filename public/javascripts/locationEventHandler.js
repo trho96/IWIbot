@@ -1,5 +1,6 @@
 var chat = require("./chat.js");
 var map = require("./map.js");
+var tts = require("./textToSpeech.js");
 
 var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+ $WSK_API_CODE +'/iwibot/router';
 
@@ -185,6 +186,9 @@ function onNewPosition(position) {
             } else {
               //Sonst: Gebe Richtung zum nächsten Wegpunkt an, aktualisiere Karte
               chat.appendReceivedMessage("Gehe " + getDirectionOrder(position, currentNavigationWaypoints[i], currentNavigationWaypoints[i+1]) + currentNavigationWaypoints[i+1].name.replace(/_/g,' ') + ".");
+              if (checkForVoiceChat) {
+                tts.tts("Das ist ein Test.");
+              }
               var polylineLatLngs = [];
               currentNavigationWaypoints = currentNavigationWaypoints.slice(i + 1);
               map.removeMarker(navigationPolyline);
@@ -219,9 +223,14 @@ function onNewPosition(position) {
                     chat.appendReceivedMessage("<b>" + data.events[i].name + "</b>: " + data.events[i].description);
                 }
             }
-            return $.ajax(options);
+            
         }
     }
+    return $.ajax(options);
+};
+
+function checkForVoiceChat() {
+    return ($('.voice').css('display') === 'block');
 }
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
