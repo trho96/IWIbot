@@ -221,8 +221,8 @@ function onNewPosition(position) {
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
                 if (resultObj.numberOfEventsFound > 0) {
                     for (var i = 0; i < resultObj.numberOfEventsFound; i++) {     
-                        console.log("<b>" + JSON.parse(resultObj.events[i]).name + "</b>: " + JSON.parse(resultObj.events[i]).description);          
-                        chat.appendReceivedMessage("<b>" + JSON.parse(resultObj.events[i]).name + "</b>: " + JSON.parse(resultObj.events[i]).description);
+                        console.log("<b>" + resultObj.events[i].name + "</b>: " + resultObj.events[i].description);          
+                        chat.appendReceivedMessage("<b>" + resultObj.events[i].name + "</b>: " + resultObj.events[i].description);
                 }
             }
             
