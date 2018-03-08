@@ -1,5 +1,6 @@
 var dispatcher = require('./dispatcher');
 var conversation = require('./conversation');
+var locationEvents = require('./locationEvents');
 
 
 function main(params) {
@@ -10,6 +11,20 @@ function main(params) {
     var semester;
     var courseOfStudies;
     var position;
+
+    if ("onlyPositionDataFlag" in params) {
+        var positionObj = {latitude: params.position[1],
+                            longitude: params.position[0]
+        }
+        
+        var responseObj = locationEvents.getEventsForPosition(positionObj).then(function (response) {
+            return {
+                headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
+                body: JSON.stringify(response),
+                code: 200
+            };       
+        })
+    }
 
     if("__ow_body" in params) { // For testing this action!!
         params = JSON.parse(params.__ow_body);

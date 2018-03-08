@@ -1,6 +1,8 @@
 var chat = require("./chat.js");
 var map = require("./map.js");
 
+var url = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+ $WSK_API_CODE +'/iwibot/router';
+
 var exports = module.exports = {};
 var locationWatcher = false;
 var locationEvents = [];
@@ -198,6 +200,27 @@ function onNewPosition(position) {
     //Check other Events
     //TODO
   };
+
+
+  function getEventsForCurrentLocation(position) {
+      var requestObject = {};
+        requestObject.position = [position.longitude,position.latitude];
+        requestObject.onlyPositionDataFlag = true;
+
+        var options = {
+            url: url,
+            type: 'POST',
+            data: JSON.stringify(requestObject),
+            contentType: "application/json",
+            processData: false,
+            success: function (data) {
+                console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
+                var responseObj = JSON.parse(data);
+                console.log(JSON.stringify(data));                
+            }
+        }
+
+  }
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet
 function checkIfInRange(number, range1, range2) {
