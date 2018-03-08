@@ -5,11 +5,13 @@ This is only to show how location based events could be implemented using the
 locationEventHandler in the frontend. */
 
 function getEventsForPosition(position) {
+    console.log("Check for Position " + position);
     var responsObject = {};
     for (var i = 0; i < eventDatabase.length; i++) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(eventDatabase[i].latitude) - 0.0001, parseFloat(eventDatabase[i].latitude) + 0.0001) &&
          (checkIfInRange(position.longitude, parseFloat(eventDatabase[i].longitude) - 0.0001, parseFloat(eventDatabase[i].longitude) + 0.0001))) {
+             console.log("Found Object");
              responseObject = eventDatabase[i];
          }
     }

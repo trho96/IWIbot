@@ -16,8 +16,9 @@ function main(params) {
         var positionObj = {latitude: params.position[1],
                             longitude: params.position[0]
         }
-        
-        var responseObj = locationEvents.getEventsForPosition(positionObj).then(function (response) {
+
+        return locationEvents.getEventsForPosition(positionObj).then(function (response) {
+            console.log("Responding... " + JSON.stringify(response));
             return {
                 headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
                 body: JSON.stringify(response),
