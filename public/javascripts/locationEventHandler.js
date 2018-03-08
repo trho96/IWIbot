@@ -196,7 +196,7 @@ function onNewPosition(position) {
               navigationPolyline = map.addPolyline(polylineLatLngs); 
               getEventsForCurrentLocation(position);
               if (checkForVoiceChat) {
-                tts.tts({payload: "Das ist ein Test."});
+                tts.tts({"payload": "Das ist ein Test."});
               }
             }
          
@@ -230,7 +230,7 @@ function onNewPosition(position) {
 };
 
 function checkForVoiceChat() {
-    return ($('.voice').css('display') === 'block');
+    return ($('.history').css('display') === 'none');
 }
 
   //Hilfsfunktion. Berechnet, ob sich eine Zahl zwischen zwei anderen Zahlen befindet

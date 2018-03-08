@@ -12,7 +12,7 @@ function getEventsForPosition(position) {
         //About 7m in each direction
         if (checkIfInRange(position.latitude, parseFloat(eventDatabase[i].latitude) - 0.0001, parseFloat(eventDatabase[i].latitude) + 0.0001) &&
          (checkIfInRange(position.longitude, parseFloat(eventDatabase[i].longitude) - 0.0001, parseFloat(eventDatabase[i].longitude) + 0.0001))) {
-             eventsFound.push = eventDatabase[i];
+             eventsFound.push(eventDatabase[i]);
          }
     }
     var responseObject = {events: eventsFound, numberOfEventsFound: eventsFound.length}
