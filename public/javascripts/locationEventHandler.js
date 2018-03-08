@@ -217,11 +217,12 @@ function onNewPosition(position) {
             contentType: "application/json",
             processData: false,
             success: function (data) {
+                var resultObj = JSON.parse(data);
                 console.log("LOCATIONEVENT_received_data: " + JSON.stringify(data));
-                if (JSON.parse(data).numberOfEventsFound > 0) {
-                    for (var i = 0; i < data.numberOfEventsFound; i++) {     
-                        console.log("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);          
-                        chat.appendReceivedMessage("<b>" + JSON.parse(data.events[i]).name + "</b>: " + JSON.parse(data.events[i]).description);
+                if (resultObj.numberOfEventsFound > 0) {
+                    for (var i = 0; i < resultObj.numberOfEventsFound; i++) {     
+                        console.log("<b>" + JSON.parse(resultObj.events[i]).name + "</b>: " + JSON.parse(resultObj.events[i]).description);          
+                        chat.appendReceivedMessage("<b>" + JSON.parse(resultObj.events[i]).name + "</b>: " + JSON.parse(resultObj.events[i]).description);
                 }
             }
             
