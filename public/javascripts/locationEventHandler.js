@@ -196,7 +196,7 @@ function onNewPosition(position) {
               navigationPolyline = map.addPolyline(polylineLatLngs); 
               getEventsForCurrentLocation(position);
               if (checkForVoiceChat) {
-                tts.tts(JSON.parse({"payload": "Das ist ein Test."}));
+                tts.tts('{"payload": "Das ist ein Test."}');
               }
             }
          
