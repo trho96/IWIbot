@@ -1,0 +1,20 @@
+{
+    "classifications": {
+        "intent": "meal     // entweder intent oder entity, je nachdem was erkannt wurde",
+        "entity": "essen1   // nicht gesetzte Werte als leerer String"
+    },
+    "context" : {
+        "conversation_id": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+        "priorIntent": {
+            "intent": "meal"
+        },
+        "system":{
+            "dialog_stack":[],
+            "dialog_turn_counter":1,
+            "dialog_request_counter":1,
+            "_node_output_map":[]
+        }
+    },
+    "init": "",
+    "params": ""
+}

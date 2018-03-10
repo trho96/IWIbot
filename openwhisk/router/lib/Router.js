@@ -1,6 +1,8 @@
 var dispatcher = require('./dispatcher');
-var conversation = require('./conversation');
-var locationEvents = require('./locationEvents');
+// Use this for Bluemix Conversation-Service
+// var conversation = require('./conversation');
+// Use this for own Python-Classifer Based Conversation
+var conversation = require('./classifier-based-conversation/conversation');
 
 
 function main(params) {
