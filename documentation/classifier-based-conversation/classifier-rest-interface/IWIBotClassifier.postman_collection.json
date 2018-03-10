@@ -1,0 +1,106 @@
+{
+	"info": {
+		"name": "IWIBot",
+		"_postman_id": "69b10e95-a749-ce8e-d4c9-e2f8987532a2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Classify Intent",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"sentence\":\"Welch Speisen tischet die Mensa am heutigen Tage auf, werter Chatbot?\",\r\n   \"context\":{\r\n      \"conversation_id\":\"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\",\r\n      \"priorIntent\": {\r\n            \"intent\":\"\"\r\n      },\r\n      \"system\":{\r\n         \"dialog_stack\":[\r\n\r\n         ],\r\n         \"dialog_turn_counter\":1,\r\n         \"dialog_request_counter\":1,\r\n         \"_node_output_map\":[\r\n\r\n         ]\r\n      }\r\n   },\r\n   \"init\":\"Inhalt\",\r\n   \"param\":\"Inhalt\"\r\n}"
+				},
+				"url": {
+					"raw": "https://iwibotclassifier.mybluemix.net/api/getIntent",
+					"protocol": "https",
+					"host": [
+						"iwibotclassifier",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"api",
+						"getIntent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Router",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"use_unauthenticated\":true,\r\n   \"semester\":5,\r\n   \"courseOfStudies\":\"INFB\",\r\n   \"payload\": \"Joke\",\r\n   \"customObject\": {\r\n\t  \"value\": true\r\n   },\r\n   \"context\":{\r\n      \"conversation_id\":\"ab1fa9a8-53ea-49c8-b50e-b1803b28d305\",\r\n      \"system\":{\r\n         \"dialog_stack\":[\r\n            {\r\n               \"dialog_node\":\"root\"\r\n            }\r\n         ],\r\n         \"dialog_turn_counter\":1,\r\n         \"dialog_request_counter\":1,\r\n         \"_node_output_map\":{\r\n            \"Willkommen\":[\r\n               0\r\n            ]\r\n         }\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/76d6b84357849a891d7f92f0e22ae9158c0395c822f2af824211c54c7c2edf5e/iwibot/router",
+					"protocol": "https",
+					"host": [
+						"service",
+						"us",
+						"apiconnect",
+						"ibmcloud",
+						"com"
+					],
+					"path": [
+						"gws",
+						"apigateway",
+						"api",
+						"76d6b84357849a891d7f92f0e22ae9158c0395c822f2af824211c54c7c2edf5e",
+						"iwibot",
+						"router"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Classify Entity",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"sentence\":\"Mich gelüstet es wahrlich nach Wahlessen 1, werter Chatbot!\",\n   \"context\":{\n      \"conversation_id\":\"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx\",\n      \"priorIntent\": {\n\t        \"intent\":\"meal\"\n\t  },\n      \"system\":{\n         \"dialog_stack\":[\n\n         ],\n         \"dialog_turn_counter\":1,\n         \"dialog_request_counter\":1,\n         \"_node_output_map\":[\n\n         ]\n      }\n   },\n   \"init\":\"Inhalt\",\n   \"param\":\"Inhalt\"\n}"
+				},
+				"url": {
+					"raw": "https://iwibotclassifier.mybluemix.net/api/getEntity",
+					"protocol": "https",
+					"host": [
+						"iwibotclassifier",
+						"mybluemix",
+						"net"
+					],
+					"path": [
+						"api",
+						"getEntity"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
