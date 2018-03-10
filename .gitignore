@@ -197,4 +197,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Conversation Classifier Synapses
+synapses.json
+
 # End of https://www.gitignore.io/api/node,macos,grunt,linux,windows,webstorm+all
