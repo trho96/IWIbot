@@ -10,7 +10,7 @@ var exports = module.exports = {};
 //Initialisiert die Karte mit OSM MapTiles und Zentralposition auf die HS Karlsruhe
 exports.initMap = function initMap() {
     map = L.map('map').setView([49.015032, 8.3903939], 15);
-        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var osmUrl='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
         var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 18, attribution: osmAttrib});		
         map.addLayer(osm);   
