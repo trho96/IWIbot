@@ -5,7 +5,10 @@ function dispatch(response) {
     console.log('skip: ' + JSON.stringify(response, null, 4));
     var context = response.context;
     var responseObject = {};
-    if ("actionToInvoke" in response.output) {
+    if ("positionFlag" in response.output) {
+		responseObject.positionFlag = response.output.positionFlag;
+	}	
+	if ("actionToInvoke" in response.output) {
         console.log("Action to be invoked: " + response.output.actionToInvoke);
         console.log("Context : " + JSON.stringify(context, null, 4));
         var params = response;

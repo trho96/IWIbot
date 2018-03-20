@@ -1,10 +1,5 @@
-# IWIbot - Serverless Chatbot   [![Build Status](https://travis-ci.org/HSKA-IWI-VSYS/IWIbot.svg?branch=master)](https://travis-ci.org/HSKA-IWI-VSYS/IWIbot)
-
-Link zum <a href="https://iwibot.mybluemix.net/" target="_blank">IWIbot</a>
-Link zur <a href="https://github.com/Nickkr/IWIbot/wiki" target="_blank">Dokumentation</a>
-
 # How to Setup Development Environment
-Assuming you already forked your version of the bot on GitHub and cloned your newly created fork to your development computer, the following steps will guide you to a fully functioning development environment.
+Assuming you already forked your verion of the bot on GitHub and cloned your repository to your development computer, the following steps will guide you to a fully functioning development environment.
 ## Required IBM Bluemix Services
 The first step is to create all necessary IBM Bluemix Services. To create a service, on your Bluemix Dashboard, click on "Ressource erstellen". Then select the following Services from the list and name them according to the naming convention listed below. Most of the services can be found in the "Watson" category.
 ### 1. Conversation:
@@ -20,8 +15,8 @@ The first step is to create all necessary IBM Bluemix Services. To create a serv
 ## Setup Travis CI
 The second step is to set up Travis CI to automatically build and deploy every commit that is made to your Fork to your own Instance of the IWIBot.
 ### Add the IWIBot to Travis
-To log in on the Travis CI website (https://travis-ci.org/) you can use your GitHub Credentials.
-After logging in, you should see a list of Repositories on the left side. Click on the IWIBot Repository with your username **\- not the  HSKA-IWI-VSYS/IWIbot one -** and activate it. Since there is already a travis.yml file in the repository that tells Travis what to do, it should already be possible to manually trigger a build. But it won't work yet. Since Travis will deploy to your own instance of Bluemix, it needs to know your credentials and a few other things.
+To log in on the Travis CI website (https://travis-ci.org/), you can use your GitHub Credentials.
+After logging in, you should see a list of Repositories on the left side. Click on **the IWIBot Repository with your username** and activate it. Since there is already a travis.yml file in the repository, the build button should already be active. But it won't work yet. Since Travis will deploy to your own instance of Bluemix, it needs to know your credentials and a few other things.
 ### Adding Environment Variables to Travis
 In order for Travis to be able to build and deploy your IWIBot, it needs some additional credentials and variables. These are saved as Environment Variables. To add a Environment Variable, go to the Settings of your Repository in Travis CI and Scroll down to the section *Environment Variables*. Now add the following Keys:
 + **WSK_API_CODE**: Click on APIs in the menu on the left. Then click on the API that is listed here. Click it again and in the following view, you will be able to copy the Code out of the URL.

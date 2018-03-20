@@ -107,6 +107,23 @@ function install() {
   # install zip in openwhisk
   wsk action create Meal --kind nodejs:6 action.zip --web true
   cd ../..
+  
+  echo "Deploy GET Navigation Action"
+  cd openwhisk/navigation
+  # preserve dev deps if any
+  mkdir -p .mod
+  mv node_modules .mod
+  # install only prod deps
+  npm install --production
+  # zip all but skip the dev deps
+  zip -rq action.zip package.json lib node_modules
+  # delete prod deps
+  rm -rf node_modules
+  # recover dev deps
+  mv .mod node_modules
+  # install zip in openwhisk
+  wsk action create Navigation --kind nodejs:6 action.zip --web true
+  cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -184,6 +201,7 @@ function uninstall() {
 
   echo "Removing actions..."
   wsk action delete Meal
+  wsk action delete Navigation
   wsk action delete Router
   wsk action delete Timetables
   wsk action delete Joke

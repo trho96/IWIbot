@@ -203,6 +203,27 @@ a {
 	margin-bottom: 30px;
 }
 
+.map {
+  	  position: absolute;
+	  height: 100%;
+	  width: 100%;
+}
+
+.mapcontainer {
+	position: fixed;
+	min-height: 40vh;
+	width: 100vw;
+	left:0;
+	right:0;
+	bottom:0;
+	display: none;
+}
+
+.chatcontainer {
+	overflow-y: auto;
+	max-height: calc (100vh - 150px);
+}
+
 @-webkit-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @-moz-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 @-ms-keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

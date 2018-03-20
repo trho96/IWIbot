@@ -46,13 +46,14 @@ chmod u+x wsk
 export PATH=$PATH:`pwd`
 
 # config and login in deploy scripts
+
 echo -e "${BLUE}"
 echo "===================================================================================================="
 echo "                         Configuring CLI from apihost and API key                                   "
 echo "===================================================================================================="
 echo -e "${NC}"
 
-wsk property set --apihost openwhisk.ng.bluemix.net --auth $OPENWHISK_KEY > /dev/null 2>&1
+wsk property set --apihost openwhisk.ng.bluemix.net --auth ${OPENWHISK_KEY} > /dev/null 2>&1
 wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
 
 # fake local.env (Configurations defined in travis-ci console)
