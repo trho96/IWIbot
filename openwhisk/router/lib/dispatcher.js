@@ -2,7 +2,7 @@ var openwhisk = require('openwhisk');
 
 function dispatch(response) {
     console.log("------Dispatcher started!------");
-    console.log('skip: ' + JSON.stringify(response));
+    console.log('skip: ' + JSON.stringify(response, null, 4));
     var context = response.context;
     var responseObject = {};
     if ("positionFlag" in response.output) {
@@ -10,14 +10,14 @@ function dispatch(response) {
 	}	
 	if ("actionToInvoke" in response.output) {
         console.log("Action to be invoked: " + response.output.actionToInvoke);
-        console.log("Context : " + JSON.stringify(context));
+        console.log("Context : " + JSON.stringify(context, null, 4));
         var params = response;
         //const name = response.intents[0].intent;
         var name = response.output.actionToInvoke;
         var blocking = true, result = true;
 
         return action(name, blocking, result, params).then(function (response) {
-            console.log("openwhisk response: " + JSON.stringify(response));
+            console.log("openwhisk response: " + JSON.stringify(response, null, 4));
             return new Promise(function (resolve) {
                 responseObject = response;
                 responseObject.context = context;
@@ -30,7 +30,7 @@ function dispatch(response) {
 
         return new Promise(function (resolve) {
             console.log("Skiped action");
-            console.log("ResponseObject " + JSON.stringify(responseObject));
+            console.log("ResponseObject " + JSON.stringify(responseObject, null, 4));
             resolve(responseObject);
         });
     }

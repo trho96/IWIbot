@@ -6,7 +6,7 @@ var locationEvents = require('./locationEvents');
 function main(params) {
 
     console.log("------Router started!------");
-    console.log('Router Action Params: ' + JSON.stringify(params));
+    console.log('Router Action Params: ' + JSON.stringify(params, null, 4));
 
     var semester;
     var courseOfStudies;

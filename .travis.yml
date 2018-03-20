@@ -34,7 +34,6 @@ script:
     - sed 's%$DEPLOY_HOSTNAME%'"\'${DEPLOY_HOSTNAME}\'"'%g' -i manifest.yml
     - ./travis_test.sh
     - export PATH=$PATH:`pwd`  # make openwhisk cli available here
-    - echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Undeploying wsk actions for testing~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     - ./deploy_test.sh --uninstall
     - ./deploy.sh --uninstall
     - ./deploy.sh --install
