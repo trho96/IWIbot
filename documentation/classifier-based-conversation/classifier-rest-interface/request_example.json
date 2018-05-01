@@ -1,0 +1,17 @@
+{
+    "sentence": "Ich interessiere mich für Wahlessen 1.",
+    "context" : {
+        "conversation_id": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+        "priorIntent": {
+            "intent": ""
+        },
+        "system":{
+            "dialog_stack":[],
+            "dialog_turn_counter":1,
+            "dialog_request_counter":1,
+            "_node_output_map":[]
+        }
+    },
+    "init": "Parameter übergeben durch Router, wird durchgereicht und nicht verwendet.",
+    "params": "Parameter übergeben durch Router, wird durchgereicht und nicht verwendet."
+}
