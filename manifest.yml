@@ -1,14 +1,15 @@
 ---
 applications:
-- path: .
-  memory: 512M
-  instances: 1
-  name: $DEPLOY_HOSTNAME
-  host: $DEPLOY_HOSTNAME
-  disk_quota: 1024M
-  domain: mybluemix.net
-  services:
-    - conversation
-    - text_to_speech
-    - speech_to_text
-    - weatherinsights
+  - path: .
+    memory: 512M
+    instances: 1
+    name: $DEPLOY_HOSTNAME
+    host: $DEPLOY_HOSTNAME
+    disk_quota: 1024M
+    domain: mybluemix.net
+    services:
+      - conversation
+      - text_to_speech
+      - speech_to_text
+      - weatherinsights
+      - cloudant_nosql_db
