@@ -12,4 +12,12 @@ applications:
       - text_to_speech
       - speech_to_text
       - weatherinsights
+  - path: ./classification
+    memory: 256M
+    instances: 1
+    name: classifier
+    host: classifier
+    disk_quota: 512M
+    domain: mybluemix.net
+    services:
       - cloudant_nosql_db
