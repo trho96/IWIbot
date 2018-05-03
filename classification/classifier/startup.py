@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 from .trainer import Trainer
-
 
 def populate_intents(client):
     intents = Trainer("intents", client)
