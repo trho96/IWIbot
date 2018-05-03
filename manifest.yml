@@ -15,8 +15,8 @@ applications:
   - path: ./classification
     memory: 256M
     instances: 1
-    name: classifier
-    host: classifier
+    name: IWIBotClassifier2
+    host: IWIBotClassifier2
     disk_quota: 512M
     domain: mybluemix.net
     services:
