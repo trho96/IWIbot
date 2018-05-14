@@ -1,0 +1,31 @@
+<div ng-controller="NodeEditorCtrl" style="width: 100%; height: 100%; position: relative;">
+    <div id="first_nodes_column" class="w3-cell w3-container" style="min-width: 450px; max-width: 450px; width: 450px; height: 100%">
+        <div class="" style="position: absolute;">Start</div>
+        <div class="w3-badge w3-green" style="position: absolute; width: 10px; height: 10px; top: 16px; left: 10px"></div>
+        <div class="w3-green" style="position: absolute; width: 6px; height: 100px; left: 15px; top: 16px;"></div>
+        <node></node>
+        <node2></node2>
+        <node2></node2>
+
+        <!-- first column add button -->
+        <div ng-click="nodeEditorService.addFirstColumnNode($event, this)" class="w3-button w3-badge w3-green" style="position: absolute; width: 28px; height: 25px; top: auto; left: 4px; top: 16px; z-index: 16;">
+            <b style="width: 6px; height: 6px; color: blue; position: absolute; top: -14px; font-size: 34px">&#43;</b>
+        </div>
+    </div>
+
+    <div id="second_nodes_column" class="w3-cell w3-container" style="width: 450px; height: 100%; position: relative; min-width: 450px; max-width: 450px;">
+        <node></node>
+        <node2></node2>
+        <node2></node2>
+        <node></node>
+    </div>
+
+    <div id="third_nodes_column" class="w3-cell w3-container" style="width: 450px; height: 100%; position: relative; min-width: 450px; max-width: 450px;">
+        <node></node>
+        <node2></node2>
+        <node2></node2>
+        <node2></node2>
+        <node></node>
+        <node2></node2>
+    </div>
+</div>

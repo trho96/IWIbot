@@ -3,6 +3,6 @@ applications:
  - name: IWIBotClassifier2
    host: IWIBotClassifier2
    random-route: false
-   memory: 128M
+   memory: 512M
    services:
      - cloudant_nosql_db

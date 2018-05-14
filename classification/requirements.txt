@@ -1,4 +1,6 @@
 Flask==0.12.2
+flask-cors
+#Flask-Triangle==0.5.3
 cloudant==2.8.1
 cf-deployment-tracker==1.0.4
 metrics-tracker-client>=1.1.1

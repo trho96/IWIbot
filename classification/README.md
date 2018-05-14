@@ -165,24 +165,45 @@ Der Classifier besteht aus drei Komponenten:, Trainer, Classifier und REST-Schni
 
 * **Classifier:** Gibt eine Prognose über den Intend den der Satz beinhaltet basierend auf dem gegebenen NN des Trainers.
 
-* **REST:** Ist die Schnittstelle des Classifiers nach außen Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entities als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
+* **REST:** Ist die Schnittstelle des Classifiers nach außen. Anwendungen können die Services die diese Schnittstelle bereitstellt aufrufen. Die Schnittstelle beinhaltet Endpunkte für das erhalten von Intends und Entities als auch Endpunkte zum modifizieren und trainieren von Neuronalen Netzen.
 
 ## REST Schnittstelle
 Endpunkte:
-* **/api/testIntent** Zum Testen des Classifiers durch die Web-Oberfläche.
+* **/api/v1/intents** Trainiert den Classifier für die Intents neu.  
+**HTTP-Methode:** POST
 
-* **/api/getIntent** Gibt den Intent eines Satzes zurück. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die einen Intent beinhaltet.
+* **/api/v1/intents** Sendet alle Intents an den Client. Enthält den Namen, die Beispielsätze und assoziierten Entitäten.  
+**HTTP-Methode:** GET
 
-* **/api/getEntity** Gibt eine Entity eines Satzes zurück basierend auf den mitgegebenen vorherigen Intent. Erwartet ein JSON im Request Body. Dieses JSON muss einen Satz beinhalten unter dem Schlüssel "sentence" und einen vorherigen Intent unter dem Pfad "/context/priorIntent/intent". Gibt als Response zurück den erhaltenen Request Body ohne den Satz und mit einer Classification, die eine Entity beinhaltet.
+* **/api/v1/intent** Fügt einen neuen Intent dem Trainingsdatensatz hinzu.  
+**HTTP-Methode:** PUT
 
-* **/api/addIntent** Fügt einen Satz mit dem entsprechenden Intent dem Classifier für die Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz und "intent" für den dazu gewollten Intent
+* **/api/v1/intent** Fügt Änderungen zu einem bestehenden Intent dem Trainingsdatensatz hinzu.  
+**HTTP-Methode:** PATCH
 
-* **/api/trainIntents** Trainiert den Classifier für die Intents neu.
+* **/api/v1/intent** Entfernt einen Intent aus dem Trainingsdatensatz.  
+**HTTP-Methode:** DELETE
 
-* **/api/addIntent** Fügt einen Satz mit der entsprechenden Entity zum entsprechenden Classifier für die Entities des übergebenen Intents hinzu. Erwartet ein JSOn mit dem Schlüssel "sentence" für den hinzuzufügenden Satz, "entity" für die gewollte Entity und "intent" für den entsprechenden Intent, zu dem diese Entity gehört.
+* **/api/v1/intent** Klassifiziert einen gegebenen Satz. Bei erfolgreichem Erkennen eines Intents wird geschaut ob es ein Entitäten-Netz dazu gibt. Wenn ja wird der Satz mit diesem Netz erneut klassifiziert und die Resultate an den Client gesendet.  
+**HTTP-Methode:** POST
 
-* **/api/trainEntity** Trainiert den Classifier für die Entities zu einem Intents neu. Erwartet ein JSON mit dem "intent" für den die Entities neu trainiert werden sollen.
+* **/api/v1/entities** Trainiert die Classifier für die Entitäten neu.  
+**HTTP-Methode:** POST
 
+* **/api/v1/entities** Sendet alle Entitäten an den Client. Enthält den Namen und die Beispielwörter.  
+**HTTP-Methode:** GET
+
+* **/api/v1/entity** Fügt eine neue Entität dem Trainingsdatensatz hinzu.  
+**HTTP-Methode:** PUT
+
+* **/api/v1/entity** Fügt Änderungen zu einer bestehenden Entität dem Trainingsdatensatz hinzu.   
+**HTTP-Methode:** PATCH
+
+* **/api/v1/entity** Entfernt eine Entität aus dem Trainingsdatensatz.  
+**HTTP-Methode:** DELETE
+
+* **/api/v1/train** Trainiert alle Netze neu.  
+**HTTP-Methode:** POST
 
 ##  Ausblick
 Im Rahmen des Projekts wurden auch schon der Grundstein gelegt den Classifier zu erweitern. Folgende Ideen sind Teilweise schon umgesetzt:

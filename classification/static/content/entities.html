@@ -1,0 +1,44 @@
+<div ng-controller="EntityCtrl" style="padding-top: 12px; padding-bottom: 12px">
+    <div class="w3-bar">
+        <input type="text" class="w3-border w3-bar-item" style="height: 40px; width: 150px;" name="name" ng-model="name">
+        <input type="text" class="w3-border w3-bar-item" style="margin-left: 12px; height: 40px; width: 600px;" name="sentence" ng-model="words">
+        <p class="w3-bar-item w3-border" style="width: 40px; height: 40px; margin-top: 0;" ng-click="entityService.addEntity({name:name, words:words})" onmouseenter="this.prevBackgroundColor = this.style.backgroundColor; this.style.backgroundColor = '#afceff        '" onmouseleave="this.style.backgroundColor = this.prevBackgroundColor;">
+            <b style="color: green; width: 40px; height: 100%; margin-left: auto; margin-right: auto;">&#10003;</b>
+        </p>
+    </div>
+    <table class="w3-table w3-striped w3-border w3-center">
+        <tr>
+            <th style="width: 150px"> {{ clOneName }}</th>
+            <th style="width: auto"> {{ clTwoName }} <span style="font-size: 10px">(Trennzeichen ist das Komma --> , <--)</span></th>
+            <th style="width: 40px"></th>
+        </tr>
+        <tr ng-repeat="entity in entityService.getEntities()">
+            <td ng-if="$odd" style="background-color:white"> {{ entity.name }} </td>
+            <td ng-if="$even" style="background-color:#f1f1f1"> {{ entity.name }} </td>
+            <td ng-if="$odd" class="w3-bar" style="background-color:white; width: 100%;" ng-dblclick="toggle($event, this)">
+                <div class="w3-bar-item w3-bar-block">
+                    <div style="display: none !important;"> {{ entity.words }} </div>
+                    <span class="w3-bar-item" style="padding: 0;" ng-repeat="word in entity.words"> {{ word }} </span>
+                </div>
+                <input class="w3-bar-item w3-border" style="display: none; width: calc(100% - 40px)" ng-model="words" />
+                <p class="w3-bar-item w3-border" ng-click="updateEntity($event, this)" style="width: 40px; height: 40px; margin-top: 0; display: none;" onmouseenter="this.prevBackgroundColor = this.style.backgroundColor; this.style.backgroundColor = '#afceff'" onmouseleave="this.style.backgroundColor = this.prevBackgroundColor;">
+                    <b style="color: green; width: 40px; height: 100%; margin-left: auto; margin-right: auto;">&#10003;</b>
+                </p>
+            </td>
+            <td ng-if="$even" class="w3-bar" style="background-color:#f1f1f1; width: 100%;" ng-dblclick="toggle($event, this)">
+                <div class="w3-bar-item w3-bar-block">
+                    <div style="display: none !important;"> {{ entity.words }} </div>
+                    <span class="w3-bar-item" style="padding: 0;" ng-repeat="word in entity.words"> {{ word }} </span>
+                </div>
+                <input class="w3-bar-item w3-border" style="display: none; width: calc(100% - 40px)" ng-model="words" />
+                <p class="w3-bar-item w3-border" ng-click="updateEntity($event, this)" style="width: 40px; height: 40px; margin-top: 0; display: none;" onmouseenter="this.prevBackgroundColor = this.style.backgroundColor; this.style.backgroundColor = '#afceff'" onmouseleave="this.style.backgroundColor = this.prevBackgroundColor;">
+                    <b style="color: green; width: 40px; height: 100%; margin-left: auto; margin-right: auto;">&#10003;</b>
+                </p>
+            </td>
+            <!-- for deletion of entity -->
+            <td class="w3-border" ng-click="forSure(entity)" onmouseenter="this.prevBackgroundColor = this.style.backgroundColor; this.style.backgroundColor = '#afceff'" onmouseleave="this.style.backgroundColor = this.prevBackgroundColor;">
+                <b style="color: red; width: 30px; height: auto; margin-left: auto; margin-right: auto;">&times;</b>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -56,7 +56,7 @@ def train(context, db, X, y, classes, words, hidden_neurons=10, alpha=1.0, epoch
         # how much did we miss the target value?
         layer_2_error = y - layer_2
 
-        if (j % 10000) == 0 and j > 5000:
+        if (j % 1000) == 0 and j > 500:
             # if this 10k iteration's error is greater than the last iteration, break out
             if np.mean(np.abs(layer_2_error)) < last_mean_error:
                 print("delta after " + str(j) + " iterations:" + str(np.mean(np.abs(layer_2_error))))
@@ -109,7 +109,7 @@ def train(context, db, X, y, classes, words, hidden_neurons=10, alpha=1.0, epoch
         data = dict([('_id', context), ('context', context),
                      ('synapse', synapse)])
         synapses = db.create_document(data)
-
+    
     # Check that the document exists in the database
     if synapses.exists():
         print("saved synapses to database")
@@ -123,7 +123,7 @@ def do_training(context, synapse_db, classes, words, _x, _y, show_details=True):
 
     start_time = time.time()
     train(context, synapse_db, X, y, classes, words, hidden_neurons=20, alpha=0.2,
-          epochs=100000, dropout=False, dropout_percent=0.2)
+          epochs=10000, dropout=False, dropout_percent=0.2)
     elapsed_time = time.time() - start_time
 
     if show_details:
@@ -164,35 +164,87 @@ class Trainer:
     #  * Adds a new example for an intent to the training set and retrains the neuronal network for the context and
     #  * persists it in the database
     #  */
-    def add_to_traingset_and_retrain(self, sentence, intend, trusted=False):
-        self.add_to_traingset(sentence, intend, trusted)
+    def add_intent_to_trainingset_and_retrain(self, sentences, name, entities, trusted=False):
+        self.add_intent_to_trainingset(sentences, name, entities, trusted)
         self.start_training()
 
     # /**
     #  * Adds a new example for an intent to the training set.
     #  */
-    def add_to_traingset(self, sentence, intend, trusted=False):
-        entry = dict([('class', intend), ('sentence', sentence)])
-        if entry not in self.training_data:
-            self.training_data.append(entry)
+    def add_intent_to_trainingset(self, sentence, name, entities, trusted=False):
+        # search for the intent in the training set...
+        for entry in self.training_data:
+            if entry['name'] == name:
+                # .. found! Let's check if we have...
+                if type(sentence) is list:
+                    # .. a list, or...
+                    for sen in sentence:
+                        if sen and sen != 'null' and sen not in entry['sentences']:
+                            entry['sentences'].append(sen)
+                else:
+                    # .. a string
+                    if sentence and sentence != 'null' and sentence not in entry['sentences']:
+                        entry['sentences'].append(sentence)
 
-            trainer = self.trainer_db[self.context]
-            trainer['training_data'] = self.training_data
-            trainer.save()
+                entry['entities'] = entities
+                # save in the db
+                trainer = self.trainer_db[self.context]
+                trainer['training_data'] = self.training_data
+                trainer.save()
+                return
+
+        # intent not in training_data (it's NEW!)
+        if type(sentence) is list:
+            entry = dict([('name', name), ('sentences', sentence), ('entities', entities)])
+        else:
+            entry = dict([('name', name), ('sentences', [sentence]), ('entities', entities)])
+
+        # the intent is new so append it to the training data and save to db
+        self.training_data.append(entry)
+
+        trainer = self.trainer_db[self.context]
+        trainer['training_data'] = self.training_data
+        trainer.save()
+
+    def update_intent_in_trainingset(self, sentences_to_add, sentences_to_remove, entities_to_add, entities_to_remove, name, trusted=False):
+        for intent in self.training_data:
+            if intent['name'] == name:
+                if len(sentences_to_add) > 0:
+                    # Sätze hinzufügen
+                    for sentence in sentences_to_add:
+                        intent['sentences'].append(sentence)
+                else:
+                    # Sätze entfernen
+                    for sentence in sentences_to_remove:
+                        intent['sentences'].remove(sentence)
+
+                if len(entities_to_add) > 0:
+                    # Entitäten hinzufügen
+                    for entity in entities_to_add:
+                        intent['entities'].append(entity)
+                else:
+                    # Entitäten entfernen
+                    for entity in entities_to_remove:
+                        intent['entities'].remove(entity)
+
+        trainer = self.trainer_db[self.context]
+        trainer['training_data'] = self.training_data
+        trainer.save()
 
     # /**
     #  * Removes an example for an intent from the training set and retrains the neuronal network for the context and
     #  * persists it in the database
     #  */
-    def remove_from_trainingset_and_retrain(self, sentence, intend, trusted=False):
-        self.remove_from_trainingset(sentence, intend, trusted)
+    def remove_intent_from_trainingset_and_retrain(self, sentences, name, entities, trusted=False):
+        self.remove_from_trainingset(sentences, name, entities, trusted)
         self.start_training()
 
     # /**
     #  * Removes an example for an intent from the training set.
     #  */
-    def remove_from_trainingset(self, sentence, intend, trusted=False):
-        entry = dict([('class', intend), ('sentence', sentence)])
+    def remove_intent_from_trainingset(self, sentences, name, entities, trusted=False):
+        entry = dict([('name', name), ('sentences', sentences), ('entities', entities)])
+        # die reihenfolge darf hier keine Rolle spielen!!
         if entry in self.training_data:
             self.training_data.remove(entry)
 
@@ -201,9 +253,114 @@ class Trainer:
             trainer.save()
 
     # /**
+    #  * Removes an example for an intent from the training set.
+    #  */
+    def remove_intent_from_trainingset_by_name(self, name, trusted=False):
+        for entry in self.training_data:
+            if entry['name'] == name:
+                self.training_data.remove(entry)
+
+                trainer = self.trainer_db[self.context]
+                trainer['training_data'] = self.training_data
+                trainer.save()
+                return
+
+    # /**
+    #  * Adds a new example for an Entity to the training set and retrains the neuronal network for the context and
+    #  * persists it in the database
+    #  */
+    def add_entity_to_trainingset_and_retrain(self, words, name, trusted=False):
+        self.add_entity_to_trainingset(words, name, trusted)
+        self.start_training(entities=True)
+
+    # /**
+    #  * Adds a new example for an Entity to the training set.
+    #  */
+    def add_entity_to_trainingset(self, word, name, trusted=False):
+        # search for the entity in the training set...
+        for entry in self.training_data:
+            if entry['name'] == name:
+                # .. found! Let's check if we have a list...
+                if type(word) is list:
+                    for wrd in word:
+                        if wrd and wrd != 'null' and wrd not in entry['words']:
+                            entry['words'].append(wrd)
+                # .. or a string
+                else:
+                    if word and word != 'null' and word not in entry['words']:
+                        entry['words'].append(word)
+
+                trainer = self.trainer_db[self.context]
+                trainer['training_data'] = self.training_data
+                trainer.save()
+                return
+
+        # entity not in training data (it's NEW!)
+        if type(word) is list:
+            entry = dict([('name', name), ('words', word)])
+        else:
+            entry = dict([('name', name), ('words', [word])])
+
+        # the entity is new so append it to the training data and save to db
+        self.training_data.append(entry)
+        trainer = self.trainer_db[self.context]
+        trainer['training_data'] = self.training_data
+        trainer.save()
+
+    def update_entity_in_trainingset(self, words_to_add, words_to_remove, name, trusted=False):
+        for entity in self.training_data:
+            if entity['name'] == name:
+                if len(words_to_add) > 0:
+                    # Wörter hinzufügen
+                    for word in words_to_add:
+                        entity['words'].append(word)
+                else:
+                    # Wörter entfernen
+                    for word in words_to_remove:
+                        entity['words'].remove(word)
+
+        trainer = self.trainer_db[self.context]
+        trainer['training_data'] = self.training_data
+        trainer.save()
+
+    # /**
+    #  * Removes an example for an intent from the training set and retrains the neuronal network for the context and
+    #  * persists it in the database
+    #  */
+    def remove_entitiy_from_trainingset_and_retrain(self, words, name, trusted=False):
+        self.remove_from_trainingset(words, name, trusted)
+        self.start_training(entities=True)
+
+    # /**
+    #  * Removes an example for an intent from the training set.
+    #  */
+    def remove_entity_from_trainingset(self, words, name, trusted=False):
+        entry = dict([('name', name), ('words', words)])
+        if entry in self.training_data:
+            self.training_data.remove(entry)
+
+            trainer = self.trainer_db[self.context]
+            trainer['training_data'] = self.training_data
+            trainer.save()
+
+    # /**
+    #  * Removes an example for an intent from the training set.
+    #  */
+    def remove_entity_from_trainingset_by_name(self, name, trusted=False):
+
+        for entry in self.training_data:
+            if entry['name'] == name:
+                self.training_data.remove(entry)
+
+                trainer = self.trainer_db[self.context]
+                trainer['training_data'] = self.training_data
+                trainer.save()
+                return
+
+    # /**
     #  * Trains the neuronal network for the context and persists it in the database
     #  */
-    def start_training(self):
+    def start_training(self, entities=False):
         stemmer = LancasterStemmer()
 
         print("%s sentences in training data" % len(self.training_data))
@@ -212,17 +369,33 @@ class Trainer:
         self.classes = []
         self.documents = []
         ignore_words = ['?']
+
         # loop through each sentence in our training data
         for pattern in self.training_data:
-            # tokenize each word in the sentence
-            w = nltk.word_tokenize(pattern['sentence'])
-            # add to our words list
-            self.words.extend(w)
-            # add to documents in our corpus
-            self.documents.append((w, pattern['class']))
+            if entities:
+                words = pattern['words']
+                # tokenize each word in the sentence
+                for object in words:
+                    w = nltk.word_tokenize(object)
+                    # add to our words list
+                    self.words.extend(w)
+
+                    # add to documents in our corpus
+                    self.documents.append((w, pattern['name']))
+            else:
+                words = pattern['sentences']
+                # tokenize each word in the sentence
+                for object in words:
+                    w = nltk.word_tokenize(object)
+                    # add to our words list
+                    self.words.extend(w)
+
+                    # add to documents in our corpus
+                    self.documents.append((w, pattern['name']))
+
             # add to our classes list
-            if pattern['class'] not in self.classes:
-                self.classes.append(pattern['class'])
+            if pattern['name'] not in self.classes:
+                self.classes.append(pattern['name'])
 
         # stem and lower each word and remove duplicates
         self.words = [stemmer.stem(w.lower()) for w in self.words if w not in ignore_words]
@@ -232,7 +405,7 @@ class Trainer:
         self.classes = list(set(self.classes))
 
         print(len(self.documents), "documents")
-        print(len(self.classes), "classes", self.classes)
+        print(len(self.classes), "names", self.classes)
         print(len(self.words), "unique stemmed words", self.words)
 
         # create our training data
@@ -259,15 +432,8 @@ class Trainer:
             output_row[self.classes.index(self.doc[1])] = 1
             output.append(output_row)
 
-        # sample training/output
-        i = 0
-        w = self.documents[i][0]
-        print([stemmer.stem(word.lower()) for word in w])
-        print(training[i])
-        print(output[i])
-
         ###
         # play
         ###
-
-        do_training(self.context, self.synapse_db, self.classes, self.words, training, output)
+        if self.classes and self.words and training and output:
+            do_training(self.context, self.synapse_db, self.classes, self.words, training, output)

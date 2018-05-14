@@ -1,6 +1,8 @@
 import nltk
+import datetime
 import numpy as np
 from nltk.stem.lancaster import LancasterStemmer
+from cloudant.document import Document
 
 
 # compute sigmoid nonlinearity
@@ -74,6 +76,22 @@ class Classifier:
         self.synapse_db = client["synapse"]
         if not self.synapse_db.exists():
             self.synapse_db = client.create_database('synapse', throw_on_exists=False)
+
+        now = datetime.datetime.now()
+
+        # Create a document using the Database API
+        if not Document(self.synapse_db, context).exists():
+            # persist synapses
+            synapse = {'synapse0': [], 'synapse1': [],
+                       'datetime': now.strftime("%Y-%m-%d %H:%M"),
+                       'words': [],
+                       'classes': []
+                       }
+
+            data = dict([('_id', context), ('context', context),
+                         ('synapse', synapse)])
+            self.synapse_db.create_document(data)
+
         self.load()
 
     # /**
