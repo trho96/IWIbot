@@ -42,7 +42,7 @@ echo "==========================================================================
 echo -e "${NC}"
 
 curl -o bluemixInstaller.tar.gz $LINK
-tar -xvzf bluemixInstaller
+tar -xvzf bluemixInstaller.tar.gz
 chmod u+x install_bluemix_cli
 ./install_bluemix_cli
 chmod u+x bx
