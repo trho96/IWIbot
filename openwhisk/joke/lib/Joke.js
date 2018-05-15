@@ -15,7 +15,7 @@ function main() {
 
                 body = JSON.parse(body);
                 jokeResponse.payload = body.value.joke;
-                jokeResponse.language = voice;
+                jokeResponse.language = language;
                 resolve(jokeResponse);
 
             }
