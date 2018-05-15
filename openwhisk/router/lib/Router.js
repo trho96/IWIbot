@@ -17,7 +17,7 @@ function main(params) {
     if ("onlyPositionDataFlag" in params) {
         var positionObj = {latitude: params.position[1],
                             longitude: params.position[0]
-        }
+        };
 
         return locationEvents.getEventsForPosition(positionObj).then(function (response) {
             console.log("Responding... " + JSON.stringify(response));

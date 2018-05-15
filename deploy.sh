@@ -37,19 +37,19 @@ function info() {
   set -e
   echo -e "\n"
   echo -e "URL for Action 'Joke':"
-  wsk action get Joke --url
+  bx wsk action get Joke --url
   echo -e "\n"
   echo -e "URL for Action 'Meal':"
-  wsk action get Meal --url
+  bx wsk action get Meal --url
   echo -e "\n"
   echo -e "URL for Action 'Router':"
-  wsk action get Router --url
+  bx wsk action get Router --url
   echo -e "\n"
   echo -e "URL for Action 'Timetables':"
-  wsk action get Timetables --url
+  bx wsk action get Timetables --url
   echo -e "\n"
   echo -e "URL for Action 'Weather':"
-  wsk action get Weather --url
+  bx wsk action get Weather --url
   echo -e "\n"
 }
 
@@ -65,123 +65,51 @@ function install() {
   echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
 
   # Login requiered to provision the API Gateway
-  wsk bluemix login \
-    --user $BLUEMIX_USER \
-    --password $BLUEMIX_PASS \
-    --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
+  #wsk bluemix login \
+   # --user $BLUEMIX_USER \
+    #--password $BLUEMIX_PASS \
+    #--namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
-  # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
-  # install only prod deps only=production
-  npm install --production  > /dev/null
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Joke --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
-  # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
-  # install only prod deps
-  npm install --production  > /dev/null
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Meal --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   cd ../..
   
   echo "Deploy GET Navigation Action"
   cd openwhisk/navigation
-  # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
-  # install only prod deps
-  npm install --production
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Navigation --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/router
-  # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
-  # install only prod deps
-  npm install --production  > /dev/null
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Router --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   #wsk api create -n "$API_NAME" $API_BASE_PATH $API_PATH /router post Router --response-type http
-  wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
+  bx wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~ 4/5) Deploy Timetables Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/timetables
-  # preserve dev deps if any
-  mkdir .mod
-  mv node_modules .mod
-  # install only prod deps
-  npm install --production  > /dev/null
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Timetables --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/weather
-  # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
-  # install only prod deps
-  npm install --production  > /dev/null
-  # zip all but skip the dev deps
-  zip -rq action.zip package.json lib node_modules
-  # delete prod deps
-  rm -rf node_modules
-  # recover dev deps
-  mv .mod node_modules
-  # install zip in openwhisk
-  wsk action create Weather --kind nodejs:6 action.zip --web true
+  ./deploy.sh
   cd ../..
 
   echo -e "${GREEN}"
@@ -200,12 +128,12 @@ function uninstall() {
   wsk api delete $API_BASE_PATH
 
   echo "Removing actions..."
-  wsk action delete Meal
-  wsk action delete Navigation
-  wsk action delete Router
-  wsk action delete Timetables
-  wsk action delete Joke
-  wsk action delete Weather
+  bx wsk action delete Meal
+  bx wsk action delete Navigation
+  bx wsk action delete Router
+  bx wsk action delete Timetables
+  bx wsk action delete Joke
+  bx wsk action delete Weather
 
   echo -e "${GREEN}"
   echo -e "Undeployment Complete"

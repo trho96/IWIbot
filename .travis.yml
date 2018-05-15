@@ -18,7 +18,7 @@ notifications:
   #- npm install source-map
 script:
     - chmod +x ./travis_test.sh
-    - chmod +x ./deploy_test.sh
+    #- chmod +x ./deploy_test.sh
     - chmod +x ./deploy.sh
     - echo "Bundle selected Javascript files"
     - npm run-script browserify
@@ -34,7 +34,7 @@ script:
     - sed 's%$DEPLOY_HOSTNAME%'"\'${DEPLOY_HOSTNAME}\'"'%g' -i manifest.yml
     - ./travis_test.sh
     - export PATH=$PATH:`pwd`  # make openwhisk cli available here
-    - ./deploy_test.sh --uninstall
+    #- ./deploy_test.sh --uninstall
     - ./deploy.sh --uninstall
     - ./deploy.sh --install
 deploy:
