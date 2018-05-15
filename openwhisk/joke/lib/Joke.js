@@ -1,6 +1,6 @@
 var request = require('request');
 var url = "http://api.icndb.com/jokes/random";
-var voice = "en-US_MichaelVoice";
+var language = "en-US";
 var jokeResponse = {};
 
 function main() {
@@ -8,14 +8,14 @@ function main() {
     return new Promise(function (resolve, reject) {
 
         request({
-            url: url,
+            url: url
         }, function (error, response, body) {
 
             if (!error && response.statusCode === 200) {
 
                 body = JSON.parse(body);
                 jokeResponse.payload = body.value.joke;
-                jokeResponse.voice = voice;
+                jokeResponse.language = voice;
                 resolve(jokeResponse);
 
             }
