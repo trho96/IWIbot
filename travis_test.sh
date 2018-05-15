@@ -41,7 +41,7 @@ echo "                         Downloading OpenWhisk CLI from '$LINK'...        
 echo "===================================================================================================="
 echo -e "${NC}"
 
-curl -o bluemixInstaller $LINK
+curl -o bluemixInstaller.tar.gz $LINK
 tar -xvzf bluemixInstaller
 chmod u+x install_bluemix_cli
 ./install_bluemix_cli
