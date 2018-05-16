@@ -64,11 +64,6 @@ function install() {
   echo -e "Deploying OpenWhisk actions, triggers, and rules for IWIBot"
   echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
 
-  # Login requiered to provision the API Gateway
-  #wsk bluemix login \
-   # --user $BLUEMIX_USER \
-    #--password $BLUEMIX_PASS \
-    #--namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -125,7 +120,7 @@ function uninstall() {
   echo -e "${NC}"
 
   echo "Removing API actions..."
-  wsk api delete $API_BASE_PATH
+  bx wsk api delete $API_BASE_PATH
 
   echo "Removing actions..."
   bx wsk action delete Meal

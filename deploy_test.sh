@@ -46,12 +46,6 @@ function install() {
 
   echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
 
-  # Login requiered to provision the API Gateway
-  wsk bluemix login \
-    --user $BLUEMIX_USER \
-    --password $BLUEMIX_PASS \
-    --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
@@ -68,8 +62,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create testJoke --kind nodejs:6 action.zip --web true
-  wsk api create -n "$API_NAME" $API_BASE_PATH /joke get testJoke --response-type json
+  bx wsk action create testJoke --kind nodejs:6 action.zip --web true
+  bx wsk api create -n "$API_NAME" $API_BASE_PATH /joke get testJoke --response-type json
   cd ../..
 
   echo -e "${BLUE}"
@@ -88,8 +82,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create testMeal --kind nodejs:6 action.zip --web true
-  wsk api create $API_BASE_PATH /meal get testMeal --response-type json
+  bx wsk action create testMeal --kind nodejs:6 action.zip --web true
+  bx wsk api create $API_BASE_PATH /meal get testMeal --response-type json
   cd ../..
 
   echo -e "${BLUE}"
@@ -108,8 +102,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create testTimetables --kind nodejs:6 action.zip --web true
-  wsk api create $API_BASE_PATH /timetables post testTimetables --response-type json
+  bx wsk action create testTimetables --kind nodejs:6 action.zip --web true
+  bx wsk api create $API_BASE_PATH /timetables post testTimetables --response-type json
   cd ../..
 
   echo -e "${BLUE}"
@@ -117,8 +111,6 @@ function install() {
   echo -e "${NC}"
   # save router sources
   cd openwhisk/weather
-  cp ./lib/Weather.js ./lib/Weather.js.org
-  sed -i -e 's%$WEATHER_COMPANY_URL%'"\'${WEATHER_COMPANY_URL}\'"'%g' ./lib/Weather.js
   # preserve dev deps if any
   mkdir -p .mod
   mv node_modules .mod
@@ -131,11 +123,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create testWeather --kind nodejs:6 action.zip --web true
-  wsk api create $API_BASE_PATH /weather post testWeather --response-type json
-  #recover router source
-  cp ./lib/Weather.js ./lib/Weather.js.trans
-  mv ./lib/Weather.js.org ./lib/Weather.js
+  bx wsk action create testWeather --kind nodejs:6 action.zip --web true
+  bx wsk api create $API_BASE_PATH /weather post testWeather --response-type json
   cd ../..
 
   echo -e "${BLUE}"
@@ -143,11 +132,6 @@ function install() {
   echo -e "${NC}"
   # save router sources
   cd openwhisk/router
-  cp ./lib/conversation.js ./lib/conversation.js.org
-  # prepare router sources
-  sed -i -e 's/$CONVERSATION_USERNAME/'"\'${CONVERSATION_USERNAME}\'"'/g' ./lib/conversation.js
-  sed -i -e 's/$CONVERSATION_PASSWORD/'"\'${CONVERSATION_PASSWORD}\'"'/g' ./lib/conversation.js
-  sed -i -e 's/$CONVERSATION_WORKSPACE_ID/'"\'${CONVERSATION_WORKSPACE_ID}\'"'/g' ./lib/conversation.js
   # preserve dev deps if any
   mkdir -p .mod
   mv node_modules .mod
@@ -160,11 +144,8 @@ function install() {
   # recover dev deps
   mv .mod node_modules
   # install zip in openwhisk
-  wsk action create testRouter --kind nodejs:6 action.zip --web true
-  wsk api create $API_BASE_PATH /router post testRouter --response-type http
-  #recover router source
-  cp ./lib/conversation.js ./lib/conversation.js.trans
-  mv ./lib/conversation.js.org ./lib/conversation.js
+  bx wsk action create testRouter --kind nodejs:6 action.zip --web true
+  bx wsk api create $API_BASE_PATH /router post testRouter --response-type http
   cd ../..
 
   echo -e "${GREEN}"
@@ -183,11 +164,11 @@ function uninstall() {
   wsk api delete $API_BASE_PATH
 
   echo "Removing actions..."
-  wsk action delete testMeal
-  wsk action delete testRouter
-  wsk action delete testTimetables
-  wsk action delete testJoke
-  wsk action delete testWeather
+  bx wsk action delete testMeal
+  bx wsk action delete testRouter
+  bx wsk action delete testTimetables
+  bx wsk action delete testJoke
+  bx wsk action delete testWeather
 
   echo -e "${GREEN}"
   echo -e "Undeployment Complete"

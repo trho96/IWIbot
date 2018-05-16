@@ -42,7 +42,6 @@ echo "==========================================================================
 echo -e "${NC}"
 
 curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
-chmod u+x bx
 bx plugin install Cloud-Functions -r Bluemix
 
 export PATH=$PATH:`pwd`
