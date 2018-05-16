@@ -161,7 +161,7 @@ function uninstall() {
   echo -e "${NC}"
 
   echo "Removing API actions..."
-  wsk api delete $API_BASE_PATH
+  bx wsk api delete $API_BASE_PATH
 
   echo "Removing actions..."
   bx wsk action delete testMeal

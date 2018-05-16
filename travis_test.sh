@@ -56,7 +56,7 @@ echo -e "${NC}"
 
 #wsk property set --apihost openwhisk.ng.bluemix.net --auth ${OPENWHISK_KEY} > /dev/null 2>&1
 #wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-bx login -u $BLUEMIX_USER -p $BLUEMIX_PASS -a https://api.ng.bluemix.net
+bx login -u $BLUEMIX_USER -p $BLUEMIX_PASS -a https://api.ng.bluemix.net -c $BLUEMIX_ACCOUNT_ID
 bx target -o ${BLUEMIX_ORGANIZATION} -s ${BLUEMIX_SPACE}
 bx wsk --auth ${OPENWHISK_KEY}
 # fake local.env (Configurations defined in travis-ci console)
