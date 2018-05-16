@@ -41,10 +41,7 @@ echo "                         Downloading OpenWhisk CLI from '$LINK'...        
 echo "===================================================================================================="
 echo -e "${NC}"
 
-curl -o bluemixInstaller.tar.gz $LINK
-tar -xvzf bluemixInstaller.tar.gz
-chmod u+x install_bluemix_cli
-./install_bluemix_cli
+curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
 chmod u+x bx
 bx plugin install Cloud-Functions -r Bluemix
 
