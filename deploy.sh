@@ -69,26 +69,26 @@ function install() {
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
-  ./deploy.sh
+  bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
-  ./deploy.sh
+  bash deploy.sh
   cd ../..
   
   echo "Deploy GET Navigation Action"
   cd openwhisk/navigation
-  ./deploy.sh
+  bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/router
-  ./deploy.sh
+  bash deploy.sh
   #wsk api create -n "$API_NAME" $API_BASE_PATH $API_PATH /router post Router --response-type http
   bx wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
   cd ../..
@@ -97,14 +97,14 @@ function install() {
   echo "~~~~~~~~~~~~~~~~~~~~~~ 4/5) Deploy Timetables Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/timetables
-  ./deploy.sh
+  bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/weather
-  ./deploy.sh
+  bash deploy.sh
   cd ../..
 
   echo -e "${GREEN}"
