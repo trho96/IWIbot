@@ -111,7 +111,7 @@ echo -e "${NC}"
 
 cd ../router
 npm install
-npm test
+#npm test
 
 cd ../..
 
