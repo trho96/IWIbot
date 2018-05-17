@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod
@@ -13,3 +12,4 @@ rm -rf node_modules
 mv .mod node_modules
 # install zip in openwhisk
 bx wsk action update Weather --kind nodejs:6 action.zip --web true
+bx wsk service bind weatherinsights Weather

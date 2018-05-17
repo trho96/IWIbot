@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod

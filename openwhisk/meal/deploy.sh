@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 #preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod
