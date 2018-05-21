@@ -62,7 +62,7 @@ elif os.path.isfile('vcap-local.json'):
         creds = vcap['services']['cloudantNoSQLDB'][0]['credentials']
         user = creds['username']
         password = creds['password']
-        url = 'https://' + creds['host']
+        url = 'http://' + creds['host']
         #client = Cloudant(user, password, url=url, connect=True, auto_renew=True)
         client = CouchDB(user, password, url=url, connect=True, auto_renew=True)
         client.create_database('trainer', throw_on_exists=False)
