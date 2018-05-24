@@ -13,8 +13,6 @@ function main(params) {
     var semester;
     var courseOfStudies;
     var position;
-    var username;
-    var password;
 
     if ("onlyPositionDataFlag" in params) {
         var positionObj = {

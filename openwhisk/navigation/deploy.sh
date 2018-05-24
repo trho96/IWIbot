@@ -11,4 +11,4 @@ rm -rf node_modules
 # recover dev deps
 mv .mod node_modules
 # install zip in openwhisk
-bx wsk action create Navigation --kind nodejs:6 action.zip --web true
+bx wsk action update Navigation --kind nodejs:6 action.zip --web true

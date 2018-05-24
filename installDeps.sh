@@ -11,9 +11,15 @@ npm install > /dev/null
 cd ../router
 rm -rf node_modules
 npm install > /dev/null
-cd ../timetables
+cd ../timetable
 rm -rf node_modules
 npm install > /dev/null
 cd ../weather
+rm -rf node_modules
+npm install > /dev/null
+cd ../login
+rm -rf node_modules
+npm install > /dev/null
+cd ../semester
 rm -rf node_modules
 npm install > /dev/null

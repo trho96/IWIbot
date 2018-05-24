@@ -31,89 +31,88 @@ echo "                                | | | |/\| | | |______| ___ \/ _ \| __|   
 echo "                               _| |_\  /\  /_| |_     | |_/ / (_) | |_                              "
 echo "                               \___/ \/  \/ \___/     \____/ \___/ \__|                             "
 echo "                                                                                                    "
-echo -e "${NC}"
-
-# install wsk cli
-LINK=https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64
-echo -e "${BLUE}"
 echo "===================================================================================================="
-echo "                         Downloading OpenWhisk CLI from '$LINK'...                                  "
+echo "                              Configuring CLI from apihost and API key                              "
 echo "===================================================================================================="
 echo -e "${NC}"
 
-curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
-bx plugin install Cloud-Functions -r Bluemix
 
-export PATH=$PATH:`pwd`
-
-# config and login in deploy scripts
-
-echo -e "${BLUE}"
-echo "===================================================================================================="
-echo "                         Configuring CLI from apihost and API key                                   "
-echo "===================================================================================================="
-echo -e "${NC}"
-
-#wsk property set --apihost openwhisk.ng.bluemix.net --auth ${OPENWHISK_KEY} > /dev/null 2>&1
-#wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-bx login -u $BLUEMIX_USER -p $BLUEMIX_PASS -a https://api.ng.bluemix.net -c $BLUEMIX_ACCOUNT_ID
-bx target -o ${BLUEMIX_ORGANIZATION} -s ${BLUEMIX_SPACE}
-bx wsk --auth ${OPENWHISK_KEY}
 # fake local.env (Configurations defined in travis-ci console)
 touch local.env
 
+# Remove Deployments that are left over by interrupted Test-Run
+./deploy_test.sh --uninstall
 # Deploy WSK Test-Actions and Actions for Router Test
 ./deploy_test.sh --install
-#./deploy.sh --install
 
 
 echo -e "${BLUE}"
 echo "===================================================================================================="
-echo "                                    Running tests                                                   "
+echo "                                           Running tests                                            "
 echo "===================================================================================================="
 echo -e "${NC}"
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Running test joke ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Running Joke Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
 cd openwhisk/joke
 npm install
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Running test meal ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Running Meal Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
 cd ../meal
 npm install
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Running test timetables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Running Navigation Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
-cd ../timetables
+cd ../navigation
 npm install
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/5) Running test weather ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Running Router Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
+cd ../router
+npm install
+npm test
 
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Running Timetable Tests~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
+cd ../timetable
+npm install
+npm test
+
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Running Weather Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
 cd ../weather
 npm install
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Running test router ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Running Login Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 
-cd ../router
+cd ../login
 npm install
-#npm test
+npm test
+
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Running Semester Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
+
+cd ../semester
+npm install
+npm test
 
 cd ../..
+
+./deploy_test.sh --uninstall
 
 echo -e "${GREEN}"
 echo -e "______________________       __    ___    ___    __        ___       ___       _____________________"

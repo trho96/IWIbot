@@ -3,7 +3,7 @@
   "description": "IWIBot module that returns timetables from the HsKA-Api",
   "license": "Apache-2.0",
   "version": "1.0.0",
-  "main": "lib/Timetables.js",
+  "main": "lib/Timetable.js",
   "scripts": {
     "test": "grunt nodeunit"
   },

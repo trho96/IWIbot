@@ -17,11 +17,6 @@
 # Load configuration variables
 source local.env
 
-# API
-export API_NAME="iwibot API"
-export API_BASE_PATH="/iwibot"
-export API_PATH="/iwibot"
-
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -46,15 +41,15 @@ function info() {
   bx wsk action get Router --url
   echo -e "\n"
   echo -e "URL for Action 'Timetables':"
-  bx wsk action get Timetables --url
+  bx wsk action get Timetable --url
   echo -e "\n"
   echo -e "URL for Action 'Weather':"
   bx wsk action get Weather --url
   echo -e "\n"
-  echo -e "URL for Action 'Weather':"
+  echo -e "URL for Action 'Login':"
   bx wsk action get Login --url
   echo -e "\n"
-  echo -e "URL for Action 'Weather':"
+  echo -e "URL for Action 'Semester':"
   bx wsk action get Semester --url
   echo -e "\n"
 }
@@ -68,18 +63,6 @@ function install() {
   echo -e "${NC}"
   set -e
   echo -e "Deploying OpenWhisk actions, triggers, and rules for IWIBot"
-  echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
-
-  # Login requiered to provision the API Gateway
-  bx login \
-    --user $BLUEMIX_USER \
-    --password $BLUEMIX_PASS \
-    --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-
-  # target org in cf
-  bx target -cf $BLUEMIX_ORGANIZAZION
-  # install wsk plugin for the bluemix cli
-  #bx plugin install Cloud-Functions -r Bluemix
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -99,6 +82,7 @@ function install() {
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Deploy Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/navigation
+  bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
@@ -106,14 +90,13 @@ function install() {
   echo -e "${NC}"
   cd openwhisk/router
   bash deploy.sh
-  #wsk api create -n "$API_NAME" $API_BASE_PATH $API_PATH /router post Router --response-type http
-  bx wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
+  bx wsk api create -n "iwibot API" $API_PATH /router post Router --response-type http
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~ 5/8) Deploy Timetables Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~ 5/8) Deploy Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/timetables
+  cd openwhisk/timetable
   bash deploy.sh
   cd ../..
 
@@ -128,6 +111,7 @@ function install() {
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Deploy Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/login
+  bash deploy.sh
   cd ../..
 
 
@@ -135,6 +119,7 @@ function install() {
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Deploy Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/semester
+  bash deploy.sh
   cd ../..
 
   echo -e "${GREEN}"
@@ -150,13 +135,13 @@ function uninstall() {
   echo -e "${NC}"
 
   echo "Removing API actions..."
-  bx wsk api delete $API_BASE_PATH
+  bx wsk api delete $API_PATH
 
   echo "Removing actions..."
   bx wsk action delete Meal
   bx wsk action delete Navigation
   bx wsk action delete Router
-  bx wsk action delete Timetables
+  bx wsk action delete Timetable
   bx wsk action delete Joke
   bx wsk action delete Weather
   bx wsk action delete Login
@@ -168,14 +153,12 @@ function uninstall() {
 }
 
 function showenv() {
+  echo -e API_PATH="$API_PATH"
+  echo -e API_ENDPOINT="$API_ENDPOINT"
+  echo -e API_KEY="$API_KEY"
+  echo -e BLUEMIX_ACCOUNT_ID="$BLUEMIX_ACCOUNT_ID"
   echo -e BLUEMIX_ORGANIZATION="$BLUEMIX_ORGANIZATION"
-  echo -e BLUEMIX_PASS="$BLUEMIX_PASS"
   echo -e BLUEMIX_SPACE="$BLUEMIX_SPACE"
-  echo -e BLUEMIX_USER="$BLUEMIX_USER"
-  echo -e CONVERSATION_PASSWORD="$CONVERSATION_PASSWORD"
-  echo -e CONVERSATION_USERNAME="$CONVERSATION_USERNAME"
-  echo -e OPENWHISK_KEY="$OPENWHISK_KEY"
-  echo -e WEATHER_COMPANY_URL="$WEATHER_COMPANY_URL"
 }
 
 case "$1" in

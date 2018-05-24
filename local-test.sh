@@ -16,21 +16,16 @@ echo "                               \___/ \/  \/ \___/     \____/ \___/ \__|   
 echo "                                                                                                    "
 echo -e "${NC}"
 
+# Load configuration
+source local-test.env
+
 # Remove Deployments that are left over by interrupted Test-Run
 ./deploy_test.sh --uninstall
 ./deploy_test.sh --install
 
 echo "Find and set API URL"
-export API_URL=`wsk api list $API_BASE_PATH $API_PATH | grep iwibot | awk '{print $5}'`
+export API_URL=`bx wsk api list | grep iwibotTest | awk '{print $5}'`
 echo "API-URL:......................${API_URL}"
-
-source local.env
-export WSK_API_CODE
-echo "Openwhisk-Auth-Key:...........$WSK_API_CODE"
-export CONVERSATION_WORKSPACE_ID
-echo "Conversation-Workspace-ID:....$CONVERSATION_WORKSPACE_ID"
-export CONVERSATION_ID
-echo "Conversation-ID:..............$CONVERSATION_ID"
 
 echo -e "${BLUE}"
 echo "===================================================================================================="
@@ -39,52 +34,70 @@ echo "==========================================================================
 echo -e "${NC}"
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Running test joke ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Running Joke Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
 cd openwhisk/joke
 rm -rf node_modules
 npm install > /dev/null
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Running test meal ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Running Meal Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
 cd ../meal
 rm -rf node_modules
 npm install > /dev/null
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Running test router ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Running Navigation Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-
-cd ../router
-rm -rf node_modules
-npm install > /dev/null
-# npm test
-
-echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/5) Running test timetables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo -e "${NC}"
-
-cd ../timetables
+cd ../navigation
 rm -rf node_modules
 npm install > /dev/null
 npm test
 
 echo -e "${BLUE}"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Running test weather ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Running Router Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
+cd ../router
+rm -rf node_modules
+npm install > /dev/null
+npm test
 
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Running Timetable Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
+cd ../timetable
+rm -rf node_modules
+npm install > /dev/null
+npm test
+
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Running Weather Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
 cd ../weather
 rm -rf node_modules
 npm install > /dev/null
 npm test
 
-cd ../..
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Running Login Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
+cd ../login
+rm -rf node_modules
+npm install > /dev/null
+npm test
 
+echo -e "${BLUE}"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Running Semester Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo -e "${NC}"
+cd ../semester
+rm -rf node_modules
+npm install > /dev/null
+npm test
+
+cd ../..
 ./deploy_test.sh --uninstall
 
 echo -e "${GREEN}"

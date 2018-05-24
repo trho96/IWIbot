@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod
@@ -11,5 +11,5 @@ rm -rf node_modules
 # recover dev deps
 mv .mod node_modules
 # install zip in openwhisk
-bx wsk action create testMeal --kind nodejs:6 action.zip --web true
-bx wsk api create $API_BASE_PATH /meal get testMeal --response-type json
+bx wsk action update testMeal --kind nodejs:6 action.zip --web true
+bx wsk api create $API_PATH /meal get testMeal --response-type json

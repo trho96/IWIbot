@@ -1,6 +1,3 @@
-
-local.env
-action.zip
 *.js-e
 *.js.trans
 
@@ -119,6 +116,7 @@ typings/
 ### WebStorm+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+.idea/
 
 # User-specific stuff:
 .idea/**/workspace.xml
@@ -174,8 +172,6 @@ fabric.properties
 # Ignores the whole idea folder
 # See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
-.idea/
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -198,6 +194,9 @@ $RECYCLE.BIN/
 *.lnk
 
 # Conversation Classifier Synapses
-synapses.json
+classification/classifier/synapses.json
+
+local-test.env
+local.env
 
 # End of https://www.gitignore.io/api/node,macos,grunt,linux,windows,webstorm+all

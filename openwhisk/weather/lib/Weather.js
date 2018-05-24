@@ -21,7 +21,7 @@ function main(params) {
 
     var weather_host = params.__bx_creds.weatherinsights.url;
 
-        console.log(params);
+    console.log(params);
     if ('__ow_body' in params) { // For testing this action!!
         params = JSON.parse(params.__ow_body);
     }

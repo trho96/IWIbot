@@ -6,37 +6,32 @@ cache:
   directories:
     - "node_modules"
     - "openwhisk/joke/node_modules"
-    - "openwhisk/navigation/node_modules"
     - "openwhisk/meal/node_modules"
+    - "openwhisk/navigation/node_modules"
     - "openwhisk/router/node_modules"
-    - "openwhisk/timetables/node_modules"
+    - "openwhisk/timetable/node_modules"
     - "openwhisk/weather/node_modules"
+    - "openwhisk/login/node_modules"
+    - "openwhisk/semester/node_modules"
+    - "Bluemix_CLI"
 notifications:
   email: false
-#before_script:
-  #- npm install
-  #- npm install source-map
+before_script:
+    - echo "install bluemix cli"
+    - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
+    - chmod -R u+x ./Bluemix_CLI/bin
+    - bash Bluemix_CLI/install_bluemix_cli
+    - echo "login to the bluemix cli"
+    - bash bx_authenticate.sh
+    #- npm install source-map
 script:
-    - chmod +x ./travis_test.sh
-    - chmod +x ./deploy_test.sh
-    - chmod +x ./deploy.sh
     - echo "Bundle selected Javascript files"
     - npm run-script browserify
-    - echo "Uglify Bundle.js"
+    - echo "Minify Bundle.js"
     - grunt uglify
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/conversation.js
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/bundle.js
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/bundle.min.js
-    - sed 's/$CONVERSATION_USERNAME/'"\'${CONVERSATION_USERNAME}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's/$CONVERSATION_PASSWORD/'"\'${CONVERSATION_PASSWORD}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's/$CONVERSATION_WORKSPACE_ID/'"\'${CONVERSATION_WORKSPACE_ID}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's%$WEATHER_COMPANY_URL%'"\'${WEATHER_COMPANY_URL}\'"'%g' -i openwhisk/weather/lib/Weather.js
-    - sed 's%$DEPLOY_HOSTNAME%'"\'${DEPLOY_HOSTNAME}\'"'%g' -i manifest.yml
-    - ./travis_test.sh
-    - export PATH=$PATH:`pwd`  # make openwhisk cli available here
-    - ./deploy_test.sh --uninstall
-    - ./deploy.sh --uninstall
-    - ./deploy.sh --install
+    - bash travis_test.sh
+    - bash deploy.sh --uninstall
+    - bash deploy.sh --install
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true

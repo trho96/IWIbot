@@ -15,11 +15,7 @@
 # limitations under the License.
 
 # Load configuration variables
-source local.env
-
-# API
-export API_NAME="iwibot Test API"
-export API_BASE_PATH="/iwibotTest"
+source local-test.env
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -41,47 +37,68 @@ function install() {
 
   # Exit if any command fails
   set -e
-
   echo -e "Deploying OpenWhisk actions, triggers, and rules for IWIBot"
 
-  echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
-
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~ 3/5) Deploy Timetables Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Deploy Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/timetables
+  cd openwhisk/navigation
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~ 4/5) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  # save router sources
+  cd openwhisk/router
+  bash deployTest.sh
+  cd ../..
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Deploy Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/timetable
+  bash deployTest.sh
+  cd ../..
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
   cd openwhisk/weather
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Deploy Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  # save router sources
-  cd openwhisk/router
+  cd openwhisk/login
   bash deployTest.sh
   cd ../..
+
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Deploy Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/semester
+  bash deployTest.sh
+  cd ../..
+
+  echo -e "${GREEN}"
+  echo -e "Deployment Complete!"
+  echo -e "${NC}"
 
   echo -e "${GREEN}"
   echo -e "Deployment Complete!"
@@ -96,14 +113,16 @@ function uninstall() {
   echo -e "${NC}"
 
   echo "Removing API actions..."
-  bx wsk api delete $API_BASE_PATH
+  bx wsk api delete $API_PATH
 
   echo "Removing actions..."
   bx wsk action delete testMeal
   bx wsk action delete testRouter
-  bx wsk action delete testTimetables
+  bx wsk action delete testTimetable
   bx wsk action delete testJoke
   bx wsk action delete testWeather
+  bx wsk action delete testLogin
+  bx wsk action delete testSemester
 
   echo -e "${GREEN}"
   echo -e "Undeployment Complete"
@@ -111,17 +130,12 @@ function uninstall() {
 }
 
 function showenv() {
+  echo -e API_PATH="$API_PATH"
+  echo -e API_ENDPOINT="$API_ENDPOINT"
+  echo -e API_KEY="$API_KEY"
+  echo -e BLUEMIX_ACCOUNT_ID="$BLUEMIX_ACCOUNT_ID"
   echo -e BLUEMIX_ORGANIZATION="$BLUEMIX_ORGANIZATION"
-  echo -e BLUEMIX_PASS="$BLUEMIX_PASS"
   echo -e BLUEMIX_SPACE="$BLUEMIX_SPACE"
-  echo -e BLUEMIX_USER="$BLUEMIX_USER"
-  echo -e CONVERSATION_PASSWORD="$CONVERSATION_PASSWORD"
-  echo -e CONVERSATION_USERNAME="$CONVERSATION_USERNAME"
-  echo -e OPENWHISK_KEY="$OPENWHISK_KEY"
-  echo -e WEATHER_COMPANY_URL="$WEATHER_COMPANY_URL"
-  echo -e CONVERSATION_WORKSPACE_ID="$CONVERSATION_WORKSPACE_ID"
-  echo -e CONVERSATION_ID="$CONVERSATION_ID"
-  echo -e WSK_API_CODE="$WSK_API_CODE"
 }
 
 case "$1" in
