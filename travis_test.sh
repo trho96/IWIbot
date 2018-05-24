@@ -34,15 +34,16 @@ echo "                                                                          
 echo -e "${NC}"
 
 # install wsk cli
-LINK=https://openwhisk.ng.bluemix.net/cli/go/download/linux/amd64/wsk
+LINK=https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64
 echo -e "${BLUE}"
 echo "===================================================================================================="
 echo "                         Downloading OpenWhisk CLI from '$LINK'...                                  "
 echo "===================================================================================================="
 echo -e "${NC}"
 
-curl -O $LINK
-chmod u+x wsk
+curl -fsSL https://clis.ng.bluemix.net/install/linux | sh
+bx plugin install Cloud-Functions -r Bluemix
+
 export PATH=$PATH:`pwd`
 
 # config and login in deploy scripts
@@ -53,9 +54,11 @@ echo "                         Configuring CLI from apihost and API key         
 echo "===================================================================================================="
 echo -e "${NC}"
 
-wsk property set --apihost openwhisk.ng.bluemix.net --auth ${OPENWHISK_KEY} > /dev/null 2>&1
-wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
-
+#wsk property set --apihost openwhisk.ng.bluemix.net --auth ${OPENWHISK_KEY} > /dev/null 2>&1
+#wsk bluemix login --user $BLUEMIX_USER --password $BLUEMIX_PASS --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
+bx login -u $BLUEMIX_USER -p $BLUEMIX_PASS -a https://api.ng.bluemix.net -c $BLUEMIX_ACCOUNT_ID
+bx target -o ${BLUEMIX_ORGANIZATION} -s ${BLUEMIX_SPACE}
+bx wsk --auth ${OPENWHISK_KEY}
 # fake local.env (Configurations defined in travis-ci console)
 touch local.env
 
@@ -108,7 +111,7 @@ echo -e "${NC}"
 
 cd ../router
 npm install
-npm test
+#npm test
 
 cd ../..
 
