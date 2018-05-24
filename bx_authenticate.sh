@@ -7,4 +7,4 @@ bx login -a "$API_ENDPOINT" --apikey "$API_KEY" \
 # target org in cf
 bx target --cf "$BLUEMIX_ORGANIZATION"
 # install wsk plugin for the bluemix cli
-#bx plugin install Cloud-Functions -r Bluemix
+bx plugin install Cloud-Functions -r Bluemix
