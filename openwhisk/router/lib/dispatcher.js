@@ -27,6 +27,8 @@ function dispatch(response) {
     } else {
         responseObject.payload = response.output.text[0];
         responseObject.context = context;
+        // this info should not lack to the Frontend
+        delete responseObject.context.password;
 
         return new Promise(function (resolve) {
             console.log("Skiped action");

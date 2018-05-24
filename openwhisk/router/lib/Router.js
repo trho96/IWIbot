@@ -2,7 +2,7 @@ var dispatcher = require('./dispatcher');
 // Use this for Bluemix Conversation-Service
 // var conversation = require('./conversation');
 // Use this for own Python-Classifer Based Conversation
-var conversation = require('./classifier-based-conversation/conversation');
+var conversation = require('./conversation');
 
 
 function main(params) {
@@ -13,11 +13,14 @@ function main(params) {
     var semester;
     var courseOfStudies;
     var position;
+    var username;
+    var password;
 
     if ("onlyPositionDataFlag" in params) {
-        var positionObj = {latitude: params.position[1],
-                            longitude: params.position[0]
-        }
+        var positionObj = {
+            latitude: params.position[1],
+            longitude: params.position[0]
+        };
 
         return locationEvents.getEventsForPosition(positionObj).then(function (response) {
             console.log("Responding... " + JSON.stringify(response));
@@ -42,15 +45,16 @@ function main(params) {
         position = params.position;
     }
 
-    return conversation.sendMessage("conInit" in params, params).then(function (response) {
+    return conversation.sendMessage("conInit" in params, params).then(function (params) {
 
-        response.semester = semester;
-        response.courseOfStudies = courseOfStudies;
-        response.position = typeof position !== 'undefined' ? {
+        params.semester = semester;
+        params.courseOfStudies = courseOfStudies;
+        params.position = typeof position !== 'undefined' ? {
             latitude: position[1],
             longitude: position[0]
         } : position;
-        return dispatcher.dispatch(response);
+
+        return dispatcher.dispatch(params);
 
     }, function (reason) {
 

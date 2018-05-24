@@ -65,13 +65,18 @@ function install() {
   echo -e "Setting Bluemix credentials and logging in to provision API Gateway"
 
   # Login requiered to provision the API Gateway
-  wsk bluemix login \
+  bx login \
     --user $BLUEMIX_USER \
     --password $BLUEMIX_PASS \
     --namespace ${BLUEMIX_ORGANIZATION}_${BLUEMIX_SPACE}
 
+  # target org in cf
+  bx target -cf $BLUEMIX_ORGANIZAZION
+  # install wsk plugin for the bluemix cli
+  #bx plugin install Cloud-Functions -r Bluemix
+  : '
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/5) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
   # preserve dev deps if any
@@ -90,7 +95,7 @@ function install() {
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/5) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
   # preserve dev deps if any
@@ -108,7 +113,9 @@ function install() {
   wsk action create Meal --kind nodejs:6 action.zip --web true
   cd ../..
   
-  echo "Deploy GET Navigation Action"
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Deploy Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
   cd openwhisk/navigation
   # preserve dev deps if any
   mkdir -p .mod
@@ -124,30 +131,32 @@ function install() {
   # install zip in openwhisk
   wsk action create Navigation --kind nodejs:6 action.zip --web true
   cd ../..
+    '
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~ 3/5) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/router
   # preserve dev deps if any
-  mkdir -p .mod
-  mv node_modules .mod
+  #mkdir -p .mod
+  #mv node_modules .mod
   # install only prod deps
   npm install --production  > /dev/null
   # zip all but skip the dev deps
   zip -rq action.zip package.json lib node_modules
   # delete prod deps
-  rm -rf node_modules
+  #rm -rf node_modules
   # recover dev deps
-  mv .mod node_modules
+  #mv .mod node_modules
   # install zip in openwhisk
-  wsk action create Router --kind nodejs:6 action.zip --web true
+  bx wsk action create Router --kind nodejs:6 action.zip --web true
   #wsk api create -n "$API_NAME" $API_BASE_PATH $API_PATH /router post Router --response-type http
-  wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
+  bx wsk api create -n "$API_NAME" $API_BASE_PATH /router post Router --response-type http
   cd ../..
+  : '
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~ 4/5) Deploy Timetables Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~ 5/8) Deploy Timetables Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/timetables
   # preserve dev deps if any
@@ -166,7 +175,7 @@ function install() {
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~ 5/5) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Deploy Weather Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/weather
   # preserve dev deps if any
@@ -184,6 +193,46 @@ function install() {
   wsk action create Weather --kind nodejs:6 action.zip --web true
   cd ../..
 
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Deploy Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/login
+  # preserve dev deps if any
+  #mkdir -p .mod
+  #mv node_modules .mod
+  # install only prod deps
+  npm install --production  > /dev/null
+  # zip all but skip the dev deps
+  zip -rq action.zip package.json lib node_modules
+  # delete prod deps
+  #rm -rf node_modules
+  # recover dev deps
+  #mv .mod node_modules
+  # install zip in openwhisk
+  bx wsk action create Login --kind nodejs:6 action.zip --web true
+  cd ../..
+  '
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Deploy Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/semester
+  # preserve dev deps if any
+  #mkdir -p .mod
+  #mv node_modules .mod
+  # install only prod deps
+  npm install --production  > /dev/null
+  # zip all but skip the dev deps
+  zip -rq action.zip package.json lib node_modules
+  # delete prod deps
+  #rm -rf node_modules
+  # recover dev deps
+  #mv .mod node_modules
+  # install zip in openwhisk
+  bx wsk action create Semester --kind nodejs:6 action.zip --web true
+  cd ../..
+
   echo -e "${GREEN}"
   echo -e "Deployment Complete!"
   echo -e "${NC}"
@@ -197,23 +246,24 @@ function uninstall() {
   echo -e "${NC}"
 
   echo "Removing API actions..."
-  wsk api delete $API_BASE_PATH
+  bx wsk api delete $API_BASE_PATH
 
   echo "Removing actions..."
-  wsk action delete Meal
-  wsk action delete Navigation
-  wsk action delete Router
-  wsk action delete Timetables
-  wsk action delete Joke
-  wsk action delete Weather
-
+  #bx wsk action delete Meal
+  #bx wsk action delete Navigation
+  bx wsk action delete Router
+  #bx wsk action delete Timetables
+  #bx wsk action delete Joke
+  #bx wsk action delete Weather
+  #bx wsk action delete Login
+  bx wsk action delete Semester
   echo -e "${GREEN}"
   echo -e "Undeployment Complete"
   echo -e "${NC}"
 }
 
 function showenv() {
-  echo -e BLUEMIX_ORGANIZATION="$BLUEMIX_ORGANIZATION"
+  echo -e BLUEMIX_ORGANIZATION=$BLUEMIX_ORGANIZATION
   echo -e BLUEMIX_PASS="$BLUEMIX_PASS"
   echo -e BLUEMIX_SPACE="$BLUEMIX_SPACE"
   echo -e BLUEMIX_USER="$BLUEMIX_USER"
