@@ -13,4 +13,4 @@ mv .mod node_modules
 # install zip in openwhisk
 bx wsk action create testWeather --kind nodejs:6 action.zip --web true
 bx wsk service bind weatherinsights testWeather
-bx wsk api create $API_PATH /weather post testWeather --response-type json
+bx wsk api create $API_TEST_PATH /weather post testWeather --response-type json

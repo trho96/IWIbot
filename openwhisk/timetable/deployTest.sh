@@ -12,4 +12,4 @@ rm -rf node_modules
 mv .mod node_modules
 # install zip in openwhisk
 bx wsk action create testTimetable --kind nodejs:6 action.zip --web true
-bx wsk api create $API_PATH /timetable post testTimetable --response-type json
+bx wsk api create $API_TEST_PATH /timetable post testTimetable --response-type json

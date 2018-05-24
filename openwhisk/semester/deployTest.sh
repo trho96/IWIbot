@@ -12,4 +12,4 @@ rm -rf node_modules
 mv .mod node_modules
 # install zip in openwhisk
 bx wsk action create testSemester --kind nodejs:6 action.zip --web true
-bx wsk api create $API_PATH /semester post testSemester --response-type http
+bx wsk api create $API_TEST_PATH /semester post testSemester --response-type http
