@@ -40,11 +40,8 @@ echo -e "${NC}"
 # fake local.env (Configurations defined in travis-ci console)
 touch local.env
 
-# Remove Deployments that are left over by interrupted Test-Run
-./deploy_test.sh --uninstall
-# Deploy WSK Test-Actions and Actions for Router Test
+# Deploy WSK Test-Actions
 ./deploy_test.sh --install
-
 
 echo -e "${BLUE}"
 echo "===================================================================================================="
@@ -111,8 +108,6 @@ npm install
 npm test
 
 cd ../..
-
-./deploy_test.sh --uninstall
 
 echo -e "${GREEN}"
 echo -e "______________________       __    ___    ___    __        ___       ___       _____________________"

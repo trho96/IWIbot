@@ -17,6 +17,7 @@ cache:
 notifications:
   email: false
 before_script:
+    - set -e # fail on error
     - echo "install bluemix cli"
     - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
     - chmod -R u+x ./Bluemix_CLI/bin
@@ -30,7 +31,6 @@ script:
     - echo "Minify Bundle.js"
     - grunt uglify
     - bash travis_test.sh
-    - bash deploy.sh --uninstall
     - bash deploy.sh --install
 deploy:
     provider: bluemixcloudfoundry

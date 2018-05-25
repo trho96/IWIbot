@@ -31,58 +31,58 @@ function install() {
 
   echo -e "${BLUE}"
   echo "===================================================================================================="
-  echo "                                      Deploying Test-Actions                                        "
+  echo "                                      Updating Test-Actions                                        "
   echo "===================================================================================================="
   echo -e "${NC}"
 
   # Exit if any command fails
   set -e
-  echo -e "Deploying OpenWhisk actions, triggers, and rules for IWIBot"
+  echo -e "Updating OpenWhisk actions, triggers, and rules for IWIBot"
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Deploy Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Update Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Deploy Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Update Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Deploy Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Update Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/navigation
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Deploy Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Update Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/router
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Deploy Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Update Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/timetable
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Deploy Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Update Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/weather
   bash deployTest.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Deploy Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Update Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/login
   bash deployTest.sh
@@ -90,18 +90,14 @@ function install() {
 
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Deploy Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Update Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/semester
   bash deployTest.sh
   cd ../..
 
   echo -e "${GREEN}"
-  echo -e "Deployment Complete!"
-  echo -e "${NC}"
-
-  echo -e "${GREEN}"
-  echo -e "Deployment Complete!"
+  echo -e "Updating Complete!"
   echo -e "${NC}"
 }
 

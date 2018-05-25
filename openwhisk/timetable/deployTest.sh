@@ -11,5 +11,5 @@ rm -rf node_modules
 # recover dev deps
 mv .mod node_modules
 # install zip in openwhisk
-bx wsk action create testTimetable --kind nodejs:6 action.zip --web true
+bx wsk action update testTimetable --kind nodejs:6 action.zip --web true
 bx wsk api create $API_TEST_PATH /timetable post testTimetable --response-type json
