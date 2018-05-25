@@ -17,8 +17,8 @@ echo "                                                                          
 echo -e "${NC}"
 
 # Remove Deployments that are left over by interrupted Test-Run
-./deploy_test.sh --uninstall
-./deploy_test.sh --install
+deployTestFunctions.sh --uninstall
+deployTestFunctions.sh --install
 
 echo "Find and set API URL"
 export API_URL=`wsk api list $API_BASE_PATH $API_PATH | grep iwibot | awk '{print $5}'`
@@ -85,7 +85,7 @@ npm test
 
 cd ../..
 
-./deploy_test.sh --uninstall
+deployTestFunctions.sh --uninstall
 
 echo -e "${GREEN}"
 echo -e "______________________       __    ___    ___    __        ___       ___       _____________________"

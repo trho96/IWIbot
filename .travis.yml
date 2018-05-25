@@ -13,30 +13,15 @@ cache:
     - "openwhisk/weather/node_modules"
 notifications:
   email: false
-#before_script:
-  #- npm install
-  #- npm install source-map
 script:
     - chmod +x ./travis_test.sh
-    - chmod +x ./deploy_test.sh
-    - chmod +x ./deploy.sh
-    - echo "Bundle selected Javascript files"
-    - npm run-script browserify
-    - echo "Uglify Bundle.js"
-    - grunt uglify
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/conversation.js
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/bundle.js
-    - sed 's/$WSK_API_CODE/'"\'${WSK_API_CODE}\'"'/g' -i public/javascripts/bundle.min.js
-    - sed 's/$CONVERSATION_USERNAME/'"\'${CONVERSATION_USERNAME}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's/$CONVERSATION_PASSWORD/'"\'${CONVERSATION_PASSWORD}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's/$CONVERSATION_WORKSPACE_ID/'"\'${CONVERSATION_WORKSPACE_ID}\'"'/g' -i openwhisk/router/lib/conversation.js
-    - sed 's%$WEATHER_COMPANY_URL%'"\'${WEATHER_COMPANY_URL}\'"'%g' -i openwhisk/weather/lib/Weather.js
-    - sed 's%$DEPLOY_HOSTNAME%'"\'${DEPLOY_HOSTNAME}\'"'%g' -i manifest.yml
+    - chmod +x ./deployTestFunctions.sh
+    - chmod +x ./deployFunctions.sh
     - ./travis_test.sh
     - export PATH=$PATH:`pwd`  # make openwhisk cli available here
-    - ./deploy_test.sh --uninstall
-    - ./deploy.sh --uninstall
-    - ./deploy.sh --install
+    - ./deployTestFunctions.sh --uninstall
+    - ./deployFunctions.sh --uninstall
+    - ./deployFunctions.sh --install
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true

@@ -1,0 +1,31 @@
+packages:
+  IWIBot:
+    version: 1.0
+    license: Apache-2.0
+    actions:
+      Joke:
+        function: /joke
+        version: 1.0
+        runtime: nodejs:8
+        web-export: true
+      Meal:
+        function: /meal
+        runtime: nodejs:8
+        web-export: true
+      Router:
+        function: /router
+        runtime: nodejs:8
+        web-export: true
+      Timetables:
+        function: /timetables
+        runtime: nodejs:8
+        web-export: true
+      Weather:
+        function: /weather
+        runtime: nodejs:8
+        web-export: true
+    apis:
+      Router:
+        iwibot:
+          router:
+            Router: POST

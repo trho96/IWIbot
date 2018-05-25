@@ -1,0 +1,105 @@
+.chat {
+  overflow: auto;
+  list-style-type: none;
+  padding: 0;
+}
+.chatContainer {
+  height: 100%;
+}
+.message{
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  word-break: break-word;
+}
+.send-message {
+  background-color: #ef5350;
+  color: white;
+  margin-left: 35px;
+  margin-right: 15px;
+}
+.received-message {
+  background-color: #EEEEEE;
+  color: black;
+  margin-right: 35px;
+  margin-left: 15px;
+}
+.messageHtmlContainer {
+  margin-top: 15px;
+}
+#chatInputField {
+  width: 300px;
+  border-radius: 5px;
+  padding: 5px 45px 5px 5px;
+  height: 35px;
+  border: solid #DDDDDD;
+}
+#chatInputField:focus{
+  outline:none;
+}
+#buttonGroup {
+  margin-left: -39px;
+}
+#chatControls {
+  /*position: fixed;
+  bottom: 50px;*/
+  margin-top: 15px;
+}
+#recordButton {
+      margin-left: 5px;
+}
+.recording {
+	-webkit-animation: pulse 1.15s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 1.15s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 1.15s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 1.15s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+::-webkit-scrollbar {
+  width: 4px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #DDDDDD;
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 15px;
+}
+
+.send-message:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-left-color: #ef5350;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -14px;
+	margin-right: -8px;
+}
+.received-message:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-right-color: #EEEEEE;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -14px;
+	margin-left: -8px;
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 30px rgba(239, 83, 80, 0.5);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 30px rgba(239, 83, 80, 0.5);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 30px rgba(239, 83, 80, 0.5);}}
+@keyframes pulse {to {box-shadow: 0 0 0 30px rgba(239, 83, 80, 0.5);}}

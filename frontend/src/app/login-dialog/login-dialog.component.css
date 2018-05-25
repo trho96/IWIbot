@@ -1,0 +1,10 @@
+mat-form-field {
+  width: 100%;
+}
+#cancel {
+  margin-left: 10%;
+}
+#errorNotification {
+  color: #ef5350;
+  font-family: Arial, Helvetica, sans-serif;
+}
