@@ -19,6 +19,7 @@ notifications:
 before_script:
     - set -e # fail on error
     - npm i npm@latest -g
+    - npm audit fix
     - echo "install bluemix cli"
     - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
     - chmod -R u+x ./Bluemix_CLI/bin

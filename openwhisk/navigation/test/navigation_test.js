@@ -6,6 +6,6 @@ var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'
 
 module.exports = {
     'Navigation Action Test' : function (test) {
-        test.done();
+        test.done(true);
     }
 };
