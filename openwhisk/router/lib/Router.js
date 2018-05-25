@@ -31,7 +31,7 @@ function main(params) {
     }
 
     if("__ow_body" in params) { // For testing this action!!
-        params = JSON.parse(params.__ow_body);
+        Object.assign(params, JSON.parse(params.__ow_body));
     }
 
     if ("semester" in params && "courseOfStudies" in params) {
