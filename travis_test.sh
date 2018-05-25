@@ -39,6 +39,7 @@ echo -e "${NC}"
 
 # fake local.env (Configurations defined in travis-ci console)
 touch local.env
+touch local-test.env
 
 # Deploy WSK Test-Actions
 ./deploy_test.sh --install
@@ -53,6 +54,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Running Joke Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd openwhisk/joke
+rm -Rf node_modules
 npm install
 npm test
 
@@ -60,6 +62,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Running Meal Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd ../meal
+rm -Rf node_modules
 npm install
 npm test
 
@@ -67,6 +70,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Running Navigation Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd ../navigation
+rm -Rf node_modules
 npm install
 npm test
 
@@ -74,6 +78,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Running Router Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd ../router
+rm -Rf node_modules
 npm install
 npm test
 
@@ -81,6 +86,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 5/8) Running Timetable Tests~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd ../timetable
+rm -Rf node_modules
 npm install
 npm test
 
@@ -88,6 +94,7 @@ echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Running Weather Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
 cd ../weather
+rm -Rf node_modules
 npm install
 npm test
 
@@ -96,6 +103,7 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Running Login Tests ~~~~~~~~~~~~
 echo -e "${NC}"
 
 cd ../login
+rm -Rf node_modules
 npm install
 npm test
 
@@ -104,6 +112,7 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Running Semester Tests ~~~~~~~~~
 echo -e "${NC}"
 
 cd ../semester
+rm -Rf node_modules
 npm install
 npm test
 
