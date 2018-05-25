@@ -2,13 +2,13 @@ var ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 exports.sendMessage = function sendMessage(init, params) {
     console.log("------Conversation Started!------");
-    console.log('Conversation Params: ' + params.payload);
+    console.log('Conversation Params: ' + params);
 
     var conversation = new ConversationV1({
         username: params.__bx_creds.conversation.username,
         password: params.__bx_creds.conversation.password,
         path: {workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"},
-        version_date: "2018-09-01"
+        version_date: "2018-24-05"
     });
 
     return new Promise(function (resolve, reject) {
