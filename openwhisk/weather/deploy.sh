@@ -1,9 +1,9 @@
 #!/bin/bash
-#preserve dev deps if any
+# preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod
 # install only prod deps only=production
-npm install --production  > /dev/null
+npm install --production > /dev/null
 # zip all but skip the dev deps
 zip -rq action.zip package.json lib node_modules
 # delete prod deps

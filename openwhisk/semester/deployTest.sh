@@ -1,5 +1,5 @@
 #!/bin/bash
-#preserve dev deps if any
+# preserve dev deps if any
 mkdir -p .mod
 mv node_modules .mod
 # install only prod deps
