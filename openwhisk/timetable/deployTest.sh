@@ -5,7 +5,7 @@ mv node_modules .mod
 # install only prod deps
 npm install --production  > /dev/null
 # zip all but skip the dev deps
-zip -rq action.zip package.json lib/Timetables.js node_modules
+zip -rq action.zip package.json lib/Timetable.js node_modules
 # delete prod deps
 rm -rf node_modules
 # recover dev deps
