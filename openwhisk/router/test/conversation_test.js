@@ -5,17 +5,16 @@
 
 // =================================== Variables ===================================
 
-var conversation = require('../lib/classifier-based-conversation/conversation');
+var conversation = require('../lib/conversation');
 var request = require('request');
 var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + process.env.WSK_API_CODE + '/iwibotTest/router';
 var initParams = {
-    use_unauthenticated: true,
     semester: 5,
     courseOfStudies: 'INFB',
     context: {
         conversation_id: process.env.CONVERSATION_ID,
         priorIntent:{
-            intent : ''
+            intent : 'greeting'
         },
         system: {
             dialog_stack:[{dialog_node: 'root'}],
@@ -346,16 +345,14 @@ function buildRequestOptions(responseBody, sentence) {
  * @param {string} sentence
  */
 function newRequestBody(responseBody, sentence) {
-    try {
+    if (requestBody) {
         responseBody = JSON.parse(responseBody);
-    } catch (exception) {
-        console.error(responseBodyParsingError);
     }
     var requestBody = initParams;
-    if(responseBody && responseBody !== null && responseBody.context) {
+    if(responseBody && responseBody.context) {
         requestBody.context = responseBody.context;
     }
-    if(sentence && sentence !== null) {
+    if(sentence) {
         requestBody.payload = sentence;
     }
     console.log('\n Request-Body \n' + JSON.stringify(requestBody, null, 4));
