@@ -20,7 +20,6 @@ echo -e "${NC}"
 source local-test.env
 
 # Remove Deployments that are left over by interrupted Test-Run
-./deploy_test.sh --uninstall
 ./deploy_test.sh --install
 
 echo -e "${BLUE}"
@@ -94,7 +93,6 @@ npm install > /dev/null
 npm test
 
 cd ../..
-./deploy_test.sh --uninstall
 
 echo -e "${GREEN}"
 echo -e "______________________       __    ___    ___    __        ___       ___       _____________________"

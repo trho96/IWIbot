@@ -12,4 +12,4 @@ rm -rf node_modules
 mv .mod node_modules
 # install zip in openwhisk
 bx wsk action update testMeal --kind nodejs:6 action.zip --web true
-bx wsk api create $API_TEST_PATH /meal get testMeal --response-type json
+bx wsk api create -n "iwibot Test API" $API_TEST_PATH /meal get testMeal --response-type json

@@ -1,0 +1,14 @@
+{
+  "services": {
+    "cloudantNoSQLDB": [
+      {
+        "credentials": {
+          "username":"iwibot",
+          "password":"HSKA-IWIBOT-VSyS",
+          "host":"kunkel24.de:6001"
+        },
+        "label": "CouchDB"
+      }
+    ]
+  }
+}

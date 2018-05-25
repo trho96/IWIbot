@@ -11,9 +11,7 @@ function main(params) {
         var options = {
             url: tmpUrl,
             headers: {
-                'Referer': 'https://iwibot.mybluemix.net/',
                 'Host': 'www.iwi.hs-karlsruhe.de',
-                'Origin': 'https://iwibot.mybluemix.net',
                 'Accept': '*/*'
             }
         };

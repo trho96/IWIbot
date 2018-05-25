@@ -97,7 +97,7 @@ cd ../weather
 rm -Rf node_modules
 npm install
 npm test
-
+: '
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Running Login Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
@@ -106,7 +106,7 @@ cd ../login
 rm -Rf node_modules
 npm install
 npm test
-
+'
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Running Semester Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
