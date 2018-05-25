@@ -2,7 +2,7 @@ var ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 exports.sendMessage = function sendMessage(init, params) {
     console.log("------Conversation Started!------");
-    console.log('Conversation Params: ' + params);
+    console.log('Conversation Params: ' + JSON.stringify(params, null, 2));
 
     var conversation = new ConversationV1({
         username: params.__bx_creds.conversation.username,
