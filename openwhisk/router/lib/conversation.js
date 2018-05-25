@@ -7,7 +7,6 @@ exports.sendMessage = function sendMessage(init, params) {
     var conversation = new ConversationV1({
         username: params.__bx_creds.conversation.username,
         password: params.__bx_creds.conversation.password,
-        workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624",
         path: {workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"},
         version_date: "2018-24-05"
     });
@@ -15,7 +14,8 @@ exports.sendMessage = function sendMessage(init, params) {
     return new Promise(function (resolve, reject) {
         var options = init ? {} : {
             input: {text: params.payload.toString()},
-            context: params.context
+            context: params.context,
+            workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"
         };
         conversation.message(options, function (err, response) {
             if (err) {
