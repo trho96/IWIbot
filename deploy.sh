@@ -90,7 +90,6 @@ function install() {
   echo -e "${NC}"
   cd openwhisk/router
   bash deploy.sh
-  bx wsk api delete /iwibot
   bx wsk api create -n "iwibot API" $API_PATH /router post Router --response-type http
   cd ../..
 

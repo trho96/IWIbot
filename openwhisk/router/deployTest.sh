@@ -13,5 +13,4 @@ mv .mod node_modules
 # install zip in openwhisk
 bx wsk action update testRouter --kind nodejs:6 action.zip --web true
 bx wsk service bind conversation testRouter
-bx wsk api delete /iwibotTest
 bx wsk api create -n "iwibot Test API" $API_TEST_PATH /router post testRouter --response-type http
