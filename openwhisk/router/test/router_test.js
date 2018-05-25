@@ -2,14 +2,16 @@
  * Created by Armin on 11.06.2017.
  */
 var request = require('request');
-var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'+process.env.WSK_API_CODE+'/iwibotTest/router';
+var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibotTest/router';
 
 var params = {
-    use_unauthenticated: true,
     semester: 5,
     courseOfStudies: 'INFB',
     context: { // If this test is not successful, try to get a new context! (Log and paste it here!)
-        conversation_id: process.env.CONVERSATION_ID,
+        conversation_id: 'edde5df3-a4d2-4875-ada7-ca95dec02daf',
+        priorIntent:{
+            intent : 'greeting'
+        },
         system: {
             dialog_stack:[{dialog_node: 'root'}],
             dialog_turn_counter: 1,
@@ -21,10 +23,8 @@ var params = {
     }
 };
 
-console.log(JSON.stringify(params, null, 4))
-
 module.exports = {
-    'Router Action Test (timetables)' : function (test) {
+    'Router Action Test (timetable)' : function (test) {
         test.expect(2);
         params.payload = 'timetable friday';
         request.post({

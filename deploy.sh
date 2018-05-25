@@ -138,11 +138,11 @@ function uninstall() {
   bx wsk api delete $API_PATH
 
   echo "Removing actions..."
+  bx wsk action delete Joke
   bx wsk action delete Meal
   bx wsk action delete Navigation
   bx wsk action delete Router
   bx wsk action delete Timetable
-  bx wsk action delete Joke
   bx wsk action delete Weather
   bx wsk action delete Login
   bx wsk action delete Semester

@@ -7,12 +7,12 @@
 
 var conversation = require('../lib/conversation');
 var request = require('request');
-var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' + process.env.WSK_API_CODE + '/iwibotTest/router';
+var actionUrl = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibotTest/router';
 var initParams = {
     semester: 5,
     courseOfStudies: 'INFB',
     context: {
-        conversation_id: process.env.CONVERSATION_ID,
+        conversation_id: 'edde5df3-a4d2-4875-ada7-ca95dec02daf',
         priorIntent:{
             intent : 'greeting'
         },
@@ -31,15 +31,15 @@ var genericError = conversation.genericErrorMessage;
 
 // =================================== Router sentences ===================================
 
-const jokeSentence =                    'Erzähle mir einen Witz !';
-const weatherSentence =                 'Wie wird das Wetter ?';
-const timetablesSentenceAll =           'Was steht am Donnerstag auf dem Stundenplan?';
-const timetablesSentenceOnlyIntent =    'Was steht auf dem Stundenplan?';
-const timetablesSentenceEntity =        'Mittwoch';
-const mealSentenceAll =                 'Was gibt es als Wahlessen 1?';
-const mealSentenceOnlyIntent =          'Was gibt es heute zu Essen?';
-const mealSentenceEntity =              'Aktionstheke';
-const garbageSentence =                 'Skidoodle';
+var jokeSentence =                    'Erzähle mir einen Witz !';
+var weatherSentence =                 'Wie wird das Wetter ?';
+var timetableSentenceAll =            'Was steht am Donnerstag auf dem Stundenplan?';
+var timetableSentenceOnlyIntent =     'Was steht auf dem Stundenplan?';
+var timetableSentenceEntity =         'Mittwoch';
+var mealSentenceAll =                 'Was gibt es als Wahlessen 1?';
+var mealSentenceOnlyIntent =          'Was gibt es heute zu Essen?';
+var mealSentenceEntity =              'Aktionstheke';
+var garbageSentence =                 'Skidoodle';
 
 console.log("=========================================================================================================");
 console.log("                                         Start Conversation-Tests                                        ");
@@ -49,9 +49,9 @@ console.log("action url:                    ", actionUrl);
 console.log("=========================================================================================================");
 console.log("jokeSentence:                  ", jokeSentence);
 console.log("weatherSentence:               ", weatherSentence);
-console.log("timetablesSentenceAll:         ", timetablesSentenceAll);
-console.log("timetablesSentenceOnlyIntent:  ", timetablesSentenceOnlyIntent);
-console.log("timetablesSentenceEntity:      ", timetablesSentenceEntity);
+console.log("timetableSentenceAll:          ", timetableSentenceAll);
+console.log("timetableSentenceOnlyIntent:   ", timetableSentenceOnlyIntent);
+console.log("timetableSentenceEntity:       ", timetableSentenceEntity);
 console.log("mealSentenceAll:               ", mealSentenceAll);
 console.log("mealSentenceOnlyIntent:        ", mealSentenceOnlyIntent);
 console.log("mealSentenceEntity:            ", mealSentenceEntity);
@@ -103,10 +103,10 @@ module.exports = {
     // ::::::::::::::::::::::::::::::::::::::: Timetables :::::::::::::::::::::::::::::::::::::::
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    'Conversation Action Test (timetables, one sentence)' : function (test) {
+    'Conversation Action Test (timetable, one sentence)' : function (test) {
         test.expect(2);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, one sentence) ~~~~~ \n")
-        var options = buildRequestOptions(null, timetablesSentenceAll);
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, one sentence) ~~~~~ \n")
+        var options = buildRequestOptions(null, timetableSentenceAll);
         request.post( options,
             function (err, response, body) {
                 body = JSON.parse(body);
@@ -117,12 +117,12 @@ module.exports = {
         });
     },
 
-    'Conversation Action Test (timetables, two sentences)' : function (test) {
+    'Conversation Action Test (timetable, two sentences)' : function (test) {
         test.expect(4);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, two sentences) ~~~~~ \n");
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, two sentences) ~~~~~ \n");
 
         // ~~~~~~ First Request ~~~~~~
-        var options = buildRequestOptions(null, timetablesSentenceOnlyIntent);
+        var options = buildRequestOptions(null, timetableSentenceOnlyIntent);
         request.post( options,
             function (err, response, body) {
                 body = JSON.parse(body);
@@ -131,7 +131,7 @@ module.exports = {
                 test.ok(body.payload.indexOf('Error') === -1 && body.payload.indexOf('error') === -1);
 
                 // ~~~~~~ Second Request ~~~~~~
-                var optionsStageTwo = buildRequestOptions(body, timetablesSentenceEntity);
+                var optionsStageTwo = buildRequestOptions(body, timetableSentenceEntity);
                 request.post( optionsStageTwo,
                     function (err, response, body) {
                         consoleLog(body, err, response);
@@ -144,12 +144,12 @@ module.exports = {
         });
     },
 
-    'Conversation Action Test (timetables, abort timetables)' : function (test) {
+    'Conversation Action Test (timetable, abort timetable)' : function (test) {
         test.expect(4);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, abort timetables) ~~~~~ \n");
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, abort timetable) ~~~~~ \n");
 
         // ~~~~~~ First Request ~~~~~~
-        var options = buildRequestOptions(null, timetablesSentenceOnlyIntent);
+        var options = buildRequestOptions(null, timetableSentenceOnlyIntent);
         request.post( options,
             function (err, response, body) {
                 body = JSON.parse(body);
@@ -171,12 +171,12 @@ module.exports = {
         });
     },
 
-    'Conversation Action Test (timetables, abort timetables, check if priorIntent is deleted)' : function (test) {
+    /*'Conversation Action Test (timetable, abort timetable, check if priorIntent is deleted)' : function (test) {
         test.expect(7);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, abort timetables, check if priorIntent is deleted) ~~~~~ \n")
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, abort timetable, check if priorIntent is deleted) ~~~~~ \n")
 
         // ~~~~~~ First Request ~~~~~~
-        var options = buildRequestOptions(null, timetablesSentenceOnlyIntent);
+        var options = buildRequestOptions(null, timetableSentenceOnlyIntent);
         request.post( options,
             function (err, response, body) {
                 body = JSON.parse(body);
@@ -194,7 +194,7 @@ module.exports = {
                         test.ok(body.payload.indexOf('Error') === -1 && body.payload.indexOf('error') === -1);
                         
                         // ~~~~~~ Third Request ~~~~~~
-                        var optionsStageTwo = buildRequestOptions(body, timetablesSentenceEntity);
+                        var optionsStageTwo = buildRequestOptions(body, timetableSentenceEntity);
                         request.post( optionsStageTwo,
                             function (err, response, body) {
                                 consoleLog(body, err, response);
@@ -206,14 +206,14 @@ module.exports = {
                         });
                 });
         });
-    },
+    },*/
 
-    'Conversation Action Test (timetables, three sentences)' : function (test) {
+    'Conversation Action Test (timetable, three sentences)' : function (test) {
         test.expect(6);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, three sentences) ~~~~~ \n")
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, three sentences) ~~~~~ \n")
 
         // ~~~~~~ First Request ~~~~~~
-        var options = buildRequestOptions(null, timetablesSentenceOnlyIntent);
+        var options = buildRequestOptions(null, timetableSentenceOnlyIntent);
         request.post( options,
             function (err, response, body) {
                 body = JSON.parse(body);
@@ -231,7 +231,7 @@ module.exports = {
                         test.ok(body.payload.indexOf('Error') === -1 && body.payload.indexOf('error') === -1);
                         
                         // ~~~~~~ Third Request ~~~~~~
-                        var optionsStageTwo = buildRequestOptions(body, timetablesSentenceEntity);
+                        var optionsStageTwo = buildRequestOptions(body, timetableSentenceEntity);
                         request.post( optionsStageTwo,
                             function (err, response, body) {
                                 consoleLog(body, err, response);
@@ -289,9 +289,9 @@ module.exports = {
         });
     },
     
-    'Conversation Action Test (timetables, three sentences)' : function (test) {
+    'Conversation Action Test (timetable, three sentences)' : function (test) {
         test.expect(6);
-        console.log("\n ~~~~~ Run Conversation Action Test (timetables, three sentences) ~~~~~ \n")
+        console.log("\n ~~~~~ Run Conversation Action Test (timetable, three sentences) ~~~~~ \n")
 
         // ~~~~~~ First Request ~~~~~~
         var options = buildRequestOptions(null, mealSentenceOnlyIntent);

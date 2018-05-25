@@ -23,10 +23,6 @@ source local-test.env
 ./deploy_test.sh --uninstall
 ./deploy_test.sh --install
 
-echo "Find and set API URL"
-export API_URL=`bx wsk api list | grep iwibotTest | awk '{print $5}'`
-echo "API-URL:......................${API_URL}"
-
 echo -e "${BLUE}"
 echo "===================================================================================================="
 echo "                                         Running tests                                              "
@@ -60,7 +56,7 @@ npm test
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Running Router Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-cd ../router
+cd openwhisk/router
 rm -rf node_modules
 npm install > /dev/null
 npm test

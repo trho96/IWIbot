@@ -88,7 +88,6 @@ function install() {
   bash deployTest.sh
   cd ../..
 
-
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Update Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
@@ -112,10 +111,11 @@ function uninstall() {
   bx wsk api delete $API_TEST_PATH
 
   echo "Removing actions..."
+  bx wsk action delete testJoke
   bx wsk action delete testMeal
+  bx wsk action delete testNavigation
   bx wsk action delete testRouter
   bx wsk action delete testTimetable
-  bx wsk action delete testJoke
   bx wsk action delete testWeather
   bx wsk action delete testLogin
   bx wsk action delete testSemester
@@ -126,7 +126,7 @@ function uninstall() {
 }
 
 function showenv() {
-  echo -e API_PATH="$API_PATH"
+  echo -e API_TEST_PATH="$API_TEST_PATH"
   echo -e API_ENDPOINT="$API_ENDPOINT"
   echo -e API_KEY="$API_KEY"
   echo -e BLUEMIX_ACCOUNT_ID="$BLUEMIX_ACCOUNT_ID"

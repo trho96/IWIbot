@@ -21,7 +21,7 @@ function main(params) {
     console.log("DayString: " + currentDayString);
 
     if("__ow_body" in params) { // For testing this action!!
-        params = JSON.parse(params.__ow_body);
+        Object.assign(params, JSON.parse(params.__ow_body));
     }
 
     return new Promise(function (resolve, reject) {
