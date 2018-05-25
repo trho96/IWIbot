@@ -55,7 +55,7 @@ npm test
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Running Router Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
-cd openwhisk/router
+cd ../router
 rm -rf node_modules
 npm install > /dev/null
 npm test
@@ -75,7 +75,7 @@ cd ../weather
 rm -rf node_modules
 npm install > /dev/null
 npm test
-
+: '
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Running Login Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
@@ -83,7 +83,7 @@ cd ../login
 rm -rf node_modules
 npm install > /dev/null
 npm test
-
+'
 echo -e "${BLUE}"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Running Semester Tests ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo -e "${NC}"
