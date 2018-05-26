@@ -45,7 +45,9 @@ script:
     - cd frontend && npm run deploy && cd ..
     # deploy production actions
     - echo $WSK_AUTH_KEY
-    - cd openwhisk && wskdeploy --auth $WSK_AUTH_KEY && cd ..
+    - cd openwhisk
+    - wskdeploy undeploy
+    - wskdeploy --auth $WSK_AUTH_KEY && cd ..
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true
