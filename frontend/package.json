@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --base-href='https://nickkr.github.io/HSKA-IWI-VSYS/IWIbot/' && ngh"
+    "deploy": "ng build --prod --base-href https://hska-iwi-vsys.github.io/IWIbot/ && ngh --repo=https://GH_TOKEN@github.com/HSKA-IWI-VSYS/IWIbot.git --name='IWIBot' --email=krni1019@hs-karlsruhe.de"
   },
   "private": true,
   "dependencies": {
