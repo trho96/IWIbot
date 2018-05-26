@@ -42,7 +42,7 @@ script:
     - ./runFunctionsUnittests.sh
     #- ./deployFunctions.sh --install
     # deploy to github pages
-    - cd frontend && npm run deploy
+    - cd frontend && npm run deploy && cd ..
     # deploy production actions
     - cd openwhisk && wskdeploy && cd ..
 deploy:
