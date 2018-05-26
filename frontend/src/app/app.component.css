@@ -4,6 +4,11 @@ mat-sidenav-container {
 #themeWrapper {
   height: calc(100% - 64px);
 }
+@media (max-width: 599px) {
+  #themeWrapper {
+    height: calc(100% - 54px);
+  }
+}
 mat-sidenav {
   width: 200px;
 }
