@@ -24,6 +24,7 @@ import { TextToSpeechService } from './shared/services/text-to-speech.service';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { LoginService } from './shared/services/login.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ThemeManagerService } from "./shared/services/theme-manager.service";
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ConversationService,
     Conversation,
     TextToSpeechService,
-    LoginService
+    LoginService,
+    ThemeManagerService,
   ],
   bootstrap: [
     AppComponent,

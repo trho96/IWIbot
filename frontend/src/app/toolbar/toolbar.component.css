@@ -9,6 +9,7 @@
   font-size: 30px;
   color: #e53935;
 }
-mat-toolbar {
-  margin-bottom: 40px;
+#switchThemeButton {
+  margin-right: 25px;
 }
+

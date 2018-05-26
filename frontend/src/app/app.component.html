@@ -1,3 +1,10 @@
+<div id="themeWrapper" [class.darkTheme]="this.themeManager.isDarkTheme">
 <app-toolbar></app-toolbar>
-<app-chat></app-chat>
-
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened="false">
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-chat></app-chat>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

@@ -2,13 +2,11 @@
   class="chatContainer"
   fxLayout="column"
   fxLayoutAlign="center center"
-  fxFlexFill
 >
   <!-- START Chat -->
   <div
     fxFlex="600px"
     fxLayout="column"
-    fxLayoutGap="15px"
     fxFlex.xs="330px"
     fxFlex.gt-lg="800px"
     class="chat"
@@ -93,7 +91,7 @@
         (click)="sendMessage(chatInputField.value)"
         type=button
       >
-        <mat-icon>send</mat-icon>
+        <mat-icon id="sendIcon">send</mat-icon>
       </button>
       <button
         mat-fab id="recordButton"
