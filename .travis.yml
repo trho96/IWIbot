@@ -20,10 +20,14 @@ before_script:
     - set -e # fail on error
     - npm i npm@latest -g
     - npm audit fix
+    # install bluemix cli
     - echo "install bluemix cli"
     - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
     - chmod -R u+x ./Bluemix_CLI/bin
     - bash Bluemix_CLI/install_bluemix_cli
+    - chmod u+x runFunctionsUnittests.sh
+    - chmod u+x deployTestFunctions.sh
+    - chmod u+x deployFunctions.sh
     - echo "login to the bluemix cli"
     - bash bx_authenticate.sh
     #- npm install source-map
@@ -32,9 +36,8 @@ script:
     #- npm run-script browserify
     #- echo "Minify Bundle.js"
     #- grunt uglify
-    - chmod u+x runFunctionsUnittests.sh
     - ./runFunctionsUnittests.sh
-    - bash deployFunctions.sh --install
+    - ./deployFunctions.sh --install
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true
