@@ -23,21 +23,28 @@ before_script:
     # install bluemix cli
     - echo "install bluemix cli"
     - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
+    # install angular cli and ngh (Angular cli Github Pages)
+    - cd frontend && npm install --only=dev && cd ..
     - chmod -R u+x ./Bluemix_CLI/bin
     - bash Bluemix_CLI/install_bluemix_cli
+    # install wskdeploy for action deployment
+    - curl -L https://github.com/apache/incubator-openwhisk-wskdeploy/releases/download/0.9.5/openwhisk_wskdeploy-latest-linux-386.tgz | tar -zx
+    - mv openwhisk_wskdeploy-latest-linux-amd64/wskdeploy /usr/bin
+    - echo "wskdeploy moved to /usr/bin"
+    - ls /usr/bin
     - chmod u+x runFunctionsUnittests.sh
     - chmod u+x deployTestFunctions.sh
     - chmod u+x deployFunctions.sh
+    # login to bluemix cloud
     - echo "login to the bluemix cli"
     - bash bx_authenticate.sh
-    #- npm install source-map
 script:
-    #- echo "Bundle selected Javascript files"
-    #- npm run-script browserify
-    #- echo "Minify Bundle.js"
-    #- grunt uglify
     - ./runFunctionsUnittests.sh
-    - ./deployFunctions.sh --install
+    #- ./deployFunctions.sh --install
+    # deploy to github pages
+    - cd frontend && npm run deploy
+    # deploy production actions
+    - cd openwhisk && wskdeploy && cd ..
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true
