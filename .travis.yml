@@ -28,12 +28,12 @@ before_script:
     - bash bx_authenticate.sh
     #- npm install source-map
 script:
-    - echo "Bundle selected Javascript files"
-    - npm run-script browserify
-    - echo "Minify Bundle.js"
-    - grunt uglify
-    - bash travis_test.sh
-    - bash deploy.sh --install
+    #- echo "Bundle selected Javascript files"
+    #- npm run-script browserify
+    #- echo "Minify Bundle.js"
+    #- grunt uglify
+    - bash runFunctionsUnittests.sh
+    - bash deployFunctions.sh --install
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true

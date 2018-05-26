@@ -42,7 +42,7 @@ touch local.env
 touch local-test.env
 
 # Deploy WSK Test-Actions
-./deploy_test.sh --install
+./deployTestFunctions.sh --install
 
 echo -e "${BLUE}"
 echo "===================================================================================================="

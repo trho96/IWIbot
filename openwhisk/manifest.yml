@@ -16,8 +16,8 @@ packages:
         function: /router
         runtime: nodejs:8
         web-export: true
-      Timetables:
-        function: /timetables
+      Timetable:
+        function: /timetable
         runtime: nodejs:8
         web-export: true
       Weather:
