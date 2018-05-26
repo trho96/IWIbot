@@ -32,7 +32,8 @@ script:
     #- npm run-script browserify
     #- echo "Minify Bundle.js"
     #- grunt uglify
-    - bash runFunctionsUnittests.sh
+    - chmod u+x runFunctionsUnittests.sh
+    - ./runFunctionsUnittests.sh
     - bash deployFunctions.sh --install
 deploy:
     provider: bluemixcloudfoundry
