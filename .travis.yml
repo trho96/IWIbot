@@ -29,7 +29,7 @@ before_script:
     - bash Bluemix_CLI/install_bluemix_cli
     # install wskdeploy for action deployment
     - curl -L https://github.com/apache/incubator-openwhisk-wskdeploy/releases/download/0.9.5/openwhisk_wskdeploy-latest-linux-386.tgz | tar -zx
-    - mv wskdeploy /usr/bin
+    - sudo mv wskdeploy /usr/bin
     - echo "wskdeploy moved to /usr/bin"
     - ls /usr/bin
     - chmod u+x runFunctionsUnittests.sh
