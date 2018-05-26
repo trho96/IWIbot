@@ -31,7 +31,6 @@ before_script:
     - curl -L https://github.com/apache/incubator-openwhisk-wskdeploy/releases/download/0.9.5/openwhisk_wskdeploy-latest-linux-386.tgz | tar -zx
     - sudo mv wskdeploy /usr/bin
     - echo "wskdeploy moved to /usr/bin"
-    - ls /usr/bin
     - chmod u+x runFunctionsUnittests.sh
     - chmod u+x deployTestFunctions.sh
     - chmod u+x deployFunctions.sh
@@ -39,10 +38,10 @@ before_script:
     - echo "login to the bluemix cli"
     - bash bx_authenticate.sh
 script:
-    - ./runFunctionsUnittests.sh
+    #- ./runFunctionsUnittests.sh
     #- ./deployFunctions.sh --install
     # deploy to github pages
-    - cd frontend && npm run deploy && cd ..
+    #- cd frontend && npm run deploy && cd ..
     # deploy production actions
     - echo $WSK_AUTH_KEY
     - cd openwhisk
