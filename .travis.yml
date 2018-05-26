@@ -24,7 +24,7 @@ before_script:
     - echo "install bluemix cli"
     - curl -L https://clis.ng.bluemix.net/download/bluemix-cli/latest/linux64 | tar -zx
     # install angular cli and ngh (Angular cli Github Pages)
-    - cd frontend && npm install --only=dev && cd ..
+    - cd frontend && npm install && cd ..
     - chmod -R u+x ./Bluemix_CLI/bin
     - bash Bluemix_CLI/install_bluemix_cli
     # install wskdeploy for action deployment
