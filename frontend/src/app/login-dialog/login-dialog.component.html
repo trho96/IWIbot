@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
+<div mat-dialog-content>
+    <div *ngIf="errorOccurred" id="errorNotification" [innerHTML]="errorText"></div>
+    <form #loginForm='ngForm'>
+    <mat-form-field appearance="standard">
+      <mat-label>IZ-Benutzername</mat-label>
+      <input [(ngModel)]='username' name='username' required matInput>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>IZ-Password</mat-label>
+      <input [(ngModel)]="password" name='password' type="password" required matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="semester" name='semester'>
+        <mat-option value="1">1. Semester</mat-option>
+        <mat-option value="2">2. Semester</mat-option>
+        <mat-option value="3">3. Semester</mat-option>
+        <mat-option value="4">4. Semester</mat-option>
+        <mat-option value="5">5. Semester</mat-option>
+        <mat-option value="6">6. Semester</mat-option>
+        <mat-option value="7">7. Semester</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button id="cancel" mat-button (click)="onNoClick()">Cancel</button>
+  <button [disabled]="!loginForm.form.valid" id="login" mat-button cdkFocusInitial (click)="login()">Login</button>
+</div>

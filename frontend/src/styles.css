@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+html, body {
+  min-height: 100% !important;
+  height: 100%;
+  margin: 0;
+}

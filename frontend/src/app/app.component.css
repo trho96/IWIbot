@@ -1,0 +1,9 @@
+mat-sidenav-container {
+  height: 100%;
+}
+#themeWrapper {
+  height: calc(100% - 64px);
+}
+mat-sidenav {
+  width: 200px;
+}

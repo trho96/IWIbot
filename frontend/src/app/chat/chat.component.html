@@ -1,0 +1,107 @@
+<div
+  class="chatContainer"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <!-- START Chat -->
+  <div
+    fxFlex="600px"
+    fxLayout="column"
+    fxFlex.xs="330px"
+    fxFlex.gt-lg="800px"
+    class="chat"
+  >
+    <div
+      *ngFor="let message of this.conversationService.getConversationMessages()"
+    >
+      <!-- START Send-Message -->
+      <div
+        class="messageContainer"
+        fxFlex="550px"
+        fxFlex.xs="300px"
+        fxLayout="row"
+        fxLayoutAlign="end start"
+      >
+        <div
+          fxFlex="initial"
+          *ngIf="message.getIsSendMessage()"
+          class="message send-message"
+        >
+          {{message.getPayload()}}
+        </div>
+      </div>
+      <!-- END Send Message -->
+      <!-- START Received Message-->
+      <div class="messageContainer"
+           fxFlex="550px"
+           fxFlex.xs="300px"
+           fxLayout="row"
+           fxLayoutAlign="start start"
+      >
+        <div
+          fxFlex="initial"
+          *ngIf="!message.getIsSendMessage()"
+          class="message received-message"
+
+        >
+          {{message.getPayload()}}
+        </div>
+      </div>
+      <!-- END Received Message -->
+      <!-- START ReceivedMessageHtmlContent -->
+      <div
+        class="messageHtmlContainer"
+        *ngIf="message.getHtml() != '' || undefined"
+        fxFlex="550px"
+        fxFlex.xs="300px"
+        fxLayout="row"
+        fxLayoutAlign="start start"
+      >
+        <div
+          fxFlex="initial"
+          *ngIf="!message.getIsSendMessage()"
+          class="message received-message"
+          [innerHTML]="message.getHtml()"
+        >
+        </div>
+      </div>
+      <!-- END ReceivedMessageHtmlContent -->
+    </div>
+    <div id="scrollAnchor"></div>
+  </div>
+  <!-- END Chat -->
+  <!-- START ChatControls -->
+  <div
+    id="chatControls"
+    fxFlex
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+  >
+    <input #chatInputField
+           id="chatInputField"
+           fxFlex.xs="230px"
+           type="text"
+           (keyup.enter)="sendMessage(chatInputField.value)"
+           [placeholder]="chatInputFieldPlaceholder"
+           [value]="finalTranscript"
+    />
+    <div id="buttonGroup">
+      <button
+        mat-icon-button id="sendButton"
+        (click)="sendMessage(chatInputField.value)"
+        type=button
+      >
+        <mat-icon id="sendIcon">send</mat-icon>
+      </button>
+      <button
+        mat-fab id="recordButton"
+        [class.recording]="this.recognizing"
+        value="send"
+        (click)="startVoiceRecognition()"
+      >
+        <mat-icon>mic</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!-- END ChatControls -->
+</div>

@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$iwiBot-primary: mat-palette($mat-gray, 400);
+$iwiBot-accent:  mat-palette($mat-red, 600);
+$iwiBot-warn:    mat-palette($mat-deep-orange);
+$iwiBot-lightPrimary: mat-palette($mat-gray, 400);
+
+$iwiBot-theme: mat-light-theme($iwiBot-primary, $iwiBot-accent, $iwiBot-warn);
+
+@include angular-material-theme($iwiBot-theme);
+
+$iwiBotDarkTHeme-primary: mat-palette($mat-gray, 900);
+$iwiBotDarkTheme-accent: mat-palette($mat-red, 600);
+$iwiBotDarkTheme-warn: mat-palette($mat-deep-orange);
+$iwiBot-lightPrimary: mat-palette($mat-gray, 400);
+
+$iwiBotDarkTheme: mat-dark-theme($iwiBotDarkTHeme-primary, $iwiBotDarkTheme-accent, $iwiBotDarkTheme-warn);
+
+.darkTheme {
+  @include angular-material-theme($iwiBotDarkTheme);
+}
+
