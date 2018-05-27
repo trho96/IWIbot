@@ -39,7 +39,6 @@ before_script:
     - chmod u+x bx_authenticate.sh
     - ./bx_authenticate.sh
     - bx wsk api list
-    - cat ~/.wskprops
 script:
     #- ./runFunctionsUnittests.sh
     #- ./deployFunctions.sh --install
@@ -48,8 +47,10 @@ script:
     # deploy production actions
     - echo $WSK_AUTH_KEY
     - cd openwhisk
-    - wskdeploy undeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY
-    - wskdeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY && cd ..
+    - wskdeploy undeploy --config "~/.wskprops"
+    - wskdeploy --config "~/.wskprops"
+    #- wskdeploy undeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY
+    #- wskdeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY && cd ..
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true
