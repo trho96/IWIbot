@@ -36,7 +36,9 @@ before_script:
     - chmod u+x deployFunctions.sh
     # login to bluemix cloud
     - echo "login to the bluemix cli"
-    - bash bx_authenticate.sh
+    - chmod u+x bx_authenticate.sh
+    - ./bx_authenticate.sh
+    - bx wsk api list
 script:
     #- ./runFunctionsUnittests.sh
     #- ./deployFunctions.sh --install
