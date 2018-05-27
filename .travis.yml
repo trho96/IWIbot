@@ -45,8 +45,8 @@ script:
     # deploy production actions
     - echo $WSK_AUTH_KEY
     - cd openwhisk
-    - wskdeploy undeploy
-    - wskdeploy --apihost api.ng.bluemix.net --auth $WSK_AUTH_KEY && cd ..
+    - wskdeploy undeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY
+    - wskdeploy --apihost openwhisk.ng.bluemix.net --auth $WSK_AUTH_KEY && cd ..
 deploy:
     provider: bluemixcloudfoundry
     skip_cleanup: true
