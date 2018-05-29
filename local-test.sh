@@ -20,7 +20,7 @@ echo -e "${NC}"
 source local-test.env
 
 # Remove Deployments that are left over by interrupted Test-Run
-./deploy_test.sh --install
+./deployTestFunctions.sh --install
 
 echo -e "${BLUE}"
 echo "===================================================================================================="

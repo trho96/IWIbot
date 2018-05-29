@@ -41,7 +41,7 @@ before_script:
     - bx wsk api list
 script:
     #- ./runFunctionsUnittests.sh
-    #- ./deployFunctions.sh --install
+    - ./deployFunctions.sh --install
     # deploy to github pages
     #- cd frontend && npm run deploy && cd ..
     # deploy production actions
