@@ -22,22 +22,22 @@ function main(params) {
         }
 
         switch (entity) {
-            case '1':           //Wahlessen 1
+            case 'Wahlessen 1':
                 entity = 0;
                 break;
-            case '2':           //Wahlessen 2
+            case 'Wahlessen 2':
                 entity = 1;
                 break;
-            case '3':           //Aktionstheke
+            case 'Aktionstheke':
                 entity = 2;
                 break;
-            case '4':           //GutUndGuenstig
+            case 'Gut und Günstig':
                 entity = 3;
                 break;
-            case '5':           //Buffet
+            case 'Buffet':
                 entity = 4;
                 break;
-            case '6':            //Schnitzelbar
+            case 'Schnitzelbar':
                 entity = 5;
                 break;
         }
