@@ -43,12 +43,13 @@
   outline:none;
 }
 #buttonGroup {
+  margin-top: -10px;
   margin-left: -39px;
 }
 #chatControls {
   /*position: fixed;
   bottom: 50px;*/
-  margin-top: 15px;
+  margin-top: 30px;
 }
 #recordButton {
       margin-left: 5px;
