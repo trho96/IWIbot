@@ -1,20 +1,29 @@
 var request = require('request');
-var url = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/certificate/live/"
-var language = "de-DE";
-var responseObject = {};
 
 function main(params) {
+    var pdfUrl = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/certificate/cache/";
+    var url = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/certificates/links";
+    var language = "de-DE";
+    var responseObject = {};
+
     return new Promise(function (resolve, reject) {
         request({
-                url: url + params.context.certificate,
+                url: url,
                 headers: {
                     'Authorization': 'Basic ' + params.context.iwibotCreds
                 }
             }, function (error, response, body) {
 
                 if (!error && response.statusCode === 200) {
+                    var bodyObject = JSON.parse(body);
+                    bodyObject.forEach(function (element) {
+                        if (element.certificateType == params.entities[0].value.toLowerCase()) {
+                            pdfUrl += element.linkHashCode;
+                        }
+                    });
+
                     responseObject.payload = "Hier ist deine Bescheinigung:";
-                    responseObject.htmlText = "<a href='data:application/pdf;base64," + body + "'>" + params.context.certificate + "</a>";
+                    responseObject.htmlText = "<a href='" + pdfUrl + "' target='_blank'>" + params.entities[0].value.toLowerCase() + "</a>";
                     responseObject.language = language;
 
                     resolve(responseObject);

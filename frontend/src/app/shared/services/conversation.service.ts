@@ -16,7 +16,7 @@ export class ConversationService {
   constructor(
     private http: HttpClient,
     private conversation: Conversation,
-    private loginService: LoginService
+    private loginService: LoginService,
   ) {
     this.newMessagesSubject = new Subject();
     this.newResponseMessageSubject = new Subject();
