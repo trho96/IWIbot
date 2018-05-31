@@ -29,9 +29,16 @@ function main(params) {
                     resolve(responseObject);
                 } else {
                     console.log('http status code:', (response || {}).statusCode);
+                    var payload = "Es ist ein unerwarteter Fehler aufgetreten.";
+                    switch (response.statusCode) {
+                        case 500:
+                            payload = "Der QIS-Server ist zurzeit offline.";
+                        case 401:
+                            payload = "Um deine Bescheinigung zu erhalten, musst du dich einloggen."
+                    }
                     console.log('error:', error);
                     console.log('body:', body);
-                    responseObject.payload = "Um deine Bescheinigung zu erhalten, musst du dich einloggen.";
+                    responseObject.payload = payload;
 
                     reject(responseObject);
                 }
