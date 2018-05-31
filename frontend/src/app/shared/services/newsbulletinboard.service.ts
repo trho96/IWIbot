@@ -6,7 +6,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class NewsbulletinboardService {
 
-  bulletinBoardNewsUrl = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/newsbulletinboard";
+  bulletinBoardNewsUrl = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/newsbulletinboard";
 
   constructor(private http: HttpClient) { }
 
