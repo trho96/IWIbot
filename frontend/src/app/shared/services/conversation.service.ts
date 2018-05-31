@@ -75,7 +75,7 @@ export class ConversationService {
     let requestObject: any;
     requestObject = {};
     requestObject.context = this.conversation.getContext();
-    Object.assign(requestObject, {'iwibotCreds': this.loginService.getCookie('iwibot-creds')});
+    Object.assign(requestObject.context, {'iwibotCreds': this.loginService.getCookie('iwibot-creds')});
     requestObject.payload = content;
     if (this.getConversation().getUserInformation() != null) {
       requestObject.semester = this.conversation.getUserInformation().getSemester();
