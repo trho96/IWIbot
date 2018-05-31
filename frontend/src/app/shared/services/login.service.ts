@@ -33,11 +33,7 @@ export class LoginService {
   }
 
   public checkCookie(cname:string): boolean {
-      if (this.getCookie(cname) == "") {
-          return false;
-      } else {
-          return true;
-      }
+    return this.getCookie(cname) != "";
   }
 
   public getStudentInformation(username: string, password: string) {
