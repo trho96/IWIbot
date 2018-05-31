@@ -10,7 +10,7 @@ mat-sidenav-container {
   }
 }
 mat-sidenav {
-  width: 300px;
+  width: 405px;
 }
 ::-webkit-scrollbar {
   width: 4px;  /* remove scrollbar space */
