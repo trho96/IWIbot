@@ -17,7 +17,7 @@ export class LoginService {
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
-  public getCookie(cname:string) {
+  public getCookie(cname:string): string {
       const name = cname + "=";
       let ca = document.cookie.split(';');
       for(let i = 0; i < ca.length; i++) {
@@ -32,7 +32,7 @@ export class LoginService {
       return "";
   }
 
-  public checkCookie(cname:string) {
+  public checkCookie(cname:string): boolean {
       if (this.getCookie(cname) == "") {
           return false;
       } else {

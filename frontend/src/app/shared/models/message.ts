@@ -4,7 +4,8 @@ export class Message {
     private payload: string,
     private isSendMessage: boolean,
     private html: string = '',
-    private lang?: string
+    private lang?: string,
+    private data?: string
   ) {
   }
   public setHtml(html: string): void {
@@ -30,5 +31,11 @@ export class Message {
   }
   public getIsSendMessage(): boolean {
     return this.isSendMessage;
+  }
+  public getData(): string {
+    return this.data;
+  }
+  public setData(data: string) {
+    this.data = data;
   }
 }

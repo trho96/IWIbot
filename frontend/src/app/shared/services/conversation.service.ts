@@ -60,6 +60,7 @@ export class ConversationService {
     const responseMessage = new Message(response.payload, false);
     responseMessage.setHtml(response.htmlText);
     responseMessage.setLanguage(response.language);
+    responseMessage.setData(response.data);
     this.conversation.setContext(response.context);
     this.conversation.addMessage(responseMessage);
     this.newResponseMessageSubject.next(responseMessage);
