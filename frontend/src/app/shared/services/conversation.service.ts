@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Conversation } from '../models/conversation';
 import { Observable, Subject } from 'rxjs';
 import { Message } from '../models/message';
+import {LoginService} from "./login.service";
 
 @Injectable()
 export class ConversationService {
@@ -15,6 +16,7 @@ export class ConversationService {
   constructor(
     private http: HttpClient,
     private conversation: Conversation,
+    private loginService: LoginService
   ) {
     this.newMessagesSubject = new Subject();
     this.newResponseMessageSubject = new Subject();
@@ -73,6 +75,7 @@ export class ConversationService {
     let requestObject: any;
     requestObject = {};
     requestObject.context = this.conversation.getContext();
+    Object.assign(requestObject, {'iwibotCreds': this.loginService.getCookie('iwibot-creds')});
     requestObject.payload = content;
     if (this.getConversation().getUserInformation() != null) {
       requestObject.semester = this.conversation.getUserInformation().getSemester();
