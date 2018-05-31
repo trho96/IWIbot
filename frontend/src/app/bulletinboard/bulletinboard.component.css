@@ -1,0 +1,17 @@
+.newsContainer {
+  margin: 15px;
+}
+.title {
+  display: flex;
+  justify-content: center;
+}
+.publicationDate {
+  margin-left: 15px;
+}
+mat-card-title {
+  word-break: break-word;
+}
+h2 {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #EF5350;
+}

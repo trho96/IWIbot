@@ -1,0 +1,11 @@
+<div class="title"><h2>Schwarzes Brett</h2></div>
+<div class="newsContainer" *ngFor="let news of this.newsList">
+  <mat-card>
+    <mat-card-title-group>
+      <mat-card-title>{{news.title}}</mat-card-title>
+      <mat-card-subtitle>{{news.subTitle}}<span class="publicationDate">{{news.publicationDate}}</span>
+      </mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-card-content>{{news.content}}</mat-card-content>
+  </mat-card>
+</div>

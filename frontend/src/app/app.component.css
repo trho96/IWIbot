@@ -10,5 +10,16 @@ mat-sidenav-container {
   }
 }
 mat-sidenav {
-  width: 200px;
+  width: 300px;
+}
+::-webkit-scrollbar {
+  width: 4px;  /* remove scrollbar space */
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #DDDDDD;
+  height: 30px;
+  margin-left: 5px;
+  border-radius: 15px;
 }
