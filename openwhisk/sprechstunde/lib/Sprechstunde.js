@@ -1,9 +1,9 @@
 const request = require('request');
-const url = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/lecturers/professors?images=false&lectures=false\n";
-const language = "de-DE";
-const responseObject = {};
 
-function main() {
+function main(params) {
+    const url = "http://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/lecturers/professors?images=false&lectures=false\n";
+    const language = "de-DE";
+    const responseObject = {};
 
     return new Promise(function (resolve, reject) {
 
@@ -14,7 +14,7 @@ function main() {
             if (!error && response.statusCode === 200) {
 
                 const professors = JSON.parse(body);
-                for (let professor of body) {
+                for (let professor of professors) {
                     if (professor.lastname === params.entities[0].value) {
                         responseObject.payload = getPayload(professor);
                         responseObject.language = language;
@@ -34,10 +34,10 @@ function main() {
     });
 }
 function getPayload(professor) {
-    return "Professor" + professor.firstname + professor.lastname +
-            "hat am " + getDayStringFromNumber(professor.consultationDay) +
+    return "Professor " + professor.firstname + professor.lastname +
+            " hat am " + getDayStringFromNumber(professor.consultationDay) +
             " von " + convertToHoursMins(professor.consultationStartTime) + " bis " +
-            convertToHoursMins(professor.consultationEndTime) + " Sprechzeit";
+            convertToHoursMins(professor.consultationEndTime) + " Sprechzeit.";
 }
 function getDayStringFromNumber(dayNumber) {
     switch (dayNumber) {
@@ -62,7 +62,7 @@ function convertToHoursMins(value) {
     let m = value % 60;
         h = h < 10 ? '0' + h : h;
         m = m < 10 ? '0' + m : m;
-        return h + ':' + m + "Uhr";
+        return h + ':' + m;
 }
 
 exports.main = main;
