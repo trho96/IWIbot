@@ -1,6 +1,6 @@
 import {Component, HostListener, Input} from '@angular/core';
 import { ThemeManagerService } from "./shared/services/theme-manager.service";
-import {ToolbarComponent} from "./toolbar/toolbar.component";
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +10,13 @@ import {ToolbarComponent} from "./toolbar/toolbar.component";
 export class AppComponent {
 
   opened: boolean = true;
+  isSmallScreen: boolean;
 
-  constructor(public themeManager: ThemeManagerService) {
-
+  constructor(public themeManager: ThemeManagerService, private breakpointObserver: BreakpointObserver) {
   }
 
+  getIsSmallScreen() {
+    return this.breakpointObserver.isMatched('(max-width: 599px)');
+  }
 
 }

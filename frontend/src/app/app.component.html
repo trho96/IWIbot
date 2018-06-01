@@ -3,7 +3,7 @@
   <mat-sidenav-container>
     <mat-sidenav mode="side" opened="false">
     </mat-sidenav>
-    <mat-sidenav mode="side" opened="true" position="end">
+    <mat-sidenav mode="side" [opened]="!this.getIsSmallScreen()" position="end">
       <app-bulletinboard></app-bulletinboard>
     </mat-sidenav>
     <mat-sidenav-content>

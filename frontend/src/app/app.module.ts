@@ -16,6 +16,7 @@ import {
   MatSidenavModule, MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {LayoutModule} from '@angular/cdk/layout';
 import { AppComponent } from './app.component';
 import { SpeechToTextService } from './shared/services/speech-to-text-service.service';
 import { ChatComponent } from './chat/chat.component';
@@ -55,6 +56,7 @@ import { BulletinboardComponent } from './bulletinboard/bulletinboard.component'
     MatSelectModule,
     MatSidenavModule,
     MatCardModule,
+    LayoutModule
   ],
   providers: [
     SpeechToTextService,
