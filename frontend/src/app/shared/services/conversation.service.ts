@@ -3,25 +3,34 @@ import { HttpClient } from '@angular/common/http';
 import { Conversation } from '../models/conversation';
 import { Observable, Subject } from 'rxjs';
 import { Message } from '../models/message';
-import {LoginService} from "./login.service";
+import { LoginService } from "./login.service";
 
 @Injectable()
 export class ConversationService {
 
-  private static CONVERSATION_API_URL = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/'
-    + 'c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibot/router';
-  private newMessagesSubject;
-  private newResponseMessageSubject;
+  private static CONVERSATION_API_URL = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' +
+                                        'c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibot/router';
+  private newMessagesSubject: Subject<Message[]>;
+  private newResponseMessageSubject: Subject<Message>;
 
   constructor(
     private http: HttpClient,
     private conversation: Conversation,
     private loginService: LoginService,
-  ) {
+  )
+  {
     this.newMessagesSubject = new Subject();
     this.newResponseMessageSubject = new Subject();
     this.initConversation();
   }
+
+  /**
+   * Initializes the conversation
+   *
+   * initial request to the conversation service to set the context of the conversation
+   * and get the first message
+   *
+   */
   private initConversation(): void {
     let initObject: any;
     initObject = {};
@@ -37,27 +46,44 @@ export class ConversationService {
       );
   }
 
-  public sendMessage(content: string) {
-    const request = this.createRequest(content);
+  /**
+   * Sends a request with the message to the conversation service and processes the response
+   * @param {string} message
+   */
+  public sendMessage(message: string) {
+    const sendMessage = new Message(message, true);
+    this.conversation.addMessage(sendMessage);
+    this.newMessagesSubject.next(this.getConversationMessages());
+
+    const request = this.createRequest(message);
     this.getResponse(request).subscribe(response => {
       this.processResponse(response);
     });
   }
-  public getConversation(): Conversation {
-    return this.conversation;
+
+  /**
+   * Creates a request object with information from the message and the conversation.
+   * @params (Message) message  the message that gets send with the request
+   * @returns {any}
+   */
+  private createRequest(message: string) {
+    let requestObject: any;
+    requestObject = {};
+    requestObject.context = this.conversation.getContext();
+    requestObject.context.iwibotCreds = this.loginService.getCookie('iwibot-creds');
+    requestObject.payload = message;
+    if (this.getConversation().getUserInformation()) {
+      requestObject.semester = this.conversation.getUserInformation().getSemester();
+      requestObject.courseOfStudies = this.conversation.getUserInformation().getCourseOfStudies();
+    }
+    return requestObject;
   }
-  public getConversationMessages() {
-    return this.conversation.getMessages();
-  }
-  public getNewMessageSubject() {
-    return this.newMessagesSubject;
-  }
-  public getNewResponseMessageSubject() {
-    return this.newResponseMessageSubject;
-  }
-  private getResponse(requestObject: Object): Observable<any> {
-    return this.http.post(ConversationService.CONVERSATION_API_URL, requestObject);
-  }
+
+  /**
+   * Processes the response from the conversation service
+   * @param response
+   * @return Message
+   */
   private processResponse(response: any) {
     const responseMessage = new Message(response.payload, false);
     responseMessage.setHtml(response.htmlText);
@@ -68,19 +94,45 @@ export class ConversationService {
     this.newResponseMessageSubject.next(responseMessage);
     this.newMessagesSubject.next(this.getConversationMessages());
   }
-  private createRequest(content: string) {
-    const sendMessage = new Message(content, true);
-    this.conversation.addMessage(sendMessage);
-    this.newMessagesSubject.next(this.getConversationMessages());
-    let requestObject: any;
-    requestObject = {};
-    requestObject.context = this.conversation.getContext();
-    Object.assign(requestObject.context, {'iwibotCreds': this.loginService.getCookie('iwibot-creds')});
-    requestObject.payload = content;
-    if (this.getConversation().getUserInformation() != null) {
-      requestObject.semester = this.conversation.getUserInformation().getSemester();
-      requestObject.courseOfStudies = this.conversation.getUserInformation().getCourseOfStudies();
-    }
-    return requestObject;
+
+  /**
+   * Sends a request to the conversation service
+   * @param {Object} requestObject
+   * @returns {Observable<any>}
+   */
+  private getResponse(requestObject: Object): Observable<any> {
+    return this.http.post(ConversationService.CONVERSATION_API_URL, requestObject);
+  }
+
+  /**
+   * Returns the current conversation
+   * @returns {Conversation}
+   */
+  public getConversation(): Conversation {
+    return this.conversation;
+  }
+
+  /**
+   * Returns the messages from the conversation
+   * @returns {Message[]}
+   */
+  public getConversationMessages() {
+    return this.conversation.getMessages();
+  }
+
+  /**
+   * Returns the newMessageSubject
+   * @returns {Subject<Message[]>}
+   */
+  public getNewMessageSubject(): Subject<Message[]> {
+    return this.newMessagesSubject;
+  }
+
+  /**
+   * Returns the newResponseMessageSubject
+   * @returns {Subject<Message>}
+   */
+  public getNewResponseMessageSubject(): Subject<Message> {
+    return this.newResponseMessageSubject;
   }
 }

@@ -12,7 +12,6 @@ export class SpeechToTextService {
 
   private recognition: any;
   private ignoreOnEnd: boolean;
-  private language: string;
 
   constructor() {
     const { webkitSpeechRecognition } = (window as any);
@@ -21,6 +20,12 @@ export class SpeechToTextService {
     this.recognition.interimResults = true;
     this.recognition.lang = 'de-DE';
   }
+
+  /**
+   * Set the language that should get recognized.
+   * @param {string} language   the language to be recognized
+   * @returns void
+   */
   setLanguage(language: string) {
     this.recognition.lang = language;
   }
@@ -115,11 +120,20 @@ export class SpeechToTextService {
     });
   }
 
+  /**
+   * Stops the speech recognition
+   * @returns void
+   */
   stop() {
     this.recognition.stop();
   }
 
-  private capitalizeFirstLetter(s: string): string {
-    return s.charAt(0).toUpperCase() + s.slice(1);
+  /**
+   * Capitalize first letter of a string
+   * @param {string} message
+   * @returns {string}
+   */
+  private capitalizeFirstLetter(message: string): string {
+    return message.charAt(0).toUpperCase() + message.slice(1);
   }
 }

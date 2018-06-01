@@ -10,6 +10,10 @@ export class NewsbulletinboardService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   *  Returns an array of news from the bulletin board.
+   * @returns {Observable<NewsBulletinBoard[]>}
+   */
   getBulletinBoardNews() {
     return this.http.get(this.bulletinBoardNewsUrl);
   }
