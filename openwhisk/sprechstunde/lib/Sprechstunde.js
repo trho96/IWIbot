@@ -33,12 +33,21 @@ function main(params) {
         });
     });
 }
+
 function getPayload(professor) {
-    return "Professor " + professor.firstname + " " + professor.lastname +
-            " hat am " + getDayStringFromNumber(professor.consultationDay) +
-            " von " + convertToHoursMins(professor.consultationStartTime) + " bis " +
-            convertToHoursMins(professor.consultationEndTime) + " Sprechzeit.";
+    let payload = "Professor " + professor.firstname + " " + professor.lastname +
+        " hat am " + getDayStringFromNumber(professor.consultationDay) +
+        " von " + convertToHoursMins(professor.consultationStartTime) +
+        " bis " + convertToHoursMins(professor.consultationEndTime) +
+        " Sprechzeit in Raum " + professor.building + " " + professor.room;
+    if (professor.consultationTimeComment !== '') {
+        return payload + " (" + professor.consultationTimeComment + ').';
+    } else {
+        return payload + '.';
+    }
+
 }
+
 function getDayStringFromNumber(dayNumber) {
     switch (dayNumber) {
         case 0:
@@ -57,12 +66,13 @@ function getDayStringFromNumber(dayNumber) {
             return "Sonntag";
     }
 }
+
 function convertToHoursMins(value) {
     let h = Math.floor(value / 60);
     let m = value % 60;
-        h = h < 10 ? '0' + h : h;
-        m = m < 10 ? '0' + m : m;
-        return h + ':' + m;
+    h = h < 10 ? '0' + h : h;
+    m = m < 10 ? '0' + m : m;
+    return h + ':' + m;
 }
 
 exports.main = main;
