@@ -34,7 +34,7 @@ function main(params) {
     });
 }
 function getPayload(professor) {
-    return "Professor " + professor.firstname + professor.lastname +
+    return "Professor " + professor.firstname + " " + professor.lastname +
             " hat am " + getDayStringFromNumber(professor.consultationDay) +
             " von " + convertToHoursMins(professor.consultationStartTime) + " bis " +
             convertToHoursMins(professor.consultationEndTime) + " Sprechzeit.";
