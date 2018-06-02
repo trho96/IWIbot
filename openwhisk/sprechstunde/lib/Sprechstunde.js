@@ -19,8 +19,14 @@ function main(params) {
                         responseObject.payload = getPayload(professor);
                         responseObject.language = language;
                         resolve(responseObject);
+                        return;
                     }
                 }
+
+                responseObject.payload = 'Für die Sprechzeiten von Professor ' + params.entities[0].value +
+                                         ' konnte ich leider keine Angaben finden.';
+                responseObject.language = language;
+                resolve(responseObject);
             }
 
             else {
