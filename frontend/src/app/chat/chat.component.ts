@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, AfterContentChecked, AfterViewChecked, ApplicationRef, NgZone } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  AfterContentChecked,
+  AfterViewChecked,
+  ApplicationRef,
+  NgZone
+} from '@angular/core';
 import * as $ from 'jquery';
 import { ConversationService } from '../shared/services/conversation.service';
 import { SpeechToTextService } from '../shared/services/speech-to-text-service.service';
@@ -106,18 +114,30 @@ export class ChatComponent implements OnInit {
       });
   }
 
+  /**
+   * Initializes the speech synthesis
+   *
+   * Subscribes to the newMessageSubject and if the emitted message is
+   * a message from the conversation service it starts the speech synthesis
+   */
   private initSpeechSynthesis(): void {
-    this.conversationService.getNewResponseMessageSubject()
+    this.conversationService.getNewMessageSubject()
       .subscribe((message: Message) => {
-        if (message.getLanguage() != null) {
-          this.speechSynthesis.speak(message.getPayload(), message.getLanguage());
-          return;
+          if (!message.getIsSendMessage()) {
+            if (message.getLanguage() != null) {
+              this.speechSynthesis.speak(message.getPayload(), message.getLanguage());
+              return;
+            }
+            this.speechSynthesis.speak(message.getPayload());
+          }
         }
-        this.speechSynthesis.speak(message.getPayload());
-      }
       );
   }
 
+  /**
+   * Send a message to the conversation service
+   * @param {string} message
+   */
   public sendMessage(message: string): void {
     if (message.length === 0) {
       return;
@@ -126,7 +146,12 @@ export class ChatComponent implements OnInit {
     this.conversationService.sendMessage(message);
     $('#chatInputField').val('');
   }
-  private initChatScrollHandler() {
+
+  /**
+   * Subscribes to the NewMessageSubject and scrolls the chat to the bottom if
+   * a new message arrives. It also scrolls to the bottom if the screen gets resized.
+   */
+  private initChatScrollHandler(): void {
     this.conversationService.getNewMessageSubject().subscribe(data => {
       this.scrollChatToBottom();
     });
@@ -134,11 +159,16 @@ export class ChatComponent implements OnInit {
       this.scrollChatToBottom();
     };
   }
-  private scrollChatToBottom() {
+
+  /**
+   * Scrolls the Chat to the Bottom
+   */
+  private scrollChatToBottom(): void {
     const chat = $('.chat');
-    chat.animate({ scrollTop: chat.prop('scrollHeight') }, 'slow');
+    chat.animate({scrollTop: chat.prop('scrollHeight')}, 'slow');
   }
-  private detectChanges() {
+
+  private detectChanges(): void {
     this.changeDetector.detectChanges();
   }
 }

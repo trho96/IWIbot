@@ -1,7 +1,7 @@
 mat-form-field {
   width: 100%;
 }
-#cancel {
+#cancelButton {
   margin-left: 10%;
 }
 #errorNotification {

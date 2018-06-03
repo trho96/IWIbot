@@ -27,7 +27,7 @@ function main(params) {
                 body: JSON.stringify(response),
                 code: 200
             };       
-        })
+        });
     }
 
     if("__ow_body" in params) { // For testing this action!!

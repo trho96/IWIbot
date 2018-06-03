@@ -1,10 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA
-} from '@angular/material';
-import { FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LoginService } from '../shared/services/login.service';
 import { ConversationService } from '../shared/services/conversation.service';
 import { UserInformation } from '../shared/models/user-information';
@@ -16,10 +11,10 @@ import { UserInformation } from '../shared/models/user-information';
 })
 export class LoginDialogComponent implements OnInit {
 
-  dialogTitle = 'Login';
+  dialogTitle: string = 'Login';
   username: string;
   password: string;
-  semester = '1';
+  semester: string  = '1';
   errorOccurred = false;
   errorText: string;
 
@@ -28,11 +23,16 @@ export class LoginDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private loginService: LoginService,
     private conversationService: ConversationService
-  ) { }
+  ) {
+  }
 
+  /**
+   * Closes the Login dialog
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   login(): void {
     this.loginService.getStudentInformation(this.username, this.password).subscribe(
       (data: any) => {

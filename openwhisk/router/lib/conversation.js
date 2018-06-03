@@ -12,7 +12,7 @@ exports.sendMessage = function sendMessage(init, params) {
     });
 
     return new Promise(function (resolve, reject) {
-        var options = init ? {} : {
+        var options = init ? {workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"} : {
             input: {text: params.payload.toString()},
             context: params.context,
             workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"

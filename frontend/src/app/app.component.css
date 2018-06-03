@@ -16,7 +16,6 @@ mat-sidenav {
   width: 4px;  /* remove scrollbar space */
   background: transparent;  /* optional: just make scrollbar invisible */
 }
-/* optional: show position indicator in red */
 ::-webkit-scrollbar-thumb {
   background: #DDDDDD;
   height: 30px;

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {NewsbulletinboardService} from "../shared/services/newsbulletinboard.service";
-import {NewsBulletinBoard} from "../shared/models/news-bulletin-board";
+import { Component, OnInit } from '@angular/core';
+import { NewsbulletinboardService } from "../shared/services/newsbulletinboard.service";
+import { NewsBulletinBoard } from "../shared/models/news-bulletin-board";
 
 @Component({
   selector: 'app-bulletinboard',

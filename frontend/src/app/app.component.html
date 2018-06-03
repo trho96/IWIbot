@@ -1,7 +1,7 @@
 <div id="themeWrapper" [class.darkTheme]="this.themeManager.isDarkTheme">
 <app-toolbar></app-toolbar>
   <mat-sidenav-container>
-    <mat-sidenav mode="side" opened="false">
+    <mat-sidenav mode="side" [opened]="false">
     </mat-sidenav>
     <mat-sidenav mode="side" [opened]="!this.getIsSmallScreen()" position="end">
       <app-bulletinboard></app-bulletinboard>
