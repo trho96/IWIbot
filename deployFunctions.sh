@@ -62,6 +62,7 @@ function install() {
   echo "===================================================================================================="
   echo -e "${NC}"
   set -e
+  : '
   echo -e "Updating OpenWhisk actions, triggers, and rules for IWIBot"
 
   echo -e "${BLUE}"
@@ -99,7 +100,7 @@ function install() {
   cd openwhisk/timetable
   bash deploy.sh
   cd ../..
-
+  '
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Update Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"

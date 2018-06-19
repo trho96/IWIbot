@@ -210,20 +210,20 @@ class Trainer:
         for intent in self.training_data:
             if intent['name'] == name:
                 if len(sentences_to_add) > 0:
-                    # Sätze hinzufügen
+                    # add sentences
                     for sentence in sentences_to_add:
                         intent['sentences'].append(sentence)
                 else:
-                    # Sätze entfernen
+                    # remove sentences
                     for sentence in sentences_to_remove:
                         intent['sentences'].remove(sentence)
 
                 if len(entities_to_add) > 0:
-                    # Entitäten hinzufügen
+                    # add entities
                     for entity in entities_to_add:
                         intent['entities'].append(entity)
                 else:
-                    # Entitäten entfernen
+                    # remove entities
                     for entity in entities_to_remove:
                         intent['entities'].remove(entity)
 
@@ -311,11 +311,11 @@ class Trainer:
         for entity in self.training_data:
             if entity['name'] == name:
                 if len(words_to_add) > 0:
-                    # Wörter hinzufügen
+                    # add words
                     for word in words_to_add:
                         entity['words'].append(word)
                 else:
-                    # Wörter entfernen
+                    # remove words
                     for word in words_to_remove:
                         entity['words'].remove(word)
 

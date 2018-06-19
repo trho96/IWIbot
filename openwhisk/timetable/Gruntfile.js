@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 src: 'Gruntfile.js'
             },
             Timetables: {
-                src: ['lib/Timetable.js']
+                src: ['lib/Timetable.py']
             }
 
         },

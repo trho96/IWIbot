@@ -28,6 +28,7 @@ import { LoginService } from './shared/services/login.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ThemeManagerService } from "./shared/services/theme-manager.service";
 import { BulletinboardComponent } from './bulletinboard/bulletinboard.component';
+import { TreeViewComponent } from './tree-view/tree-view.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { BulletinboardComponent } from './bulletinboard/bulletinboard.component'
     LoginDialogComponent,
     ToolbarComponent,
     BulletinboardComponent,
+    TreeViewComponent,
   ],
   imports: [
     BrowserModule,

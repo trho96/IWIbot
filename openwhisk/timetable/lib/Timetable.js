@@ -2,18 +2,17 @@ var request = require('request');
 var url = 'https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/timetable/INFB/0/5?format=json';
 var today = new Date();
 var currentDay = parseInt(today.getDay());
-var weekday = new Array(7);
-weekday[0] = "Sonntag";
-weekday[1] = "Montag";
-weekday[2] = "Dienstag";
-weekday[3] = "Mittwoch";
-weekday[4] = "Donnerstag";
-weekday[5] = "Freitag";
-weekday[6] = "Samstag";
-var currentDayString = weekday[currentDay];
+var weekdays = new Array(7);
+weekdays[0] = "dienstag";
+weekdays[1] = "mittwoch";
+weekdays[2] = "donnerstag";
+weekdays[3] = "freitag";
+weekdays[4] = "samstag";
+weekdays[5] = "sonntag";
+weekdays[6] = "montag";
+var currentDayString = weekdays[currentDay];
 
 function main(params) {
-
     console.log("------Timetable Action started!------");
     console.log("TimetableAction Params:" + JSON.stringify(params, null, 4));
     console.log("Timetable Semester: " + params.semester);
@@ -36,54 +35,20 @@ function main(params) {
             resolve(resultObject);
         }
 
-        if (params.entities !== undefined && params.entities.length !== 0) {
-            console.log('Entitie Value: ' + params.entities[0].value);
-            switch (params.entities[0].value) {
-                case '7':
-                    dayIndex = 0;
-                    dayValue = 'Montag';
-                    break;
-
-                case '1':
-                    dayIndex = 1;
-                    dayValue = 'Dienstag';
-                    break;
-
-                case '2':
-                    dayIndex = 2;
-                    dayValue = 'Mittwoch';
-                    break;
-
-                case '3':
-                    dayIndex = 3;
-                    dayValue = 'Donnerstag';
-                    break;
-
-                case '4':
-                    dayIndex = 4;
-                    dayValue = 'Freitag';
-                    break;
-                case '5':
-                    dayIndex = 5;
-                    dayValue = 'Samstag';
-                    break;
-                case '6':
-                    dayIndex = 6;
-                    dayValue = 'Sonntag';
-                    break;
-            }
-        }
-
         request({
             url: url
         }, function (error, response, body) {
             var ulStart = '<ul>';
 
+            function getWeekdayIndex() {
+                return weekdays.indexOf(params.entities[0].value.toLowerCase());
+            }
+
             if (!error && response.statusCode === 200) {
                 var responseObject = JSON.parse(body);
 
                 console.log('Response Object: ' + JSON.stringify(responseObject, null, 4));
-                var entries = responseObject.timetables[dayIndex].entries;
+                var entries = responseObject.timetables[getWeekdayIndex()].entries;
 
                 if (!entries || entries.length === 0) {
                     resolve({"payload": "Heute findet keine Vorlesung statt."});
@@ -107,7 +72,8 @@ function main(params) {
                 }
                 ulStart += '</ul>';
                 resultObject.htmlText = ulStart;
-                resultObject.payload = 'Hier ist der Stundenplan für ' + dayValue + ':';
+                //  Erstes Zeichen groß machen
+                resultObject.payload = 'Hier ist der Stundenplan für ' + weekdays[getWeekdayIndex()].substr(0,1).toUpperCase() + weekdays[getWeekdayIndex()].substr(1) + ':';
 
                 resolve(resultObject);
 
