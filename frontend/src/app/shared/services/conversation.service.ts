@@ -9,8 +9,8 @@ import { ConversationResponseObject } from "../models/conversation-response-obje
 @Injectable()
 export class ConversationService {
 
-  private static CONVERSATION_API_URL = 'https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/' +
-                                        'c9f88de3acb5a4648e4f118769d019c8df8797d1777c4342f43260626b4c51bf/iwibot/router';
+  private static CONVERSATION_API_URL = 'https://service.eu-de.apiconnect.ibmcloud.com/gws/apigateway/api/' +
+                                        '05228ef049045b87490b99e65d97270739d670d9ebb2ea5d5684c205ebd7deb6/iwibot/router';
   private readonly newMessagesSubject: Subject<Message>;
 
   constructor(

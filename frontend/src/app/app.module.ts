@@ -37,8 +37,7 @@ import { TreeViewComponent } from './tree-view/tree-view.component';
     ChatComponent,
     LoginDialogComponent,
     ToolbarComponent,
-    BulletinboardComponent,
-    TreeViewComponent,
+    BulletinboardComponent
   ],
   imports: [
     BrowserModule,
