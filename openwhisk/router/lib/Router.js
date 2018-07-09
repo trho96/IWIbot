@@ -44,42 +44,40 @@ function main(params) {
     }
 
     return conversation.sendMessage("conInit" in params, params).then(function (params) {
+            params.semester = semester;
+            params.courseOfStudies = courseOfStudies;
+            params.position = typeof position !== 'undefined' ? {
+                latitude: position[1],
+                longitude: position[0]
+            } : position;
 
-        params.semester = semester;
-        params.courseOfStudies = courseOfStudies;
-        params.position = typeof position !== 'undefined' ? {
-            latitude: position[1],
-            longitude: position[0]
-        } : position;
+            return dispatcher.dispatch(params);
 
-        return dispatcher.dispatch(params);
+        }, function (reason) {
+            console.error("Conversation Error: " + reason);
 
-    }, function (reason) {
+            throw reason;
 
-        console.error("Conversation Error: " + reason);
-        throw reason;
+        }).then(function (response) {
 
-    }).then(function (response) {
+            return {
+                headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
+                body: JSON.stringify(response),
+                code: 200
+            };
 
-        return {
-            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
-            body: JSON.stringify(response),
-            code: 200
-        };
+        }, function (reason) {
+            console.log("Dispatcher Error: " + reason);
 
-    }, function (reason) {
+            var response = {};
+            response.payload = reason.toString();
 
-        console.log("Dispatcher Error: " + reason);
+            return {
+                headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
+                body: JSON.stringify(response),
+                code: 200
+            };
 
-        var response = {};
-        response.payload = reason.toString();
-
-        return {
-            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'text/plain'},
-            body: JSON.stringify(response),
-            code: 200
-        };
-
-    });
+        });
 }
 exports.main = main;

@@ -11,5 +11,5 @@ rm -rf node_modules
 # recover dev deps
 mv .mod node_modules
 # install zip in openwhisk
-bx wsk action update testBescheinigung --kind nodejs:6 action.zip --web true
-bx wsk api create -n "iwibot Test API" $API_TEST_PATH /bescheinigung get testBescheinigung --response-type json
+bx wsk action update testSchwimmbad --kind nodejs:6 action.zip --web true
+bx wsk api create -n "iwibot Test API" $API_TEST_PATH /schwimmbad get testSchwimmbad --response-type json

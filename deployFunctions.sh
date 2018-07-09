@@ -62,32 +62,33 @@ function install() {
   echo "===================================================================================================="
   echo -e "${NC}"
   set -e
-  : '
+  : ' Das ist ein mehrzeiliger Kommentar. Er schließt mit '
   echo -e "Updating OpenWhisk actions, triggers, and rules for IWIBot"
-
+: '
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1/8) Update Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1) Update Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/joke
   bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2/8) Update Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2) Update Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/meal
   bash deploy.sh
   cd ../..
-  
+
+
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3/8) Update Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3) Update Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/navigation
-  #bash deploy.sh
+  bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~~ 4/8) Update Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~ 4) Update Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/router
   bash deploy.sh
@@ -95,31 +96,44 @@ function install() {
   cd ../..
 
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~ 5/8) Update Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~ 5) Update Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/timetable
   bash deploy.sh
   cd ../..
-  '
+
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~ 6/8) Update Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 6) Update Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/weather
   bash deploy.sh
   cd ../..
-
+  '
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~ 7/8) Update Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 7) Update Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/login
   bash deploy.sh
   cd ../..
 
-
   echo -e "${BLUE}"
-  echo "~~~~~~~~~~~~~~~~~~~~~~~ 8/8) Update Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 8) Update Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
   cd openwhisk/semester
+  bash deploy.sh
+  cd ../..
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 9) Update Schwimmbad Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/java-schwimmbad
+  bash deploy.sh
+  cd ../..
+
+  echo -e "${BLUE}"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~ 10) Update Wikipedia Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo -e "${NC}"
+  cd openwhisk/wikipedia
   bash deploy.sh
   cd ../..
 

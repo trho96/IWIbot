@@ -57,7 +57,7 @@ function main(params) {
                     reject({payload: 'Nicht Erflogreich geholt.', htmlText: 'Nicht Erflogreich geholt.'});
                 }
             }
-         );
+        );
         console.log('request sent!');
         delete url;
         delete tmpUrl;

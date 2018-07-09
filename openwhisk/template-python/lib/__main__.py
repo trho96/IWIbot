@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 def main(args):
     name = args.get("name", "stranger")
     greeting = "Hello " + name + "!"
