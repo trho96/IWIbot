@@ -2,7 +2,7 @@
 
 ## Getting your environment set up
 
-1. Install the [Angular CLI](https://github.com/angular/angular-cli) globally
+1. Install the [Angular CLI](https://github.com/angular/angular-cli) globally  
    `npm install -g @angular/cli`
 2. 
 
