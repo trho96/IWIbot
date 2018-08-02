@@ -1,6 +1,11 @@
-# IWIBot
+# IWIBot - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+## Getting your environment set up
+
+1. Install the [Angular CLI](https://github.com/angular/angular-cli) globally
+   `npm install -g @angular/cli`
+2. 
+
 
 ## Development server
 
