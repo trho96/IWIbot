@@ -4,12 +4,11 @@
 
 1. Install the [Angular CLI](https://github.com/angular/angular-cli) globally  
    `npm install -g @angular/cli`
-2. 
-
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2. Clone the Github project  
+   `git clone https://github.com/HSKA-IWI-VSYS/IWIbot.git`
+3. Navigate to the frontend folder inside the project  
+4. Run `npm install` to install the dependencies  
+5. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
