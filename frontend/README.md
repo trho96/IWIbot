@@ -1,12 +1,12 @@
 # IWIBot - Frontend
 
-## Getting your environment set up
-
-1. Install the [Angular CLI](https://github.com/angular/angular-cli) globally `npm install -g @angular/cli`
-2. Clone the Github project `git clone https://github.com/HSKA-IWI-VSYS/IWIbot.git`
-3. Navigate to the frontend folder inside the project  
-4. Run `npm install` to install the dependencies  
-5. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting your environment set up  
+1. First you need to [install](https://nodejs.org/en/download/package-manager/) a nodejs runtime and the node package manager (npm) for your OS.
+2. Then Install the [Angular CLI](https://github.com/angular/angular-cli) globally `npm install -g @angular/cli`
+3. Clone the Github project `git clone https://github.com/HSKA-IWI-VSYS/IWIbot.git --branch=classifier_new` 
+4. Navigate to the frontend folder inside the project  
+5. Run `npm install` to install the dependencies  
+6. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/` in a Chrome Web-Browser! The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
