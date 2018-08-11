@@ -10,7 +10,11 @@
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.  
+* Run `ng generate component conversation` to generate a component named conversation
+* Run `ng generate service conversation` to generate a service named conversation
+* Run `ng generate directive conversation` to generate a directive named conversation.  
+
+You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.  
 
 For more details see [here](https://scotch.io/tutorials/use-the-angular-cli-for-faster-angular-2-projects#toc-generate-parts-of-your-application)
 
