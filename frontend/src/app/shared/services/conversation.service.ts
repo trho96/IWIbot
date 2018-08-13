@@ -9,14 +9,14 @@ import { ConversationResponseObject } from "../models/conversation-response-obje
 @Injectable()
 export class ConversationService {
 
-  private static CONVERSATION_API_URL = 'https://service.eu-de.apiconnect.ibmcloud.com/gws/apigateway/api/' +
-                                        '05228ef049045b87490b99e65d97270739d670d9ebb2ea5d5684c205ebd7deb6/iwibot/router';
+  private CONVERSATION_API_URL = configService.getApiEndpoint('CONVERSATION_API_URL');
   private readonly newMessagesSubject: Subject<Message>;
 
   constructor(
     private http: HttpClient,
     private conversation: Conversation,
     private loginService: LoginService,
+    private configService: ConfigService
   ) {
     this.newMessagesSubject = new Subject();
     this.initConversation();
@@ -97,7 +97,7 @@ export class ConversationService {
    * @returns {Observable<ConversationResponseObject>}
    */
   private getResponse(requestObject: Object): Observable<ConversationResponseObject> {
-    return this.http.post<ConversationResponseObject>(ConversationService.CONVERSATION_API_URL, requestObject);
+    return this.http.post<ConversationResponseObject>(this.CONVERSATION_API_URL, requestObject);
   }
 
   /**

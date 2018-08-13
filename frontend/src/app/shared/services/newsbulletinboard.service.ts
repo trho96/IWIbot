@@ -6,9 +6,9 @@ import { HttpClient } from "@angular/common/http";
 })
 export class NewsbulletinboardService {
 
-  bulletinBoardNewsUrl = "https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/newsbulletinboard";
+  bulletinBoardNewsUrl = configService.getApiEndpoint('BULLETIN_BOARD_NEWS_URL');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configService: ConfigService) { }
 
   /**
    *  Returns an array of news from the bulletin board.

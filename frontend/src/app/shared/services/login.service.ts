@@ -6,9 +6,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  private hskaStudentInfoUrl = 'https://www.iwi.hs-karlsruhe.de/Intranetaccess/REST/credential/v2/info';
+  private hskaStudentInfoUrl = configService.getApiEndpoint('HSKA_STUDENT_INFO_URL');
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private configService: ConfigService) { }
 
   public setCookie(cname:string, cvalue:string, exdays:number) {
       const d = new Date();
