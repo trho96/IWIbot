@@ -5,11 +5,12 @@ import { Observable, Subject } from 'rxjs';
 import { Message } from '../models/message';
 import { LoginService } from "./login.service";
 import { ConversationResponseObject } from "../models/conversation-response-object";
+import {ConfigService} from "./config.service";
 
 @Injectable()
 export class ConversationService {
 
-  private CONVERSATION_API_URL = configService.getApiEndpoint('CONVERSATION_API_URL');
+  private CONVERSATION_API_URL = this.configService.getApiEndpoint('CONVERSATION_API_URL');
   private readonly newMessagesSubject: Subject<Message>;
 
   constructor(

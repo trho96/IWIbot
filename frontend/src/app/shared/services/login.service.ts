@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {ConfigService} from "./config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  private hskaStudentInfoUrl = configService.getApiEndpoint('HSKA_STUDENT_INFO_URL');
+  private hskaStudentInfoUrl = this.configService.getApiEndpoint('HSKA_STUDENT_INFO_URL');
 
   constructor(private http: HttpClient,
               private configService: ConfigService) { }

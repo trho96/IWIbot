@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import {ConfigService} from "./config.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsbulletinboardService {
 
-  bulletinBoardNewsUrl = configService.getApiEndpoint('BULLETIN_BOARD_NEWS_URL');
+  bulletinBoardNewsUrl = this.configService.getApiEndpoint('BULLETIN_BOARD_NEWS_URL');
 
   constructor(private http: HttpClient, private configService: ConfigService) { }
 
