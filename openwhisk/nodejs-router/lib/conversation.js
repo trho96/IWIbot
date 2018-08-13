@@ -7,6 +7,7 @@ exports.sendMessage = function sendMessage(init, params) {
     var conversation = new ConversationV1({
         username: params.__bx_creds.conversation.username,
         password: params.__bx_creds.conversation.password,
+        url: params.__bx_creds.conversation.url,
         path: {workspace_id: "599b6249-53a7-4462-98b9-f84efee7b37f"},
         version_date: "2018-24-05"
     });

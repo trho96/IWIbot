@@ -16,7 +16,7 @@ import {
   MatSidenavModule, MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {LayoutModule} from '@angular/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { AppComponent } from './app.component';
 import { SpeechToTextService } from './shared/services/speech-to-text-service.service';
 import { ChatComponent } from './chat/chat.component';
@@ -28,7 +28,6 @@ import { LoginService } from './shared/services/login.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ThemeManagerService } from "./shared/services/theme-manager.service";
 import { BulletinboardComponent } from './bulletinboard/bulletinboard.component';
-import { TreeViewComponent } from './tree-view/tree-view.component';
 
 
 @NgModule({

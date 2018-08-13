@@ -11,7 +11,6 @@
     "e2e": "ng e2e",
     "deploy": "ng build --prod --base-href https://hska-iwi-vsys.github.io/IWIbot/ && ngh --repo=https://github.com/HSKA-IWI-VSYS/IWIbot.git --name='IWIBot' --email=krni1019@hs-karlsruhe.de",
     "deployNew": "ng build --prod --base-href https://iwi-bot.github.io/ && ngh --repo=https://github.com/iwi-bot/IWIBot.git --name='IWIBot' --email=kuar1013@hs-karlsruhe.de"
-
   },
   "private": true,
   "dependencies": {
@@ -30,6 +29,7 @@
     "@types/webspeechapi": "^0.0.29",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
+    "path": "^0.12.7",
     "rxjs": "^6.1.0",
     "zone.js": "^0.8.26"
   },

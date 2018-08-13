@@ -14,8 +14,8 @@ module.exports = function(grunt) {
             gruntfile: {
                 src: 'Gruntfile.js'
             },
-            Timetables: {
-                src: ['lib/Timetable.py']
+            joke: {
+                src: ['lib/Git.js']
             }
 
         },
@@ -44,6 +44,3 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint']);
 
 };
-
-
-
