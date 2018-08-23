@@ -1,0 +1,13 @@
+service: IWIBotBackand
+
+provider:
+  name: openwhisk
+
+functions:
+  Joke:
+    handler: nodejs-joke/lib/Joke.main
+    runtime: nodejs:6
+    annotations:
+          web-export: true
+plugins:
+  - serverless-openwhisk
