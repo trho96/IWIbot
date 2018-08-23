@@ -1,4 +1,4 @@
-package de.hska.action;
+package de.hska.iwibot.actions.java;
 
 import com.google.gson.JsonObject;
 

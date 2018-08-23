@@ -4,11 +4,8 @@
     <groupId>de.hska</groupId>
     <artifactId>action</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <!-- RELEASE for deploying to Release repo
-         SNAPSHOT for deploying to Snapshot repo
-    -->
 
-    <name>action</name>
+    <name>Java Action maven pom template</name>
     <description>template parent pom</description>
     <packaging>jar</packaging>
 
@@ -16,7 +13,7 @@
         <developer>
             <name>Armin Kunkel</name>
             <email>kuar1013@hs-karlsruhe.de</email>
-            <organization>University of Applied Sciences in Karlsruhe</organization>
+            <organization>University of Applied Sciences Karlsruhe</organization>
             <organizationUrl>https://hs-karlsruhe.de</organizationUrl>
             <roles>
                 <role>developer</role>
@@ -111,7 +108,7 @@
             </plugins>
         </pluginManagement>
 
-        <!-- Use properties with ${property.name} outside the pom -->
+        <!-- Use properties with ${property.name} outside the pom in eg. application.properties files-->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -131,24 +128,18 @@
         <java.version>1.8</java.version>
 
         <!-- commons and utils -->
-        <commons-lang3.version>3.5</commons-lang3.version>
-        <guava.version>21.0</guava.version>
 
         <!-- persistence -->
-        <validation-api.version>1.1.0.Final</validation-api.version>
-
-        <rest-assured.version>2.9.0</rest-assured.version>
 
         <!-- password validation -->
-        <passay.version>1.0</passay.version>
 
         <!-- maven plugins -->
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
 
-
+        <!-- test config-->
         <skip>true</skip>
+
     </properties>
 
 </project>

@@ -12,4 +12,5 @@ rm -rf node_modules
 mv .mod node_modules
 # install zip in openwhisk
 bx wsk action update Router --kind nodejs:6 action.zip --web true
-bx wsk service bind conversation Router
+bx wsk api create -n "iwibot API" $API_PATH /router post Router --response-type http
+#bx wsk service bind conversation Router

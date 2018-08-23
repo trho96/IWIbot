@@ -2,25 +2,21 @@
 
 # activate virtualenv
 #source virtualenv/bin/activate
-#echo "sourced"
+#echo "virtual env activated!"
 # install requirements in virtualenv
-#pip install -r requirements.txt --no-cache-dir
-#echo "installed"
-
+#pip3 install -r requirements.txt --cache-dir .cache
 # deactivate virtualenv
 #deactivate
+#echo "virtual env deactivated!"
 
 # zip all
 cd lib
-echo "changed to lib"
 zip -r action.zip *
-
-# move to action root
-mv action.zip ..
-cd ..
 
 # install zip in openwhisk
 bx wsk action update test --kind python:3 action.zip --web true
 
-# remove old
+# clean up
 rm action.zip
+
+cd ..

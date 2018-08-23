@@ -1,4 +1,4 @@
 #Go Action Template  
-Mit diesem Template solltet ihr in der Lage sein, einfache Go Aktionen zu erstellen.
+Mit diesem Template solltest du in der Lage sein, komplexe Go Aktionen zu erstellen.
 
-Solltet ihr Bibliotheken benötigen, sollte bitte das packen der Abhängigkeiten in der deploy.sh beachtet werden, sodass andere ab dann auch Abhängigkeiten mit dieser Aktion benutzen können.
+Benötigte Bibliotheken einfach per `import "codehosting.com/pfad/zum/Packet` eingebunden werden.

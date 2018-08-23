@@ -1,18 +1,22 @@
 #!/bin/bash
-# This script is also for any kind of executables.
+# This script shows a way to pack any kind of executables.
+# Only the binary "exec" is needed to build the action.zip
 # Just build the binary and create the action with --native flag
-# I think you have to call the executable "exec"..
-# So just call it like that and everything should be fine
 
-cd lib
+cd src/de.hska.iwibot.actions.go
+
+# get the dependencies
+go get
 # build the go action binary
-GOOS=linux GOARCH=amd64 go build -o exec
+go build -o exec
 # zip the binary
 zip -r action.zip exec
 
-# install the go action
+# install the native go action
 bx wsk action update test --native action.zip
 
 # clean up
 rm action.zip
 rm exec
+
+cd ../..

@@ -8,16 +8,19 @@ exports.sendMessage = function sendMessage(init, params) {
         username: params.__bx_creds.conversation.username,
         password: params.__bx_creds.conversation.password,
         url: params.__bx_creds.conversation.url,
-        path: {workspace_id: "599b6249-53a7-4462-98b9-f84efee7b37f"},
+        path: {workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"},
         version_date: "2018-24-05"
     });
 
     return new Promise(function (resolve, reject) {
-        var options = init ? {workspace_id: "599b6249-53a7-4462-98b9-f84efee7b37f"} : {
-            input: {text: params.payload.toString()},
-            context: params.context,
-            workspace_id: "599b6249-53a7-4462-98b9-f84efee7b37f"
-        };
+        var options = init ? { workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624" } :
+            {
+                input: {
+                    text: params.payload.toString()
+                },
+                context: params.context,
+                workspace_id: "49d2a377-47a0-42aa-9649-cbce4637b624"
+            };
         conversation.message(options, function (err, response) {
             if (err) {
                 console.error("Conversation Error: " + err);

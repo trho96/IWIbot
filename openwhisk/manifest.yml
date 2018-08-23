@@ -4,24 +4,24 @@ packages:
     license: Apache-2.0
     actions:
       Joke:
-        function: /joke
+        function: nodejs-joke
         version: 1.0
         runtime: nodejs:8
         web-export: true
       Meal:
-        function: /meal
+        function: nodejs-meal
         runtime: nodejs:8
         web-export: true
       Router:
-        function: /router
+        function: nodejs-router
         runtime: nodejs:8
         web-export: true
       Timetable:
-        function: /timetable
+        function: nodejs-timetable
         runtime: nodejs:8
         web-export: true
       Weather:
-        function: /weather
+        function: nodejs-weather
         runtime: nodejs:8
         web-export: true
     apis:

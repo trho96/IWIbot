@@ -31,27 +31,42 @@ function info() {
   # Exit if any command fails
   set -e
   echo -e "\n"
+  echo -e "URL for Action 'Bescheinigungen':"
+  bx wsk action get Bescheinigungen --url
+  echo -e "\n"
   echo -e "URL for Action 'Joke':"
   bx wsk action get Joke --url
+  echo -e "\n"
+  echo -e "URL for Action 'Login':"
+  bx wsk action get Login --url
   echo -e "\n"
   echo -e "URL for Action 'Meal':"
   bx wsk action get Meal --url
   echo -e "\n"
+  echo -e "URL for Action 'Modulhandbuch':"
+  bx wsk action get Modulhandbuch --url
+  echo -e "\n"
   echo -e "URL for Action 'Router':"
   bx wsk action get Router --url
   echo -e "\n"
-  echo -e "URL for Action 'Timetables':"
+  echo -e "URL for Action 'Schwimmbad':"
+  bx wsk action get Schwimmbad --url
+  echo -e "\n"
+  echo -e "URL for Action 'Semester':"
+  bx wsk action get Semester --url
+  echo -e "\n"
+  echo -e "URL for Action 'Sprechstunde':"
+  bx wsk action get Sprechstunde --url
+  echo -e "\n"
+  echo -e "URL for Action 'Timetable':"
   bx wsk action get Timetable --url
   echo -e "\n"
   echo -e "URL for Action 'Weather':"
   bx wsk action get Weather --url
   echo -e "\n"
-  echo -e "URL for Action 'Login':"
-  bx wsk action get Login --url
-  echo -e "\n"
-  echo -e "URL for Action 'Semester':"
-  bx wsk action get Semester --url
-  echo -e "\n"
+  echo -e "URL for Action 'Wikipedia':"
+  bx wsk action get Wikipedia --url
+
 }
 
 function install() {
@@ -62,35 +77,35 @@ function install() {
   echo "===================================================================================================="
   echo -e "${NC}"
   set -e
-  : ' Das ist ein mehrzeiliger Kommentar. Er schließt mit '
+  :' Das ist ein mehrzeiliger Kommentar. Er schließt mit '
   echo -e "Updating OpenWhisk actions, triggers, and rules for IWIBot"
-: '
+
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 1) Update Joke Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/joke
+  cd openwhisk/nodejs-joke
   bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 2) Update Meal Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/meal
+  cd openwhisk/nodejs-meal
   bash deploy.sh
   cd ../..
 
-
+:'
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~ 3) Update Navigation Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/navigation
+  cd openwhisk/nodejs-navigation
   bash deploy.sh
   cd ../..
-
+'
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~ 4) Update Router Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/router
+  cd openwhisk/nodejs-router
   bash deploy.sh
   bx wsk api create -n "iwibot API" $API_PATH /router post Router --response-type http
   cd ../..
@@ -98,28 +113,28 @@ function install() {
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~ 5) Update Timetable Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/timetable
+  cd openwhisk/nodejs-timetable
   bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 6) Update Weather Action with HTTP-VERB POST ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/weather
+  cd openwhisk/nodejs-weather
   bash deploy.sh
   cd ../..
-  '
+
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 7) Update Login Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/login
+  cd openwhisk/nodejs-login
   bash deploy.sh
   cd ../..
 
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 8) Update Semester Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/semester
+  cd openwhisk/nodejs-semester
   bash deploy.sh
   cd ../..
 
@@ -133,7 +148,7 @@ function install() {
   echo -e "${BLUE}"
   echo "~~~~~~~~~~~~~~~~~~~~~~~ 10) Update Wikipedia Action with HTTP-VERB GET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo -e "${NC}"
-  cd openwhisk/wikipedia
+  cd openwhisk/nodejs-wikipedia
   bash deploy.sh
   cd ../..
 

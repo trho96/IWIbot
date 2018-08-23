@@ -201,5 +201,8 @@ local.env
 **/vcap-local.json
 
 # End of https://www.gitignore.io/api/node,macos,grunt,linux,windows,webstorm+all
-**/**/action.zip
-/openwhisk/java-schwimmbad/parent.iml
+**/action.zip
+**/*.iml
+
+**/package-lock.json
+
