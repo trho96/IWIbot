@@ -64,6 +64,10 @@ functions:
     #  __bx_cred: ${file(credentials.json)}
     annotations:
       web-export: true
+    events:
+      path: iwibot/router
+      method: post
+      resp: http
     package:
       include:
         - nodejs-router/lib/**/*
