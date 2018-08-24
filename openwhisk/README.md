@@ -55,6 +55,7 @@ Put the dependencies, like normal in go, in the go file imports. When you execut
 
 ## Use a Python Template
 
+## Use a PHP Template
 
 ## Tips and tricks  
 The maximum size of the zip file to be uploaded is 48MB!

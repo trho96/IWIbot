@@ -1,13 +1,37 @@
-service: IWIBotBackand
+service: IWIBotBackend
 
 provider:
   name: openwhisk
 
-functions:
-  Joke:
-    handler: nodejs-joke/lib/Joke.main
-    runtime: nodejs:6
-    annotations:
-          web-export: true
+package:
+  name: IWIBot
+  individually: true
+  exclude:
+    - '**/*'
+
 plugins:
   - serverless-openwhisk
+
+functions:
+  #Schwimmbad:
+  #  name: SchwimmbadTwi
+  #  runtime: java
+  #  handler: java-schwimmbad/target/Schwimmbad.jar:de.hska.iwibot.actions.java.Schwimmbad
+  #  annotations:
+  #    web-export: true
+  #  package:
+  #    artifact: java-schwimmbad/target/Schwimmbad.jar
+
+  Router:
+    name: Router
+    runtime: nodejs:8
+    handler: nodejs-router/lib/Router.main
+    parameters:
+      __bx_cred: ${file(credentials.json)}
+    annotations:
+      web-export: true
+    package:
+      include:
+        - nodejs-router/lib/**/*
+        - nodejs-router/package.json
+        - nodejs-router/README.md

@@ -10,7 +10,6 @@
 
     <name>action</name>
     <description>template parent pom</description>
-    <packaging>jar</packaging>
 
     <developers>
         <developer>
@@ -44,6 +43,7 @@
     </dependencies>
 
     <build>
+        <finalName>Schwimmbad</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -64,56 +64,21 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-shade-plugin</artifactId>
             </plugin>
         </plugins>
 
         <pluginManagement>
             <plugins>
-
-                <!-- The Assembly Plugin for Maven is primarily intended to allow users to aggregate the project output
-                     along with its dependencies, modules, site documentation, and other files into a single distributable archive.
-                     Formats:
-                     - zip
-                     - tar
-                     - tar.gz (or tgz)
-                     - tar.bz2 (or tbz2)
-                     - tar.snappy
-                     - tar.xz (or txz)
-                     - jar      jar-with-dependencies
-                     - dir
-                     - war
-                     - and any other format that the ArchiveManager has been configured for
-                     -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.1.0</version>
-                    <configuration>
-                        <descriptorRefs>
-                            <!--Predefined descriptors
-                                - bin
-                                    Produce binary distribution of the project (of the jar archive + README, LICENCE, NOTICE files in project root)
-                                    in three archive formats: tar.gz, tar.bz2, and zip
-                                - jar-with-dependencies
-                                    Produce JAR which contains the binary output of the project, along its the unpacked dependencies
-                                - src
-                                    Produce source archive with the contents of your project's /src directory structure
-                                - project
-                                    Produce archive with the whole project minus the /target directories
-                                     -->
-                            <!--<descriptorRef>bin</descriptorRef>-->
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                            <!-- <descriptorRef>src</descriptorRef>
-                            <descriptorRef>project</descriptorRef> -->
-                        </descriptorRefs>
-                    </configuration>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.1.1</version>
                     <executions>
                         <execution>
-                            <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                            <phase>package</phase> <!-- bind to the packaging phase -->
+                            <phase>package</phase>
                             <goals>
-                                <goal>single</goal>
+                                <goal>shade</goal>
                             </goals>
                         </execution>
                     </executions>
