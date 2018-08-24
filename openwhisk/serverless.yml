@@ -56,6 +56,10 @@ functions:
     name: Router
     runtime: nodejs:8
     handler: nodejs-router/lib/Router.main
+    bind:
+     - service:
+        name: conversation
+        instance: conversation
     #parameters:
     #  __bx_cred: ${file(credentials.json)}
     annotations:
@@ -100,6 +104,10 @@ functions:
     name: Weather
     runtime: nodejs:8
     handler: nodejs-weather/lib/Weather.main
+    bind:
+     - service:
+        name: weatherinsights
+        instance: weatherinsights
     package:
       include:
         - nodejs-weather/lib/**/*
