@@ -1,7 +1,10 @@
 ## Getting your environment set up
-First of all, to be able to deploy actions at all, you need to install the [ibm developer tools](https://console.bluemix.net/docs/cli/index.htm).  
-After editing the local.env, `source` the local.env and authenticate with `bxAuthenticate.sh`. 
+1. If you have not installed and configured your Bluemix CLI already, follow the steps as shown [here](https://console.bluemix.net/openwhisk/learn/cli).
+2. Inside the Openwhisk folder, open your console and run `serverless deploy` to deploy all actions.
+### Working with the Serverless Framework
+For the deployment of the functions we are using the serverles framework. All information that are needed for the deployment are kept inside the  ***serverless.yml*** found at the root of the openwhisk folder.
 
+Detailed information on how to work with the serverless framework can be found [here](https://serverless.com/framework/docs/providers/openwhisk/).
 ### NodeJS
 For the ***nodejs*** actions you need the node package manager (npm), so install [nodejs](https://nodejs.org/en/download/package-manager/) for your OS. The package manager is shipped with nodejs.  
 You can also install it via your favour package manager!
