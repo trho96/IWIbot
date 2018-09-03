@@ -17,10 +17,7 @@ function main() {
                 jokeResponse.payload = body.value.joke;
                 jokeResponse.language = language;
                 resolve(jokeResponse);
-
-            }
-
-            else {
+            } else {
                 console.log('http status code:', (response || {}).statusCode);
                 console.log('error:', error);
                 console.log('body:', body);

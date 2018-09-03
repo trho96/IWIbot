@@ -9,6 +9,9 @@
   ],
   "devDependencies": {
     "serverless-openwhisk": ">=0.13.0",
-    "serverless-python-requirements": "^4.1.1"
+    "serverless-python-requirements": "^4.1.1",
+    "serverless-build-plugin": "^2.4.0-alpha.0"
+  },
+  "dependencies": {
   }
 }

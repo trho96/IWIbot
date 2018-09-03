@@ -8,6 +8,7 @@
     "test": "grunt nodeunit"
   },
   "dependencies": {
+    "js-joda": "^1.9.1",
     "request": "^2.81.0"
   },
   "devDependencies": {
